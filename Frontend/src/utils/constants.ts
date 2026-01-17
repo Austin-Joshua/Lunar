@@ -1,5 +1,5 @@
-// API Base URL - Update this when connecting to backend
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// API Base URL - Set via VITE_API_BASE_URL environment variable
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 // Auth Token Key
 export const AUTH_TOKEN_KEY = 'lunar_auth_token';

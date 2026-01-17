@@ -1,11 +1,17 @@
+/**
+ * Authentication Context
+ * Manages user authentication state, token storage, and login/logout
+ */
+
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { AUTH_TOKEN_KEY, USER_DATA_KEY } from '@/utils/constants';
 import type { User } from '@/types';
 
-interface AuthContextType {
+export interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isAdmin: boolean;
   login: (user: User, token: string) => void;
   logout: () => void;
 }
@@ -45,12 +51,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   }, []);
 
+  const isAdmin = user?.role === 'admin' ?? false;
+
   return (
     <AuthContext.Provider
       value={{
         user,
         isAuthenticated: !!user,
         isLoading,
+        isAdmin,
         login,
         logout,
       }}
