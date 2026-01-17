@@ -52,7 +52,7 @@ switch ($choice) {
         Write-Host ""
         Write-Host "📂 Changing to Backend folder..." -ForegroundColor Yellow
         
-        cd $backendPath
+        Set-Location $backendPath
         
         Write-Host "📦 Checking dependencies..." -ForegroundColor Yellow
         if (-not (Test-Path "node_modules")) {
@@ -75,7 +75,7 @@ switch ($choice) {
         Write-Host ""
         Write-Host "📂 Changing to Frontend folder..." -ForegroundColor Yellow
         
-        cd $frontendPath
+        Set-Location $frontendPath
         
         Write-Host "📦 Checking dependencies..." -ForegroundColor Yellow
         if (-not (Test-Path "node_modules")) {
@@ -106,7 +106,7 @@ switch ($choice) {
         
         Read-Host "Press Enter to start Backend Server..."
         
-        cd $backendPath
+        Set-Location $backendPath
         
         if (-not (Test-Path "node_modules")) {
             npm install
@@ -131,6 +131,7 @@ switch ($choice) {
         Write-Host "⚙️  Setting up Backend .env file..." -ForegroundColor Green
         Write-Host ""
         
+        Set-Location $backendPath
         $envFile = Join-Path $backendPath ".env"
         
         if (Test-Path $envFile) {
@@ -193,7 +194,7 @@ CORS_ORIGIN=http://localhost:5173
         Write-Host "👥 Seeding Test Accounts..." -ForegroundColor Green
         Write-Host ""
         
-        cd $backendPath
+        Set-Location $backendPath
         
         if (-not (Test-Path "node_modules")) {
             Write-Host "Installing dependencies first..." -ForegroundColor Yellow
