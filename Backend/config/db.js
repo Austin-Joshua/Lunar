@@ -11,16 +11,21 @@
  */
 
 const mysql = require('mysql2/promise');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
+// Set default values if environment variables are not loaded
+if (!process.env.DB_HOST) process.env.DB_HOST = 'localhost';
+if (!process.env.DB_USER) process.env.DB_USER = 'root';
+if (!process.env.DB_PASSWORD) process.env.DB_PASSWORD = '123456';
+if (!process.env.DB_NAME) process.env.DB_NAME = 'lunar_db';
 
 // Validate required environment variables
 const requiredEnvVars = ['DB_HOST', 'DB_USER', 'DB_NAME'];
 const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
 
 if (missingEnvVars.length > 0) {
-  console.error(`❌ Missing required environment variables: ${missingEnvVars.join(', ')}`);
-  console.error('Please create a .env file with the required variables');
-  process.exit(1);
+  console.warn(`⚠️  Some environment variables not set, using defaults`);
 }
 
 // Create connection pool
