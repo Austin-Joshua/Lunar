@@ -4,22 +4,22 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react'
 
 const footerLinks = {
   shop: [
-    { name: 'Men', href: '/men' },
-    { name: 'Women', href: '/women' },
-    { name: 'Kids', href: '/kids' },
-    { name: 'New Arrivals', href: '/' },
+    { name: 'Men', href: '/men', label: 'Browse men\'s collection' },
+    { name: 'Women', href: '/women', label: 'Browse women\'s collection' },
+    { name: 'Kids', href: '/kids', label: 'Browse kids\' collection' },
+    { name: 'New Arrivals', href: '/', label: 'Latest products' },
   ],
   help: [
-    { name: 'Track Order', href: '/orders' },
-    { name: 'Returns', href: '/' },
-    { name: 'Shipping Info', href: '/' },
-    { name: 'FAQs', href: '/' },
+    { name: 'Track Order', href: '/orders', label: 'View your orders' },
+    { name: 'Returns', href: '/', label: 'Return policy' },
+    { name: 'Shipping Info', href: '/', label: 'Shipping details' },
+    { name: 'FAQs', href: '/', label: 'Frequently asked questions' },
   ],
   company: [
-    { name: 'About Us', href: '/' },
-    { name: 'Careers', href: '/' },
-    { name: 'Press', href: '/' },
-    { name: 'Sustainability', href: '/' },
+    { name: 'About Us', href: '/', label: 'Learn about Lunar' },
+    { name: 'Careers', href: '/', label: 'Join our team' },
+    { name: 'Press', href: '/', label: 'Press releases' },
+    { name: 'Sustainability', href: '/', label: 'Sustainability initiatives' },
   ],
 };
 
@@ -56,7 +56,11 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-primary-foreground/70 dark:text-slate-300 hover:text-primary-foreground dark:hover:text-white transition-colors">
+                  <Link 
+                    to={link.href} 
+                    title={link.label}
+                    className="text-primary-foreground/70 dark:text-slate-300 hover:text-primary-foreground dark:hover:text-white transition-colors cursor-pointer"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -70,7 +74,11 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.help.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-primary-foreground/70 dark:text-slate-300 hover:text-primary-foreground dark:hover:text-white transition-colors">
+                  <Link 
+                    to={link.href} 
+                    title={link.label}
+                    className="text-primary-foreground/70 dark:text-slate-300 hover:text-primary-foreground dark:hover:text-white transition-colors cursor-pointer"
+                  >
                     {link.name}
                   </Link>
                 </li>
