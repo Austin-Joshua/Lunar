@@ -25,7 +25,7 @@ const footerLinks = {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-primary text-primary-foreground dark:bg-slate-800">
       <div className="lunar-container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
