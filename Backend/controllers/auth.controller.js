@@ -82,8 +82,9 @@ const register = async (req, res) => {
     );
   } catch (err) {
     console.error('Registration error:', err);
+    const errorMessage = err.message || 'An error occurred during registration.';
     return res.status(500).json(
-      error(500, 'An error occurred during registration.')
+      error(500, errorMessage)
     );
   }
 };
@@ -152,8 +153,9 @@ const login = async (req, res) => {
     );
   } catch (err) {
     console.error('Login error:', err);
+    const errorMessage = err.message || 'An error occurred during login.';
     return res.status(500).json(
-      error(500, 'An error occurred during login.')
+      error(500, errorMessage)
     );
   }
 };

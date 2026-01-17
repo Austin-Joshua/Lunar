@@ -68,7 +68,20 @@ const Register: React.FC = () => {
         navigate('/', { replace: true });
       }, 1500);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Registration failed. Please try again.';
+      const error = err as any;
+      let errorMessage = 'Registration failed. Please try again.';
+      
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
+      // Provide helpful guidance if email already exists
+      if (errorMessage.includes('already registered')) {
+        errorMessage = 'This email is already registered. Please login instead.';
+      }
+      
       setError(errorMessage);
       setSuccess(false);
     } finally {

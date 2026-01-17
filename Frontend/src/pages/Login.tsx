@@ -50,7 +50,20 @@ const Login: React.FC = () => {
         navigate(from, { replace: true });
       }, 1000);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Login failed. Please try again.';
+      const error = err as any;
+      let errorMessage = 'Login failed. Please try again.';
+      
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
+      // Provide helpful guidance if account doesn't exist
+      if (errorMessage.includes('Invalid email or password')) {
+        errorMessage = 'Invalid credentials. Don\'t have an account? Create one on the register page.';
+      }
+      
       setError(errorMessage);
       setSuccess(false);
     } finally {
