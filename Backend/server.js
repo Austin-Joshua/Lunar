@@ -3,11 +3,19 @@
  * Entry point for the Lunar backend API
  */
 
+// Load environment variables FIRST
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+
+// Validate critical environment variables
+if (!process.env.JWT_SECRET) {
+  console.warn('⚠️  JWT_SECRET not found in .env file, using default');
+  process.env.JWT_SECRET = 'lunar_jwt_secret_key_2024_default';
+}
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 const { testConnection } = require('./config/db');
 
@@ -26,7 +34,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 // CORS Configuration - Allow frontend to access backend
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: process.env.CORS_ORIGIN || 'http://localhost:8080',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],

@@ -23,16 +23,31 @@ const register = async (req, res) => {
       );
     }
 
-    // Check if user already exists
-    const existingUser = await User.findByEmail(email);
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json(
+        error(400, 'Please enter a valid email address.')
+      );
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      return res.status(400).json(
+        error(400, 'Password must be at least 6 characters long.')
+      );
+    }
+
+    // Check if user already exists (case-insensitive)
+    const existingUser = await User.findByEmail(email.toLowerCase());
     if (existingUser) {
       return res.status(409).json(
-        error(409, 'User with this email already exists.')
+        error(409, 'This email is already registered. Please login or use a different email.')
       );
     }
 
     // Create new user
-    const user = await User.create({ name, email, password });
+    const user = await User.create({ name, email: email.toLowerCase(), password });
 
     // Generate short-lived access token (15-30 min)
     const accessToken = jwt.sign(

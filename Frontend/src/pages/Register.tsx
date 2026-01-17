@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, CheckCircle } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { authApi } from '@/services/api';
 import { Loader } from '@/components/Loader';
@@ -13,6 +13,7 @@ const Register: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -20,9 +21,22 @@ const Register: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess(false);
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    // Frontend validation
+    if (!name.trim()) {
+      setError('Please enter your full name');
+      return;
+    }
+
+    if (!email.trim()) {
+      setError('Please enter your email address');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
       return;
     }
 
@@ -31,18 +45,56 @@ const Register: React.FC = () => {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
       const response = await authApi.register(name, email, password);
-      login(response.user, response.token);
-      navigate('/');
+      const token = response.accessToken || response.token;
+      if (!token) {
+        throw new Error('No authentication token received');
+      }
+      setSuccess(true);
+      
+      // Login the user automatically
+      login(response.user, token);
+      
+      // Show success message briefly then redirect
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 1500);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed. Please try again.';
+      setError(errorMessage);
+      setSuccess(false);
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (success) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
+        <div className="w-full max-w-md animate-slide-up text-center">
+          <div className="mb-6 flex justify-center">
+            <CheckCircle className="h-16 w-16 text-green-500" />
+          </div>
+          <h1 className="text-3xl font-bold mb-2">Welcome! 🎉</h1>
+          <p className="text-muted-foreground mb-4">
+            Your account has been created successfully!
+          </p>
+          <p className="text-sm text-muted-foreground">
+            You will be redirected to the home page in a moment...
+          </p>
+          <Loader size="lg" className="mx-auto mt-6" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
@@ -144,13 +196,18 @@ const Register: React.FC = () => {
           </div>
 
           <div className="flex items-start gap-2 text-sm">
-            <input type="checkbox" className="w-4 h-4 mt-0.5 rounded border-border" required />
-            <span className="text-muted-foreground">
+            <input 
+              id="terms" 
+              type="checkbox" 
+              className="w-4 h-4 mt-0.5 rounded border-border" 
+              required 
+            />
+            <label htmlFor="terms" className="text-muted-foreground cursor-pointer">
               I agree to the{' '}
               <a href="#" className="text-primary hover:underline">Terms of Service</a>
               {' '}and{' '}
               <a href="#" className="text-primary hover:underline">Privacy Policy</a>
-            </span>
+            </label>
           </div>
 
           <button

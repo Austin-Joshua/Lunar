@@ -54,7 +54,8 @@ export interface Address {
 
 export interface AuthResponse {
   user: User;
-  token: string;
+  token?: string;
+  accessToken?: string;
 }
 
 export interface ApiError {
