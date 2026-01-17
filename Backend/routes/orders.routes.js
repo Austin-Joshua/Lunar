@@ -7,6 +7,7 @@ const express = require('express');
 const ordersController = require('../controllers/orders.controller');
 const authMiddleware = require('../middleware/auth.middleware');
 const adminMiddleware = require('../middleware/admin.middleware');
+const { validateOrderInput, sanitizeInput } = require('../middleware/validation.middleware');
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ const router = express.Router();
  */
 
 // Create order
-router.post('/', authMiddleware, ordersController.create);
+router.post('/', authMiddleware, sanitizeInput, validateOrderInput, ordersController.create);
 
 // Get user's orders
 router.get('/my-orders', authMiddleware, ordersController.getMyOrders);

@@ -7,6 +7,7 @@ const express = require('express');
 const productsController = require('../controllers/products.controller');
 const authMiddleware = require('../middleware/auth.middleware');
 const adminMiddleware = require('../middleware/admin.middleware');
+const { validateProductInput, sanitizeInput } = require('../middleware/validation.middleware');
 
 const router = express.Router();
 
@@ -34,10 +35,10 @@ router.get('/:id', productsController.getById);
  */
 
 // Create product
-router.post('/', authMiddleware, adminMiddleware, productsController.create);
+router.post('/', authMiddleware, adminMiddleware, sanitizeInput, validateProductInput, productsController.create);
 
 // Update product
-router.put('/:id', authMiddleware, adminMiddleware, productsController.update);
+router.put('/:id', authMiddleware, adminMiddleware, sanitizeInput, validateProductInput, productsController.update);
 
 // Delete product
 router.delete('/:id', authMiddleware, adminMiddleware, productsController.deleteProduct);

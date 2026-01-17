@@ -87,24 +87,14 @@ app.get('/api/admin/stats', require('./middleware/auth.middleware'), require('./
   }
 });
 
-// 404 Not Found handler
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found',
-    path: req.path,
-  });
-});
+// Import error handlers
+const { errorHandler, notFoundHandler } = require('./middleware/errorHandler.middleware');
 
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error('Global error:', err);
-  res.status(500).json({
-    success: false,
-    message: 'An internal server error occurred',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined,
-  });
-});
+// 404 Not Found handler
+app.use(notFoundHandler);
+
+// Global error handler (must be LAST)
+app.use(errorHandler);
 
 // Start server
 const startServer = async () => {
