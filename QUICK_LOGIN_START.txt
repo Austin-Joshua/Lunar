@@ -1,0 +1,204 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║              🔐 LUNAR LOGIN - QUICK START (3 SIMPLE STEPS)                 ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+⚠️  ISSUE: You're getting "Failed to fetch" error when trying to login
+
+💡 REASON: Backend server is NOT running
+
+✅ SOLUTION: Follow these 3 simple steps:
+
+═════════════════════════════════════════════════════════════════════════════
+
+📋 STEP 1: START BACKEND SERVER
+
+1. Open PowerShell
+2. Run this command:
+
+   cd C:\Users\austi\OneDrive\Desktop\Lunar\Backend
+   npm run dev
+
+3. Wait for this message:
+   
+   ╭─────────────────────────────────────────╮
+   │   LUNAR API Server Started Successfully │
+   ├─────────────────────────────────────────┤
+   │  Port: 5000
+   │  Environment: development
+   │  CORS Origin: http://localhost:5173
+   ╰─────────────────────────────────────────╯
+
+✅ Backend is now running on http://localhost:5000
+
+═════════════════════════════════════════════════════════════════════════════
+
+📋 STEP 2: START FRONTEND SERVER (New PowerShell Window)
+
+1. Open a NEW PowerShell window
+2. Run this command:
+
+   cd C:\Users\austi\OneDrive\Desktop\Lunar\Frontend
+   npm run dev -- --force
+
+3. Wait for this message:
+
+   VITE v5.0.0 ready in 234 ms
+   ➜  Local:   http://localhost:5173/
+
+✅ Frontend is now running on http://localhost:5173
+
+═════════════════════════════════════════════════════════════════════════════
+
+📋 STEP 3: LOGIN WITH TEST CREDENTIALS
+
+1. Go to: http://localhost:5173/login
+2. Enter these credentials:
+
+   📧 Email:    admin@lunar.com
+   🔐 Password: admin123456
+
+3. Click "Sign in"
+4. ✅ You should now be logged in!
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎯 THAT'S IT! You're done!
+
+If you see the homepage after login, everything is working perfectly! ✅
+
+═════════════════════════════════════════════════════════════════════════════
+
+❓ COMMON ISSUES & FIXES
+
+1. Getting "Failed to fetch" error?
+   → Backend is still not running
+   → Check Step 1 and wait for the "Server Started Successfully" message
+   → If you don't see it, there's an error (check terminal output)
+
+2. Getting "Invalid email or password" error?
+   → Using wrong credentials
+   → Use the exact credentials above: admin@lunar.com / admin123456
+
+3. Can't connect to Backend from Frontend?
+   → Both servers need to be running in separate terminals
+   → Terminal 1: Backend running on 5000
+   → Terminal 2: Frontend running on 5173
+   → Check they're both running
+
+4. MySQL connection error?
+   → MySQL isn't running
+   → Or database credentials are wrong
+   → Check Backend/.env file has:
+      DB_HOST=localhost
+      DB_USER=root
+      DB_PASSWORD=123456
+      DB_NAME=lunar_db
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎓 UNDERSTANDING WHAT'S HAPPENING
+
+When you click "Sign in":
+
+1. Frontend (React) captures your email and password
+2. Sends them to Backend API: http://localhost:5000/api/auth/login
+3. Backend checks if email exists in MySQL database
+4. Backend checks if password matches (encrypted)
+5. If correct:
+   ├─ Backend generates JWT access token (15 min expiry)
+   ├─ Backend generates refresh token (7 day expiry)
+   └─ Backend returns tokens + your user data
+6. Frontend stores token in localStorage (browser storage)
+7. Frontend redirects you to homepage
+8. You're logged in! ✅
+
+═════════════════════════════════════════════════════════════════════════════
+
+🔑 TEST ACCOUNTS AVAILABLE
+
+Admin Account:
+  Email: admin@lunar.com
+  Password: admin123456
+  Role: admin
+  Access: Full app including admin dashboard
+
+User Account:
+  Email: user@lunar.com
+  Password: user123456
+  Role: user
+  Access: Browse products, add to cart, checkout
+
+═════════════════════════════════════════════════════════════════════════════
+
+📂 FILE STRUCTURE FOR REFERENCE
+
+Backend (Port 5000):
+  ├─ Controllers: Handle login logic
+  ├─ Models: Database queries
+  ├─ Routes: API endpoints (/api/auth/login)
+  ├─ .env: Configuration (DB credentials, JWT secret)
+  └─ server.js: Main server file
+
+Frontend (Port 5173):
+  ├─ Components: UI components
+  ├─ Pages: Login page, Home page, etc
+  ├─ Services: API client (sends requests to backend)
+  ├─ Context: AuthContext (stores user data)
+  └─ .env: Configuration (API URL = http://localhost:5000/api)
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ SUCCESS INDICATORS
+
+You'll know everything works when:
+
+1. ✅ Backend terminal shows "Server running on port 5000"
+2. ✅ Frontend terminal shows "Local: http://localhost:5173"
+3. ✅ Can access http://localhost:5173 in browser
+4. ✅ Can access http://localhost:5173/login
+5. ✅ Can enter credentials
+6. ✅ Can click "Sign in" without "Failed to fetch" error
+7. ✅ Redirected to homepage after login
+8. ✅ See your username in the navbar
+9. ✅ Can logout successfully
+10. ✅ Login session persists on page refresh
+
+═════════════════════════════════════════════════════════════════════════════
+
+🚀 QUICK REFERENCE COMMANDS
+
+Terminal 1 (Backend):
+  cd C:\Users\austi\OneDrive\Desktop\Lunar\Backend
+  npm run dev
+
+Terminal 2 (Frontend):
+  cd C:\Users\austi\OneDrive\Desktop\Lunar\Frontend
+  npm run dev -- --force
+
+Test Backend:
+  curl http://localhost:5000/health
+
+Test Login API:
+  curl -X POST http://localhost:5000/api/auth/login \
+    -H "Content-Type: application/json" \
+    -d '{"email":"admin@lunar.com","password":"admin123456"}'
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎉 YOU'RE ALL SET!
+
+Follow the 3 steps above and you'll have a working login system.
+
+Questions? Check:
+- LOGIN_SETUP_GUIDE.md - Comprehensive guide
+- START_SERVERS.ps1 - Interactive setup script
+- Backend/README.md - Backend documentation
+- Frontend/README.md - Frontend documentation
+
+═════════════════════════════════════════════════════════════════════════════
+
+Created: January 17, 2026
+Status: Ready to use
+Support: All documentation included in repository
+
+═════════════════════════════════════════════════════════════════════════════
