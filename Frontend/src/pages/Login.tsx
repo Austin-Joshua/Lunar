@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { authApi } from '@/services/api';
+import { loginWithGoogle, loginWithApple } from '@/services/oauth';
 import { Loader } from '@/components/Loader';
 
 const Login: React.FC = () => {
@@ -17,6 +18,33 @@ const Login: React.FC = () => {
   const location = useLocation();
 
   const from = (location.state as { from?: Location })?.from?.pathname || '/';
+
+  // Initialize Google OAuth
+  useEffect(() => {
+    const initGoogle = async () => {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+
+      script.onload = () => {
+        if (window.google) {
+          window.google.accounts.id.initialize({
+            client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+            callback: handleGoogleResponse,
+          });
+          // Render Google button
+          window.google.accounts.id.renderButton(
+            document.getElementById('google-signin-btn'),
+            { theme: 'outline', size: 'large' }
+          );
+        }
+      };
+    };
+
+    initGoogle();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,6 +69,59 @@ const Login: React.FC = () => {
       'demo-token'
     );
     navigate(from, { replace: true });
+  };
+
+  // Handle Google OAuth response
+  const handleGoogleResponse = async (response: any) => {
+    try {
+      setIsLoading(true);
+      setError('');
+
+      // Decode JWT from Google
+      const decoded = JSON.parse(atob(response.credential.split('.')[1]));
+
+      const loginResponse = await loginWithGoogle({
+        id: decoded.sub,
+        email: decoded.email,
+        name: decoded.name,
+        picture: decoded.picture || '',
+      });
+
+      login(loginResponse.user, loginResponse.token);
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Google login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle Apple OAuth login
+  const handleAppleLogin = async () => {
+    try {
+      setIsLoading(true);
+      setError('');
+
+      if (!window.AppleID) {
+        setError('Apple ID SDK not loaded. Please try again.');
+        return;
+      }
+
+      const response = await window.AppleID.auth.signIn();
+
+      const loginResponse = await loginWithApple({
+        sub: response.user?.uid,
+        email: response.user?.email,
+        name: response.user?.name?.firstName || 'Apple User',
+      });
+
+      login(loginResponse.user, loginResponse.token);
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Apple login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -136,11 +217,35 @@ const Login: React.FC = () => {
         {/* Divider */}
         <div className="my-6 flex items-center gap-4">
           <div className="flex-1 h-px bg-border" />
-          <span className="text-sm text-muted-foreground">or</span>
+          <span className="text-sm text-muted-foreground">or continue with</span>
           <div className="flex-1 h-px bg-border" />
         </div>
 
+        {/* OAuth Buttons */}
+        <div className="space-y-3">
+          {/* Google Sign-In */}
+          <div id="google-signin-btn" className="w-full flex justify-center" />
+
+          {/* Apple Sign-In */}
+          <button
+            type="button"
+            onClick={handleAppleLogin}
+            disabled={isLoading}
+            className="w-full py-3 px-4 rounded-md border border-border bg-white hover:bg-gray-50 dark:bg-slate-950 dark:hover:bg-slate-900 font-medium text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M17.05 13.5c-.91 0-1.7.52-2.1 1.28.94.64 1.57 1.77 1.57 3.02 0 .78-.24 1.5-.64 2.11h2.72c1.23-1.2 2-2.88 2-4.74 0-3.66-2.98-6.65-6.65-6.65-1.44 0-2.77.47-3.85 1.25.64 1.4 1.01 2.96 1.01 4.6 0 .78-.09 1.55-.24 2.29.68.4 1.5.63 2.33.63 1.28 0 2.39-.68 3-1.69.4.1.82.15 1.25.15z" />
+            </svg>
+            Sign in with Apple
+          </button>
+        </div>
+
         {/* Register Link */}
+        <div className="my-6 border-t border-border" />
         <p className="text-center text-sm text-muted-foreground">
           Don't have an account?{' '}
           <Link to="/register" className="text-primary font-medium hover:underline">

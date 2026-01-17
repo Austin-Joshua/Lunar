@@ -48,7 +48,10 @@ class User {
    * @returns {object} User data or null
    */
   static async findById(id) {
-    const query = 'SELECT id, name, email, role, created_at FROM users WHERE id = ?';
+    const query = `
+      SELECT id, name, email, role, created_at, oauth_provider, profile_image 
+      FROM users WHERE id = ?
+    `;
     const [rows] = await pool.execute(query, [id]);
 
     if (rows.length === 0) return null;
@@ -58,8 +61,26 @@ class User {
       name: rows[0].name,
       email: rows[0].email,
       role: rows[0].role,
+      oauthProvider: rows[0].oauth_provider,
+      profileImage: rows[0].profile_image,
       createdAt: rows[0].created_at,
     };
+  }
+
+  /**
+   * Update OAuth data for user
+   * @param {number} userId - User ID
+   * @param {string} provider - OAuth provider (google, apple)
+   * @param {string} oauthId - OAuth ID from provider
+   * @param {string} profileImage - Profile image URL
+   */
+  static async updateOAuthData(userId, provider, oauthId, profileImage = null) {
+    const query = `
+      UPDATE users 
+      SET oauth_provider = ?, oauth_id = ?, profile_image = ? 
+      WHERE id = ?
+    `;
+    await pool.execute(query, [provider, oauthId, profileImage, userId]);
   }
 
   /**
