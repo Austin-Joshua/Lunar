@@ -9,35 +9,35 @@ import { cn } from '@/lib/utils';
 const navLinks = [
   {
     name: 'Men',
-    href: '/men',
+    href: '/shop/men',
     submenu: [
-      { name: 'Shirts', href: '/men/shirts' },
-      { name: 'Pants', href: '/men/pants' },
-      { name: 'Footwear', href: '/men/footwear' },
-      { name: 'Accessories', href: '/men/accessories' },
-      { name: 'Bags', href: '/men/bags' },
+      { name: 'Shirts', href: '/shop/men/shirts' },
+      { name: 'Pants', href: '/shop/men/pants' },
+      { name: 'Footwear', href: '/shop/men/footwear' },
+      { name: 'Accessories', href: '/shop/men/accessories' },
+      { name: 'Bags', href: '/shop/men/bags' },
     ],
   },
   {
     name: 'Women',
-    href: '/women',
+    href: '/shop/women',
     submenu: [
-      { name: 'Tops', href: '/women/tops' },
-      { name: 'Pants', href: '/women/pants' },
-      { name: 'Skirts', href: '/women/skirts' },
-      { name: 'Footwear', href: '/women/footwear' },
-      { name: 'Accessories', href: '/women/accessories' },
-      { name: 'Bags', href: '/women/bags' },
+      { name: 'Tops', href: '/shop/women/tops' },
+      { name: 'Pants', href: '/shop/women/pants' },
+      { name: 'Skirts', href: '/shop/women/skirts' },
+      { name: 'Footwear', href: '/shop/women/footwear' },
+      { name: 'Accessories', href: '/shop/women/accessories' },
+      { name: 'Bags', href: '/shop/women/bags' },
     ],
   },
   {
     name: 'Kids',
-    href: '/kids',
+    href: '/shop/kids',
     submenu: [
-      { name: 'Boys', href: '/kids/boys' },
-      { name: 'Girls', href: '/kids/girls' },
-      { name: 'Footwear', href: '/kids/footwear' },
-      { name: 'Accessories', href: '/kids/accessories' },
+      { name: 'Boys', href: '/shop/kids/boys' },
+      { name: 'Girls', href: '/shop/kids/girls' },
+      { name: 'Footwear', href: '/shop/kids/footwear' },
+      { name: 'Accessories', href: '/shop/kids/accessories' },
     ],
   },
 ];
@@ -60,7 +60,7 @@ export const Navbar: React.FC = () => {
       <nav className="lunar-container">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/shop" className="flex items-center gap-2">
             <span className={cn(
               "text-2xl font-bold tracking-tight",
               isKidsSection ? "text-kids-coral" : "text-primary"
@@ -139,10 +139,10 @@ export const Navbar: React.FC = () => {
                 </button>
                 <div className="absolute top-full right-0 mt-1 w-48 rounded-md bg-popover shadow-lunar-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                   <div className="py-2">
-                    <Link to="/orders" className="block px-4 py-2 text-sm hover:bg-accent transition-colors">
+                    <Link to="/shop/orders" className="block px-4 py-2 text-sm hover:bg-accent transition-colors">
                       My Orders
                     </Link>
-                    <Link to="/settings" className="block px-4 py-2 text-sm hover:bg-accent transition-colors">
+                    <Link to="/shop/settings" className="block px-4 py-2 text-sm hover:bg-accent transition-colors">
                       Settings
                     </Link>
                     <button
@@ -165,7 +165,7 @@ export const Navbar: React.FC = () => {
 
             {/* Cart */}
             <Link
-              to="/cart"
+              to="/shop/cart"
               className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors"
             >
               <ShoppingBag className="h-5 w-5" />

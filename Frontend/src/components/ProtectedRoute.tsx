@@ -41,14 +41,14 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminO
     return <PageLoader />;
   }
 
-  // Redirect to login if not authenticated
+  // Redirect to signin if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/signin" state={{ from: location }} replace />;
   }
 
-  // Redirect to home if admin-only route and user is not admin
+  // Redirect to shop home if admin-only route and user is not admin
   if (adminOnly && !isAdmin) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/shop" replace />;
   }
 
   return <>{children}</>;
