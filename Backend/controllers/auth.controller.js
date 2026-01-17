@@ -39,14 +39,14 @@ const register = async (req, res) => {
     }
 
     // Check if user already exists (case-insensitive)
-    const existingUser = await User.findByEmail(email.toLowerCase());
+    const existingUser = await User.findByEmail(email);
     if (existingUser) {
       return res.status(409).json(
         error(409, 'This email is already registered. Please login or use a different email.')
       );
     }
 
-    // Create new user
+    // Create new user with lowercase email for consistency
     const user = await User.create({ name, email: email.toLowerCase(), password });
 
     // Generate short-lived access token (15-30 min)
@@ -103,11 +103,11 @@ const login = async (req, res) => {
       );
     }
 
-    // Find user by email
+    // Find user by email (case-insensitive)
     const user = await User.findByEmail(email);
     if (!user) {
       return res.status(401).json(
-        error(401, 'Invalid email or password.')
+        error(401, 'Invalid email or password. Please check your credentials or create a new account.')
       );
     }
 

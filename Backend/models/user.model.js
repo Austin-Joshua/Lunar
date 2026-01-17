@@ -31,12 +31,12 @@ class User {
   }
 
   /**
-   * Find user by email
+   * Find user by email (case-insensitive)
    * @param {string} email - User email
    * @returns {object} User data or null
    */
   static async findByEmail(email) {
-    const query = 'SELECT * FROM users WHERE email = ?';
+    const query = 'SELECT * FROM users WHERE LOWER(email) = LOWER(?)';
     const [rows] = await pool.execute(query, [email]);
 
     return rows.length > 0 ? rows[0] : null;
