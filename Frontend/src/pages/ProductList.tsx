@@ -14,6 +14,27 @@ interface ProductListProps {
 
 // Mock products
 const generateMockProducts = (gender: string, subcategory?: string): Product[] => {
+  // Define category-specific product names
+  const categoryNames: Record<string, string[]> = {
+    men_shirts: ['Oxford Shirt', 'Casual Button-Up', 'Formal Shirt', 'Linen Shirt', 'Polo Shirt', 'Denim Shirt', 'Henley Shirt', 'T-Shirt'],
+    men_pants: ['Classic Chinos', 'Denim Jeans', 'Dress Pants', 'Casual Trousers', 'Joggers', 'Cargo Pants', 'Shorts', 'Linen Pants'],
+    men_footwear: ['Leather Sneakers', 'Dress Shoes', 'Casual Loafers', 'Sports Shoes', 'Sandals', 'Boots', 'Slip-ons', 'Running Shoes'],
+    men_accessories: ['Leather Belt', 'Wrist Watch', 'Baseball Cap', 'Scarf', 'Tie', 'Wallet', 'Sunglasses', 'Backpack'],
+    men_bags: ['Laptop Bag', 'Messenger Bag', 'Travel Backpack', 'Crossbody Bag', 'Duffel Bag', 'Weekend Bag', 'Camera Bag', 'Briefcase'],
+    
+    women_tops: ['Casual T-Shirt', 'Blouse', 'Crop Top', 'Tank Top', 'Sweater', 'Cardigan', 'Long Sleeve Top', 'Tunic'],
+    women_pants: ['Skinny Jeans', 'Bootcut Jeans', 'Leggings', 'Cargo Pants', 'Joggers', 'Casual Trousers', 'Shorts', 'Wide-Leg Pants'],
+    women_skirts: ['Pencil Skirt', 'A-Line Skirt', 'Maxi Skirt', 'Mini Skirt', 'Denim Skirt', 'Pleated Skirt', 'Wrap Skirt', 'Asymmetrical Skirt'],
+    women_footwear: ['Heeled Pumps', 'Flat Sandals', 'Ankle Boots', 'Sneakers', 'Ballet Flats', 'Wedges', 'Loafers', 'Strappy Heels'],
+    women_accessories: ['Handbag', 'Shoulder Bag', 'Necklace', 'Bracelet', 'Earrings', 'Hat', 'Scarf', 'Sunglasses'],
+    women_bags: ['Tote Bag', 'Crossbody Bag', 'Backpack', 'Clutch', 'Satchel', 'Hobo Bag', 'Shoulder Bag', 'Leather Bag'],
+    
+    kids_boys: ['Boys T-Shirt', 'Boys Jeans', 'Boys Shorts', 'Boys Hoodie', 'Boys Jacket', 'Boys Shoes', 'Boys Hat', 'Boys Backpack'],
+    kids_girls: ['Girls Dress', 'Girls T-Shirt', 'Girls Skirt', 'Girls Leggings', 'Girls Jacket', 'Girls Shoes', 'Girls Backpack', 'Girls Hair Clip'],
+    kids_footwear: ['Kids Sneakers', 'Kids Sandals', 'Kids Boots', 'Kids Slip-ons', 'Kids Running Shoes', 'Kids Casual Shoes', 'Kids Sports Shoes', 'Kids Loafers'],
+    kids_accessories: ['Kids Hat', 'Kids Scarf', 'Kids Backpack', 'Kids Watch', 'Kids Sunglasses', 'Kids Socks', 'Kids Belt', 'Kids Cap'],
+  };
+
   const images: Record<string, string[]> = {
     men: [
       'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=500&fit=crop',
@@ -37,10 +58,14 @@ const generateMockProducts = (gender: string, subcategory?: string): Product[] =
 
   const brands = ['LUNAR Essentials', 'LUNAR Collection', 'LUNAR Luxe', 'LUNAR Sport'];
   const genderImages = images[gender] || images.men;
+  
+  // Get correct product names based on gender and subcategory
+  const key = subcategory ? `${gender}_${subcategory}` : gender;
+  const productNames = categoryNames[key] || ['Product Item'];
 
   return Array.from({ length: 8 }, (_, i) => ({
     id: `${gender}-${subcategory || 'all'}-${i + 1}`,
-    name: `${subcategory?.charAt(0).toUpperCase()}${subcategory?.slice(1) || 'Product'} Item ${i + 1}`,
+    name: productNames[i % productNames.length],
     brand: brands[i % brands.length],
     price: 50 + Math.floor(Math.random() * 150),
     originalPrice: Math.random() > 0.5 ? 80 + Math.floor(Math.random() * 150) : undefined,
