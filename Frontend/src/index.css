@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* LUNAR Design System - Elegant Celestial Theme */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Midnight Navy */
+    --primary: 222 47% 11%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Pearl Silver */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    /* Lunar Silver Accent */
+    --accent: 220 20% 92%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.5rem;
+
+    /* Custom LUNAR tokens */
+    --lunar-navy: 222 47% 11%;
+    --lunar-silver: 220 20% 92%;
+    --lunar-pearl: 0 0% 98%;
+    --lunar-gold: 45 93% 47%;
+    --lunar-charcoal: 220 9% 20%;
+
+    /* Kids theme - playful pastels */
+    --kids-coral: 16 100% 72%;
+    --kids-mint: 158 64% 72%;
+    --kids-sky: 199 89% 76%;
+    --kids-lavender: 270 67% 83%;
+    --kids-peach: 28 100% 86%;
+
+    /* Gradients */
+    --gradient-lunar: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 30% 25%) 100%);
+    --gradient-silver: linear-gradient(135deg, hsl(220 14% 96%) 0%, hsl(0 0% 100%) 100%);
+    --gradient-kids: linear-gradient(135deg, hsl(199 89% 76% / 0.3) 0%, hsl(270 67% 83% / 0.3) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -2px hsl(222 47% 11% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(222 47% 11% / 0.1), 0 8px 10px -6px hsl(222 47% 11% / 0.1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Admin Dashboard tokens */
+    --admin-bg: 220 14% 96%;
+    --admin-sidebar: 222 47% 11%;
+    --admin-sidebar-foreground: 0 0% 98%;
+    --admin-sidebar-hover: 222 40% 18%;
+    --admin-sidebar-active: 217 91% 60%;
+    --admin-card: 0 0% 100%;
+    --admin-success: 142 76% 36%;
+    --admin-warning: 38 92% 50%;
+    --admin-info: 199 89% 48%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 222 30% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 222 30% 15%;
+    --muted-foreground: 220 9% 65%;
+
+    --accent: 222 30% 18%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 220 20% 92%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+@layer components {
+  .lunar-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .lunar-gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-lunar);
+  }
+
+  .lunar-card {
+    @apply bg-card rounded-lg border border-border;
+    box-shadow: var(--shadow-md);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .lunar-card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-4px);
+  }
+
+  .kids-card {
+    @apply rounded-2xl border-2;
+    border-color: hsl(var(--kids-sky));
+    background: var(--gradient-kids);
+  }
+
+  .lunar-btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium text-primary-foreground rounded-md transition-all duration-200;
+    background: hsl(var(--primary));
+  }
+
+  .lunar-btn-primary:hover {
+    background: hsl(var(--lunar-charcoal));
+    transform: translateY(-1px);
+  }
+
+  .lunar-btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium border-2 rounded-md transition-all duration-200;
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+
+  .lunar-btn-outline:hover {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
