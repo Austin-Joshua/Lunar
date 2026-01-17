@@ -82,7 +82,41 @@ CREATE TABLE IF NOT EXISTS order_items (
   INDEX idx_product_id (product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Refresh Tokens table for session management
+CREATE TABLE IF NOT EXISTS refresh_tokens (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  token VARCHAR(500) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  is_revoked BOOLEAN DEFAULT false,
+  revoked_at DATETIME,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_user_id (user_id),
+  INDEX idx_token (token),
+  INDEX idx_expires_at (expires_at),
+  INDEX idx_is_revoked (is_revoked)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Stock Activity Log for audit trail
+CREATE TABLE IF NOT EXISTS stock_logs (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  product_id INT NOT NULL,
+  order_id INT,
+  quantity_change INT NOT NULL,
+  reason VARCHAR(100),
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL,
+  INDEX idx_product_id (product_id),
+  INDEX idx_order_id (order_id),
+  INDEX idx_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Create indexes for better query performance
 CREATE INDEX idx_users_created_at ON users(created_at);
 CREATE INDEX idx_products_created_at ON products(created_at);
+CREATE INDEX idx_products_stock ON products(stock);
 CREATE INDEX idx_orders_created_at ON orders(created_at);
+CREATE INDEX idx_orders_user_status ON orders(user_id, status);

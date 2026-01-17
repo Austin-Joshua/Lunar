@@ -5,6 +5,7 @@
 
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
+const RefreshToken = require('../models/token.model');
 const { success, error } = require('../utils/response');
 
 /**
@@ -33,22 +34,34 @@ const register = async (req, res) => {
     // Create new user
     const user = await User.create({ name, email, password });
 
-    // Generate JWT token
-    const token = jwt.sign(
+    // Generate short-lived access token (15-30 min)
+    const accessToken = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE || '7d' }
+      { expiresIn: '15m' } // Short-lived
     );
+
+    // Generate long-lived refresh token (7 days)
+    const refreshToken = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    // Store refresh token in database
+    await RefreshToken.create(user.id, refreshToken, 7 * 24 * 60 * 60);
 
     return res.status(201).json(
       success(201, 'User registered successfully.', {
-        token,
+        accessToken,
+        refreshToken,
+        expiresIn: '15m',
         user: {
           id: user.id,
           name: user.name,
           email: user.email,
           role: user.role,
-          createdAt: user.createdAt,
+          createdAt: user.created_at,
         },
       })
     );
@@ -91,16 +104,28 @@ const login = async (req, res) => {
       );
     }
 
-    // Generate JWT token
-    const token = jwt.sign(
+    // Generate short-lived access token (15-30 min)
+    const accessToken = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE || '7d' }
+      { expiresIn: '15m' } // Short-lived
     );
+
+    // Generate long-lived refresh token (7 days)
+    const refreshToken = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    // Store refresh token in database
+    await RefreshToken.create(user.id, refreshToken, 7 * 24 * 60 * 60);
 
     return res.status(200).json(
       success(200, 'Login successful.', {
-        token,
+        accessToken,
+        refreshToken,
+        expiresIn: '15m',
         user: {
           id: user.id,
           name: user.name,
