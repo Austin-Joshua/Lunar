@@ -19,7 +19,7 @@ class User {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const query = 'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)';
-    const [result] = await pool.execute(query, [name, email, hashedPassword, 'user']);
+    const [result] = await pool.query(query, [name, email, hashedPassword, 'user']);
 
     return {
       id: result.insertId,
@@ -37,7 +37,7 @@ class User {
    */
   static async findByEmail(email) {
     const query = 'SELECT * FROM users WHERE LOWER(email) = LOWER(?)';
-    const [rows] = await pool.execute(query, [email]);
+    const [rows] = await pool.query(query, [email]);
 
     return rows.length > 0 ? rows[0] : null;
   }
@@ -52,7 +52,7 @@ class User {
       SELECT id, name, email, role, created_at, oauth_provider, profile_image 
       FROM users WHERE id = ?
     `;
-    const [rows] = await pool.execute(query, [id]);
+    const [rows] = await pool.query(query, [id]);
 
     if (rows.length === 0) return null;
 
@@ -80,7 +80,7 @@ class User {
       SET oauth_provider = ?, oauth_id = ?, profile_image = ? 
       WHERE id = ?
     `;
-    await pool.execute(query, [provider, oauthId, profileImage, userId]);
+    await pool.query(query, [provider, oauthId, profileImage, userId]);
   }
 
   /**
@@ -89,7 +89,7 @@ class User {
    */
   static async getAll() {
     const query = 'SELECT id, name, email, role, created_at FROM users ORDER BY created_at DESC';
-    const [rows] = await pool.execute(query);
+    const [rows] = await pool.query(query);
 
     return rows.map(row => ({
       id: row.id,

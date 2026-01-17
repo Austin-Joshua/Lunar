@@ -19,7 +19,7 @@ class Order {
       LEFT JOIN users u ON o.user_id = u.id
       ORDER BY o.created_at DESC
     `;
-    const [orders] = await pool.execute(query);
+    const [orders] = await pool.query(query);
 
     // Fetch items for each order
     const ordersWithItems = await Promise.all(
@@ -55,7 +55,7 @@ class Order {
       LEFT JOIN users u ON o.user_id = u.id
       WHERE o.id = ?
     `;
-    const [rows] = await pool.execute(query, [id]);
+    const [rows] = await pool.query(query, [id]);
 
     if (rows.length === 0) return null;
 
@@ -87,7 +87,7 @@ class Order {
       WHERE o.user_id = ?
       ORDER BY o.created_at DESC
     `;
-    const [orders] = await pool.execute(query, [userId]);
+    const [orders] = await pool.query(query, [userId]);
 
     // Fetch items for each order
     const ordersWithItems = await Promise.all(
@@ -121,7 +121,7 @@ class Order {
       LEFT JOIN products p ON oi.product_id = p.id
       WHERE oi.order_id = ?
     `;
-    const [rows] = await pool.execute(query, [orderId]);
+    const [rows] = await pool.query(query, [orderId]);
 
     return rows.map(row => ({
       id: row.id,
@@ -145,14 +145,14 @@ class Order {
     try {
       // Create order
       const orderQuery = 'INSERT INTO orders (user_id, total_price, status) VALUES (?, ?, ?)';
-      const [orderResult] = await pool.execute(orderQuery, [userId, totalPrice, 'pending']);
+      const [orderResult] = await pool.query(orderQuery, [userId, totalPrice, 'pending']);
       const orderId = orderResult.insertId;
 
       // Create order items
       const itemQuery = 'INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)';
       
       for (const item of items) {
-        await pool.execute(itemQuery, [orderId, item.productId, item.quantity, item.price]);
+        await pool.query(itemQuery, [orderId, item.productId, item.quantity, item.price]);
       }
 
       return await this.getById(orderId);
@@ -175,7 +175,7 @@ class Order {
     }
 
     const query = 'UPDATE orders SET status = ? WHERE id = ?';
-    await pool.execute(query, [status, id]);
+    await pool.query(query, [status, id]);
 
     return this.getById(id);
   }
@@ -188,7 +188,7 @@ class Order {
    */
   static async isOwner(orderId, userId) {
     const query = 'SELECT user_id FROM orders WHERE id = ?';
-    const [rows] = await pool.execute(query, [orderId]);
+    const [rows] = await pool.query(query, [orderId]);
 
     return rows.length > 0 && rows[0].user_id === userId;
   }

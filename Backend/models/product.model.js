@@ -20,7 +20,7 @@ class Product {
       LEFT JOIN categories c ON p.category_id = c.id
       ORDER BY p.created_at DESC
     `;
-    const [rows] = await pool.execute(query);
+    const [rows] = await pool.query(query);
 
     return rows.map(row => ({
       id: row.id,
@@ -51,7 +51,7 @@ class Product {
       LEFT JOIN categories c ON p.category_id = c.id
       WHERE p.id = ?
     `;
-    const [rows] = await pool.execute(query, [id]);
+    const [rows] = await pool.query(query, [id]);
 
     if (rows.length === 0) return null;
 
@@ -87,7 +87,7 @@ class Product {
       WHERE p.gender = ?
       ORDER BY p.created_at DESC
     `;
-    const [rows] = await pool.execute(query, [gender]);
+    const [rows] = await pool.query(query, [gender]);
 
     return rows.map(row => ({
       id: row.id,
@@ -120,7 +120,7 @@ class Product {
       WHERE p.gender = ? AND c.name = ?
       ORDER BY p.created_at DESC
     `;
-    const [rows] = await pool.execute(query, [gender, category]);
+    const [rows] = await pool.query(query, [gender, category]);
 
     return rows.map(row => ({
       id: row.id,
@@ -153,7 +153,7 @@ class Product {
       ORDER BY p.created_at DESC
     `;
     const searchTerm = `%${searchQuery}%`;
-    const [rows] = await pool.execute(query, [searchTerm, searchTerm, searchTerm]);
+    const [rows] = await pool.query(query, [searchTerm, searchTerm, searchTerm]);
 
     return rows.map(row => ({
       id: row.id,
@@ -183,7 +183,7 @@ class Product {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    const [result] = await pool.execute(query, [
+    const [result] = await pool.query(query, [
       name,
       brand,
       description,
@@ -233,7 +233,7 @@ class Product {
     updateValues.push(id);
 
     const query = `UPDATE products SET ${updateFields.join(', ')} WHERE id = ?`;
-    await pool.execute(query, updateValues);
+    await pool.query(query, updateValues);
 
     return this.getById(id);
   }
@@ -245,7 +245,7 @@ class Product {
    */
   static async delete(id) {
     const query = 'DELETE FROM products WHERE id = ?';
-    const [result] = await pool.execute(query, [id]);
+    const [result] = await pool.query(query, [id]);
 
     return result.affectedRows > 0;
   }

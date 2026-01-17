@@ -12,7 +12,7 @@ class Category {
    */
   static async getAll() {
     const query = 'SELECT id, name, gender FROM categories ORDER BY gender, name';
-    const [rows] = await pool.execute(query);
+    const [rows] = await pool.query(query);
 
     return rows.map(row => ({
       id: row.id,
@@ -28,7 +28,7 @@ class Category {
    */
   static async getByGender(gender) {
     const query = 'SELECT DISTINCT name FROM categories WHERE gender = ? ORDER BY name';
-    const [rows] = await pool.execute(query, [gender]);
+    const [rows] = await pool.query(query, [gender]);
 
     return rows.map(row => row.name);
   }
@@ -42,7 +42,7 @@ class Category {
     const { name, gender } = categoryData;
 
     const query = 'INSERT INTO categories (name, gender) VALUES (?, ?)';
-    const [result] = await pool.execute(query, [name, gender]);
+    const [result] = await pool.query(query, [name, gender]);
 
     return {
       id: result.insertId,
@@ -59,7 +59,7 @@ class Category {
    */
   static async findByNameAndGender(name, gender) {
     const query = 'SELECT id FROM categories WHERE name = ? AND gender = ?';
-    const [rows] = await pool.execute(query, [name, gender]);
+    const [rows] = await pool.query(query, [name, gender]);
 
     return rows.length > 0 ? rows[0] : null;
   }

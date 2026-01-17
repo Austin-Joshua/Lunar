@@ -3,7 +3,7 @@
  * Manages JWT refresh tokens for extended sessions
  */
 
-const pool = require('../config/db');
+const { pool } = require('../config/db');
 
 class RefreshToken {
   /**
@@ -21,7 +21,7 @@ class RefreshToken {
         VALUES (?, ?, ?, NOW())
       `;
 
-      await pool.execute(query, [userId, token, expiresAt]);
+      await pool.query(query, [userId, token, expiresAt]);
       return true;
     } catch (error) {
       console.error('Error creating refresh token:', error);
@@ -43,7 +43,7 @@ class RefreshToken {
         WHERE rt.token = ? AND rt.expires_at > NOW() AND rt.is_revoked = false
       `;
 
-      const [rows] = await pool.execute(query, [token]);
+      const [rows] = await pool.query(query, [token]);
 
       if (rows.length === 0) {
         return null;
@@ -68,7 +68,7 @@ class RefreshToken {
         WHERE token = ?
       `;
 
-      await pool.execute(query, [token]);
+      await pool.query(query, [token]);
       return true;
     } catch (error) {
       console.error('Error revoking refresh token:', error);
@@ -88,7 +88,7 @@ class RefreshToken {
         WHERE user_id = ?
       `;
 
-      await pool.execute(query, [userId]);
+      await pool.query(query, [userId]);
       return true;
     } catch (error) {
       console.error('Error revoking all tokens:', error);
@@ -106,7 +106,7 @@ class RefreshToken {
         WHERE expires_at < NOW() OR (is_revoked = true AND revoked_at < DATE_SUB(NOW(), INTERVAL 7 DAY))
       `;
 
-      await pool.execute(query);
+      await pool.query(query);
       return true;
     } catch (error) {
       console.error('Error cleaning up tokens:', error);
