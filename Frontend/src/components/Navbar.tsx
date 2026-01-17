@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, User, Menu, X, Search, ChevronDown } from 'lucide-react';
+import { ShoppingBag, User, Menu, X, Search, ChevronDown, Moon, Sun, Settings } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
+import { useTheme } from '@/context/ThemeContext';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -46,6 +47,7 @@ export const Navbar: React.FC = () => {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const { isAuthenticated, logout } = useAuth();
   const { itemCount } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   const isKidsSection = location.pathname.startsWith('/kids');
@@ -116,6 +118,19 @@ export const Navbar: React.FC = () => {
               <Search className="h-5 w-5" />
             </button>
 
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors"
+              title="Toggle dark mode"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </button>
+
             {/* User */}
             {isAuthenticated ? (
               <div className="relative group">
@@ -126,6 +141,9 @@ export const Navbar: React.FC = () => {
                   <div className="py-2">
                     <Link to="/orders" className="block px-4 py-2 text-sm hover:bg-accent transition-colors">
                       My Orders
+                    </Link>
+                    <Link to="/settings" className="block px-4 py-2 text-sm hover:bg-accent transition-colors">
+                      Settings
                     </Link>
                     <button
                       onClick={logout}
