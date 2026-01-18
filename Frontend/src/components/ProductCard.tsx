@@ -83,27 +83,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'de
           )}
         </div>
 
-        {/* Quick Actions */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button
-            className={cn(
-              "w-9 h-9 flex items-center justify-center rounded-full shadow-lunar-md transition-colors",
-              isKids 
-                ? "bg-white hover:bg-kids-lavender" 
-                : "bg-white hover:bg-accent"
-            )}
-          >
-            <Heart className="h-4 w-4" />
-          </button>
-        </div>
-
         {/* Add to Cart Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-fast">
           <button
             onClick={handleAddToCart}
             disabled={inCart}
             className={cn(
-              "w-full py-2.5 flex items-center justify-center gap-2 text-sm font-medium rounded-md transition-colors",
+              "w-full py-2.5 flex items-center justify-center gap-2 text-sm font-medium rounded-md transition-fast",
               inCart
                 ? "bg-muted text-muted-foreground cursor-default"
                 : isKids
@@ -172,32 +158,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'de
           )}
         </div>
 
-        {/* Features & Shipping */}
-        <div className="flex flex-wrap gap-2">
-          {product.shippingInfo?.freeShipping && (
-            <div className="flex items-center gap-1 text-xs bg-accent rounded px-2 py-1">
-              <Truck className="h-3 w-3" />
-              <span>Free Shipping</span>
-            </div>
-          )}
-          {product.tags?.includes('sustainable') && (
-            <div className="flex items-center gap-1 text-xs bg-green-100 text-green-700 rounded px-2 py-1">
-              <Leaf className="h-3 w-3" />
-              <span>Eco-Friendly</span>
-            </div>
-          )}
-          {product.shippingInfo?.cod && (
-            <div className="flex items-center gap-1 text-xs bg-blue-100 text-blue-700 rounded px-2 py-1">
-              <span>COD Available</span>
-            </div>
-          )}
-        </div>
-
-        {/* Color/Size Options */}
-        {(product.colors || product.sizes) && (
-          <div className="text-xs text-muted-foreground pt-1">
-            {product.colors && <p>{product.colors.length} Colors</p>}
-            {product.sizes && <p>{product.sizes.length} Sizes</p>}
+        {/* Shipping Info */}
+        {product.shippingInfo?.freeShipping && (
+          <div className="flex items-center gap-1 text-xs bg-accent rounded px-2 py-1 w-fit">
+            <Truck className="h-3 w-3" />
+            <span>Free Shipping</span>
           </div>
         )}
       </div>

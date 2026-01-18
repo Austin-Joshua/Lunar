@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, CheckCircle } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -9,25 +9,15 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const { login, rememberMe: savedRememberMe } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = (location.state as { from?: Location })?.from?.pathname || '/shop';
-
-  // Pre-fill email if remember me was checked before
-  useEffect(() => {
-    const savedEmail = localStorage.getItem('lunar_remember_email');
-    if (savedEmail) {
-      setEmail(savedEmail);
-      setRememberMe(true);
-    }
-  }, []);
+  const from = (location.state as { from?: Location })?.from?.pathname || '/';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +42,7 @@ const Login: React.FC = () => {
       if (!token) {
         throw new Error('No authentication token received');
       }
-      login(response.user, token, rememberMe);
+      login(response.user, token);
       setSuccess(true);
 
       // Redirect after showing success message
@@ -95,8 +85,7 @@ const Login: React.FC = () => {
           role: 'user',
           createdAt: new Date().toISOString(),
         },
-        'demo-token',
-        rememberMe
+        'demo-token'
       );
       setSuccess(true);
       setTimeout(() => {
@@ -199,12 +188,9 @@ const Login: React.FC = () => {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-border cursor-pointer"
-                  title="Keep me logged in for 30 days"
+                  className="w-4 h-4 rounded border-border"
                 />
-                <span>Remember me for 30 days</span>
+                <span>Remember me</span>
               </label>
               <a href="#" className="text-primary hover:underline font-medium">
                 Forgot password?

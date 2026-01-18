@@ -113,16 +113,11 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-4">
-            {/* Search - Hidden on mobile */}
-            <button className="hidden md:flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors">
-              <Search className="h-5 w-5" />
-            </button>
-
+          <div className="flex items-center gap-2">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-fast"
               title="Toggle dark mode"
             >
               {theme === 'dark' ? (
@@ -138,10 +133,10 @@ export const Navbar: React.FC = () => {
             {/* User */}
             {isAuthenticated ? (
               <div className="relative group">
-                <button className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors">
+                <button className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-fast">
                   <User className="h-5 w-5" />
                 </button>
-                <div className="absolute top-full right-0 mt-1 w-48 rounded-md bg-popover shadow-lunar-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <div className="absolute top-full right-0 mt-1 w-48 rounded-md bg-popover shadow-lunar-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-fast">
                   <div className="py-2">
                     <Link to="/shop/orders" className="block px-4 py-2 text-sm hover:bg-accent transition-colors">
                       My Orders
@@ -161,7 +156,7 @@ export const Navbar: React.FC = () => {
             ) : (
               <Link
                 to="/login"
-                className="hidden md:flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors"
+                className="hidden md:flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-fast"
               >
                 <User className="h-5 w-5" />
               </Link>
@@ -170,7 +165,7 @@ export const Navbar: React.FC = () => {
             {/* Cart */}
             <Link
               to="/shop/cart"
-              className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors"
+              className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-fast"
             >
               <ShoppingBag className="h-5 w-5" />
               {itemCount > 0 && (
@@ -185,7 +180,7 @@ export const Navbar: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-colors"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-accent transition-fast"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

@@ -79,30 +79,30 @@ const AuthLanding: React.FC = () => {
             <span className="inline-block text-primary-foreground text-2xl md:text-4xl lg:text-5xl uppercase tracking-widest mb-8 animate-slide-up font-bold drop-shadow-lg">
               Welcome to LUNAR
             </span>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-slide-up" style={{ animationDelay: '0.05s' }}>
               Discover Your
               <br />
               <span className="text-white">Signature Style</span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 max-w-2xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '0.2s' }}>
+            <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 max-w-2xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '0.1s' }}>
               Premium fashion curated for the modern individual. Elegance meets quality in every piece.
             </p>
             
             {/* Auth Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 animate-slide-up mt-8 justify-center" style={{ animationDelay: '0.3s' }}>
+            <div className="flex flex-col sm:flex-row gap-6 animate-slide-up mt-8 justify-center" style={{ animationDelay: '0.15s' }}>
               <Link 
                 to="/signin" 
-                className="group px-8 py-4 bg-primary-foreground text-primary font-semibold rounded-lg hover:bg-primary-foreground/90 transition-all duration-300 inline-flex items-center justify-center shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1"
+                className="group px-8 py-4 bg-primary-foreground text-primary font-semibold rounded-lg hover:bg-primary-foreground/90 transition-fast inline-flex items-center justify-center shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1"
               >
-                <span className="group-hover:translate-x-0.5 transition-transform">Sign In</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <span className="group-hover:translate-x-0.5 transition-fast">Sign In</span>
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-fast" />
               </Link>
               <Link 
                 to="/signup" 
-                className="group px-8 py-4 border-2 border-primary-foreground text-primary-foreground font-semibold rounded-lg hover:bg-primary-foreground hover:text-primary transition-all duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:scale-105 hover:-translate-y-1"
+                className="group px-8 py-4 border-2 border-primary-foreground text-primary-foreground font-semibold rounded-lg hover:bg-primary-foreground hover:text-primary transition-fast inline-flex items-center justify-center hover:shadow-lg transform hover:scale-105 hover:-translate-y-1"
               >
-                <span className="group-hover:translate-x-0.5 transition-transform">Create Account</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <span className="group-hover:translate-x-0.5 transition-fast">Create Account</span>
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-fast" />
               </Link>
             </div>
           </div>
