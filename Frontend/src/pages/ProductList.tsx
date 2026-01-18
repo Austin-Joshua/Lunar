@@ -63,18 +63,51 @@ const generateMockProducts = (gender: string, subcategory?: string): Product[] =
   const key = subcategory ? `${gender}_${subcategory}` : gender;
   const productNames = categoryNames[key] || ['Product Item'];
 
-  return Array.from({ length: 8 }, (_, i) => ({
+  const materialOptions = {
+    men_shirts: ['Cotton', 'Linen', 'Silk Blend', 'Polyester'],
+    men_pants: ['Cotton', 'Denim', 'Chino', 'Wool blend'],
+    men_footwear: ['Leather', 'Canvas', 'Suede', 'Rubber'],
+    women_tops: ['Cotton', 'Silk', 'Polyester', 'Rayon'],
+    women_pants: ['Denim', 'Cotton', 'Lycra blend', 'Linen'],
+    women_skirts: ['Cotton', 'Silk', 'Linen', 'Jersey'],
+    kids_boys: ['Cotton', 'Organic cotton', 'Polyester'],
+    kids_girls: ['Cotton', 'Organic cotton', 'Jersey'],
+  };
+
+  const materials = materialOptions[key as keyof typeof materialOptions] || ['Cotton'];
+
+  return Array.from({ length: 12 }, (_, i) => ({
     id: `${gender}-${subcategory || 'all'}-${i + 1}`,
     name: productNames[i % productNames.length],
     brand: brands[i % brands.length],
-    price: 50 + Math.floor(Math.random() * 150),
-    originalPrice: Math.random() > 0.5 ? 80 + Math.floor(Math.random() * 150) : undefined,
-    description: 'Premium quality item',
+    price: gender === 'kids' 
+      ? 399 + Math.floor(Math.random() * 1200)
+      : gender === 'women'
+        ? 1299 + Math.floor(Math.random() * 4000)
+        : 999 + Math.floor(Math.random() * 3500),
+    originalPrice: Math.random() > 0.5 
+      ? (gender === 'kids' 
+          ? 599 + Math.floor(Math.random() * 1500)
+          : gender === 'women'
+            ? 1799 + Math.floor(Math.random() * 4500)
+            : 1499 + Math.floor(Math.random() * 4000))
+      : undefined,
+    description: `Premium ${materials[i % materials.length].toLowerCase()} ${subcategory || 'item'}`,
     image: genderImages[i % genderImages.length],
     gender: gender as 'men' | 'women' | 'kids',
     category: subcategory || 'all',
     subcategory: subcategory || 'all',
+    stock: gender === 'kids' ? 50 + Math.floor(Math.random() * 150) : 20 + Math.floor(Math.random() * 100),
     inStock: true,
+    isNew: Math.random() > 0.7,
+    isSale: Math.random() > 0.6,
+    rating: 4 + Math.random(),
+    reviewCount: Math.floor(Math.random() * 300),
+    materials: [materials[i % materials.length]],
+    features: ['Premium quality', 'Comfortable fit', 'Durable'],
+    careInstructions: ['Gentle wash', 'Air dry recommended'],
+    shippingInfo: { freeShipping: true, estimatedDays: 2, cod: true },
+    tags: [Math.random() > 0.7 ? 'bestseller' : 'trending'],
   }));
 };
 
@@ -97,7 +130,7 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
       {/* Breadcrumb */}
       {subcategory && (
         <Link
-          to={`/${gender}`}
+          to={`/shop/${gender}`}
           className={cn(
             "inline-flex items-center gap-2 text-sm mb-6 transition-colors",
             isKids 

@@ -4,22 +4,22 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react'
 
 const footerLinks = {
   shop: [
-    { name: 'Men', href: '/men', label: 'Browse men\'s collection' },
-    { name: 'Women', href: '/women', label: 'Browse women\'s collection' },
-    { name: 'Kids', href: '/kids', label: 'Browse kids\' collection' },
-    { name: 'New Arrivals', href: '/', label: 'Latest products' },
+    { name: 'Men', href: '/shop/men', label: 'Browse men\'s collection' },
+    { name: 'Women', href: '/shop/women', label: 'Browse women\'s collection' },
+    { name: 'Kids', href: '/shop/kids', label: 'Browse kids\' collection' },
+    { name: 'New Arrivals', href: '/shop', label: 'Latest products' },
   ],
   help: [
-    { name: 'Track Order', href: '/orders', label: 'View your orders' },
-    { name: 'Returns', href: '/', label: 'Return policy' },
-    { name: 'Shipping Info', href: '/', label: 'Shipping details' },
-    { name: 'FAQs', href: '/', label: 'Frequently asked questions' },
+    { name: 'Track Order', href: '/shop/orders', label: 'View your orders' },
+    { name: 'Returns', href: '/shop', label: 'Return policy' },
+    { name: 'Shipping Info', href: '/shop', label: 'Shipping details' },
+    { name: 'FAQs', href: '/shop', label: 'Frequently asked questions' },
   ],
   company: [
-    { name: 'About Us', href: '/', label: 'Learn about Lunar' },
-    { name: 'Careers', href: '/', label: 'Join our team' },
-    { name: 'Press', href: '/', label: 'Press releases' },
-    { name: 'Sustainability', href: '/', label: 'Sustainability initiatives' },
+    { name: 'About Us', href: '/shop', label: 'Learn about Lunar' },
+    { name: 'Careers', href: '/shop', label: 'Join our team' },
+    { name: 'Press', href: '/shop', label: 'Press releases' },
+    { name: 'Sustainability', href: '/shop', label: 'Sustainability initiatives' },
   ],
 };
 

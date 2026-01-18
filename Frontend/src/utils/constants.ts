@@ -1,10 +1,16 @@
 // API Base URL - Set via VITE_API_BASE_URL environment variable
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
-// Auth Token Key
+// Auth Token Keys
 export const AUTH_TOKEN_KEY = 'lunar_auth_token';
 export const USER_DATA_KEY = 'lunar_user';
+export const REMEMBER_ME_KEY = 'lunar_remember_me';
+export const REMEMBER_ME_EMAIL_KEY = 'lunar_remember_email';
+export const SESSION_TIMEOUT_KEY = 'lunar_session_timeout'; // 30 days
 export const CART_STORAGE_KEY = 'lunar_cart';
+
+// Session timeout (30 days in milliseconds)
+export const SESSION_TIMEOUT_MS = 30 * 24 * 60 * 60 * 1000;
 
 // Categories
 export const GENDER_CATEGORIES = {

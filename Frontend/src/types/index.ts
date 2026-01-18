@@ -2,6 +2,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  role: 'user' | 'admin';
   createdAt: string;
 }
 
@@ -20,8 +21,21 @@ export interface Product {
   sizes?: string[];
   colors?: string[];
   inStock: boolean;
+  stock?: number; // Total stock quantity
+  stockBySizeColor?: Record<string, number>; // Stock by size/color combination
   rating?: number;
   reviewCount?: number;
+  features?: string[]; // Product features/highlights
+  materials?: string[]; // Material composition
+  careInstructions?: string[]; // Care instructions
+  isNew?: boolean; // New arrival indicator
+  isSale?: boolean; // Sale indicator
+  shippingInfo?: {
+    freeShipping?: boolean;
+    estimatedDays?: number;
+    cod?: boolean; // Cash on Delivery
+  };
+  tags?: string[]; // Tags like "sustainable", "bestseller", etc
 }
 
 export interface CartItem {

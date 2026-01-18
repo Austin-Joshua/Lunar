@@ -59,48 +59,40 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            {/* ========== AUTH ROUTES ========== */}
-            <Route path="/" element={<AuthLanding />} />
-            <Route path="/signin" element={
-              <AuthProvider>
-                <Login />
-              </AuthProvider>
-            } />
-            <Route path="/signup" element={
-              <AuthProvider>
-                <Register />
-              </AuthProvider>
-            } />
+        <AuthProvider>
+          <CartProvider>
+            <BrowserRouter>
+              <Routes>
+                {/* ========== AUTH ROUTES ========== */}
+                <Route path="/" element={<AuthLanding />} />
+                <Route path="/signin" element={<Login />} />
+                <Route path="/signup" element={<Register />} />
 
-            {/* ========== ADMIN ROUTES ========== */}
-            <Route path="/admin/login" element={
-              <AdminAuthProvider>
-                <AdminLogin />
-              </AdminAuthProvider>
-            } />
-            <Route path="/admin" element={
-              <AdminAuthProvider>
-                <AdminProtectedRoute>
-                  <AdminLayout />
-                </AdminProtectedRoute>
-              </AdminAuthProvider>
-            }>
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="products" element={<Products />} />
-              <Route path="products/add" element={<AddProduct />} />
-              <Route path="products/edit/:id" element={<EditProduct />} />
-              <Route path="orders" element={<AdminOrders />} />
-              <Route path="users" element={<Users />} />
-              <Route path="categories" element={<Categories />} />
-              <Route path="*" element={<AdminNotFound />} />
-            </Route>
+                {/* ========== ADMIN ROUTES ========== */}
+                <Route path="/admin/login" element={
+                  <AdminAuthProvider>
+                    <AdminLogin />
+                  </AdminAuthProvider>
+                } />
+                <Route path="/admin" element={
+                  <AdminAuthProvider>
+                    <AdminProtectedRoute>
+                      <AdminLayout />
+                    </AdminProtectedRoute>
+                  </AdminAuthProvider>
+                }>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="products" element={<Products />} />
+                  <Route path="products/add" element={<AddProduct />} />
+                  <Route path="products/edit/:id" element={<EditProduct />} />
+                  <Route path="orders" element={<AdminOrders />} />
+                  <Route path="users" element={<Users />} />
+                  <Route path="categories" element={<Categories />} />
+                  <Route path="*" element={<AdminNotFound />} />
+                </Route>
 
-            {/* ========== CUSTOMER ROUTES (PROTECTED) ========== */}
-            <Route path="/shop/*" element={
-              <AuthProvider>
-                <CartProvider>
+                {/* ========== CUSTOMER ROUTES (PROTECTED) ========== */}
+                <Route path="/shop/*" element={
                   <ProtectedRoute>
                     <div className="flex flex-col min-h-screen">
                       <Navbar />
@@ -142,18 +134,18 @@ const App = () => (
                       <Footer />
                     </div>
                   </ProtectedRoute>
-                </CartProvider>
-              </AuthProvider>
-            } />
+                } />
 
-            {/* Redirect legacy routes */}
-            <Route path="/login" element={<Navigate to="/signin" replace />} />
-            <Route path="/register" element={<Navigate to="/signup" replace />} />
+                {/* Redirect legacy routes */}
+                <Route path="/login" element={<Navigate to="/signin" replace />} />
+                <Route path="/register" element={<Navigate to="/signup" replace />} />
 
-            {/* Not Found */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+                {/* Not Found */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </CartProvider>
+        </AuthProvider>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>

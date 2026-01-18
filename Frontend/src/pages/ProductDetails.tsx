@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Minus, Plus, Heart, Share2, Truck, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Minus, Plus, Heart, Share2, Truck, RotateCcw, Check, Leaf, Package } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { ProductCard } from '@/components/ProductCard';
 import { PageLoader } from '@/components/Loader';
@@ -13,8 +13,8 @@ const mockProduct: Product = {
   id: '1',
   name: 'Premium Linen Oxford Shirt',
   brand: 'LUNAR Essentials',
-  price: 89.00,
-  originalPrice: 120.00,
+  price: 2499,
+  originalPrice: 3999,
   description: 'Crafted from the finest linen, this Oxford shirt combines timeless elegance with modern comfort. Features a relaxed fit, mother-of-pearl buttons, and a soft hand feel that gets better with every wash.',
   image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&h=1000&fit=crop',
   images: [
@@ -27,9 +27,32 @@ const mockProduct: Product = {
   subcategory: 'shirts',
   sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
   colors: ['White', 'Light Blue', 'Navy'],
+  stock: 45,
   inStock: true,
+  isNew: true,
+  isSale: true,
   rating: 4.8,
   reviewCount: 124,
+  features: [
+    '100% Premium Linen',
+    'Breathable & Lightweight',
+    'Perfect for Summers',
+    'Easy Care',
+    'Mother-of-Pearl Buttons'
+  ],
+  materials: ['Linen 100%'],
+  careInstructions: [
+    'Machine wash cold water',
+    'Use gentle cycle',
+    'Tumble dry on low',
+    'Iron on low heat if needed'
+  ],
+  shippingInfo: {
+    freeShipping: true,
+    estimatedDays: 3,
+    cod: true
+  },
+  tags: ['bestseller', 'summer-essential']
 };
 
 const relatedProducts: Product[] = [
@@ -254,29 +277,121 @@ const ProductDetails: React.FC = () => {
             </button>
           </div>
 
-          {/* Features */}
-          <div className="space-y-3 pt-6 border-t">
-            <div className="flex items-center gap-3 text-sm">
-              <Truck className="h-5 w-5 text-muted-foreground" />
-              <span>Free shipping on orders over $100</span>
+          {/* Stock Status */}
+          <div className="mb-6 p-4 rounded-lg bg-accent/50 flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium">Stock Status</p>
+              <p className="text-sm text-muted-foreground">
+                {product.stock && product.stock > 0 
+                  ? `${product.stock} items available` 
+                  : 'Out of Stock'}
+              </p>
             </div>
+            <Package className="h-5 w-5 text-primary" />
+          </div>
+
+          {/* Shipping & Policies */}
+          <div className="space-y-3 pt-6 border-t mb-6">
+            {product.shippingInfo?.freeShipping && (
+              <div className="flex items-center gap-3 text-sm">
+                <Truck className="h-5 w-5 text-primary" />
+                <span>Free shipping on this item</span>
+              </div>
+            )}
+            {product.shippingInfo?.estimatedDays && (
+              <div className="flex items-center gap-3 text-sm">
+                <Package className="h-5 w-5 text-primary" />
+                <span>Estimated delivery in {product.shippingInfo.estimatedDays}-5 business days</span>
+              </div>
+            )}
+            {product.shippingInfo?.cod && (
+              <div className="flex items-center gap-3 text-sm">
+                <Check className="h-5 w-5 text-primary" />
+                <span>Cash on Delivery Available</span>
+              </div>
+            )}
             <div className="flex items-center gap-3 text-sm">
-              <RotateCcw className="h-5 w-5 text-muted-foreground" />
-              <span>Free 30-day returns</span>
+              <RotateCcw className="h-5 w-5 text-primary" />
+              <span>Easy 30-day returns</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Related Products */}
-      <section className="mt-16">
+      {/* Product Details Sections */}
+      <div className="mt-12 space-y-8">
+        {/* Features Section */}
+        {product.features && product.features.length > 0 && (
+          <div className="border-t pt-8">
+            <h2 className="text-xl font-bold mb-4">Key Features</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {product.features.map((feature, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Materials Section */}
+        {product.materials && product.materials.length > 0 && (
+          <div className="border-t pt-8">
+            <h2 className="text-xl font-bold mb-4">Materials & Composition</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {product.materials.map((material, idx) => (
+                <div key={idx} className="flex items-center gap-2 p-3 rounded-lg bg-accent/30">
+                  <Leaf className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-medium">{material}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Care Instructions */}
+        {product.careInstructions && product.careInstructions.length > 0 && (
+          <div className="border-t pt-8">
+            <h2 className="text-xl font-bold mb-4">Care Instructions</h2>
+            <div className="space-y-2">
+              {product.careInstructions.map((instruction, idx) => (
+                <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/50">
+                  <span className="text-primary font-medium text-sm flex-shrink-0">{idx + 1}</span>
+                  <span className="text-sm">{instruction}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tags Section */}
+        {product.tags && product.tags.length > 0 && (
+          <div className="border-t pt-8">
+            <h2 className="text-xl font-bold mb-4">Product Tags</h2>
+            <div className="flex flex-wrap gap-2">
+              {product.tags.map((tag, idx) => (
+                <span 
+                  key={idx} 
+                  className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium capitalize"
+                >
+                  {tag.replace('-', ' ')}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Related Products Section */}
+      <div className="mt-12 border-t pt-12">
         <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {relatedProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>
-      </section>
+      </div>
     </div>
   );
 };

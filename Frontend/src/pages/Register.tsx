@@ -65,7 +65,7 @@ const Register: React.FC = () => {
       
       // Show success message briefly then redirect
       setTimeout(() => {
-        navigate('/', { replace: true });
+        navigate('/shop', { replace: true });
       }, 1500);
     } catch (err) {
       const error = err as any;
