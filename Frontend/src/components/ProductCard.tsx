@@ -24,7 +24,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'de
 
   return (
     <Link
-      to={`/product/${product.id}`}
+      to={`/shop/product/${product.id}`}
       className={cn(
         "group block",
         isKids ? "kids-card p-3" : "lunar-card overflow-hidden"
