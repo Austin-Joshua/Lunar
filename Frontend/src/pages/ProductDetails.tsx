@@ -5,6 +5,7 @@ import { useCart } from '@/context/CartContext';
 import { ProductCard } from '@/components/ProductCard';
 import { PageLoader } from '@/components/Loader';
 import { formatPrice, PLACEHOLDER_IMAGE } from '@/utils/constants';
+import { getProductById, sampleProducts } from '@/utils/sampleProducts';
 import { cn } from '@/lib/utils';
 import type { Product } from '@/types';
 
@@ -94,13 +95,23 @@ const ProductDetails: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    // Simulate API call
+    // Fetch product by ID
     setIsLoading(true);
     setTimeout(() => {
-      setProduct(mockProduct);
-      if (mockProduct.colors?.length) setSelectedColor(mockProduct.colors[0]);
+      if (id) {
+        const foundProduct = getProductById(id);
+        if (foundProduct) {
+          setProduct(foundProduct);
+          if (foundProduct.colors?.length) setSelectedColor(foundProduct.colors[0]);
+          if (foundProduct.sizes?.length) setSelectedSize(foundProduct.sizes[0]);
+        } else {
+          // Fallback to mockProduct if ID not found
+          setProduct(mockProduct);
+          if (mockProduct.colors?.length) setSelectedColor(mockProduct.colors[0]);
+        }
+      }
       setIsLoading(false);
-    }, 500);
+    }, 300);
   }, [id]);
 
   if (isLoading) return <PageLoader />;
@@ -116,7 +127,7 @@ const ProductDetails: React.FC = () => {
     <div className="lunar-container py-8 animate-fade-in">
       {/* Breadcrumb */}
       <Link
-        to={`/${product.gender}`}
+        to={`/shop/${product.gender}`}
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
       >
         <ArrowLeft className="h-4 w-4" />
