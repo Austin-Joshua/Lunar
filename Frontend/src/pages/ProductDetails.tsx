@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Minus, Plus, Heart, Share2, Truck, RotateCcw, Check, Leaf, Package } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useCurrency } from '@/context/CurrencyContext';
 import { ProductCard } from '@/components/ProductCard';
 import { PageLoader } from '@/components/Loader';
-import { formatPrice, PLACEHOLDER_IMAGE } from '@/utils/constants';
+import { PLACEHOLDER_IMAGE } from '@/utils/constants';
 import { getProductById, sampleProducts } from '@/utils/sampleProducts';
 import { cn } from '@/lib/utils';
 import type { Product } from '@/types';
@@ -86,6 +87,7 @@ const relatedProducts: Product[] = [
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
   
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState<Product | null>(null);

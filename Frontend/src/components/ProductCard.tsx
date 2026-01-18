@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Heart, Zap, Leaf, Truck, Star } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import { formatPrice, PLACEHOLDER_IMAGE } from '@/utils/constants';
+import { useCurrency } from '@/context/CurrencyContext';
+import { PLACEHOLDER_IMAGE } from '@/utils/constants';
 import { cn } from '@/lib/utils';
 import type { Product } from '@/types';
 
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'default' }) => {
   const { addToCart, isInCart } = useCart();
+  const { formatPrice } = useCurrency();
   const isKids = variant === 'kids';
   const inCart = isInCart(product.id);
 

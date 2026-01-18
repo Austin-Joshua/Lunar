@@ -4,6 +4,7 @@ import { ShoppingBag, User, Menu, X, Search, ChevronDown, Moon, Sun, Settings } 
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { useTheme } from '@/context/ThemeContext';
+import { CurrencySwitcher } from '@/components/CurrencySwitcher';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -130,6 +131,9 @@ export const Navbar: React.FC = () => {
                 <Moon className="h-5 w-5" />
               )}
             </button>
+
+            {/* Currency Switcher */}
+            <CurrencySwitcher />
 
             {/* User */}
             {isAuthenticated ? (

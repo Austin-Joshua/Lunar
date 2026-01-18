@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 import { AdminAuthProvider } from "@/admin/context/AdminAuthContext";
 
 // Auth Pages
@@ -56,12 +57,13 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <AuthProvider>
-          <CartProvider>
-            <BrowserRouter>
+      <CurrencyProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <AuthProvider>
+            <CartProvider>
+              <BrowserRouter>
               <Routes>
                 {/* ========== AUTH ROUTES ========== */}
                 <Route path="/" element={<AuthLanding />} />
@@ -144,9 +146,10 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
-          </CartProvider>
-        </AuthProvider>
-      </TooltipProvider>
+            </CartProvider>
+          </AuthProvider>
+        </TooltipProvider>
+      </CurrencyProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
