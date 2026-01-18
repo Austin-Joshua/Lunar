@@ -105,11 +105,11 @@ const Home: React.FC = () => {
               Curated fashion for the modern individual. Quality meets elegance in every piece.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              <Link to="/women" className="lunar-btn-outline border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Link to="/shop/women" className="lunar-btn-outline border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
                 Shop Women
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              <Link to="/men" className="lunar-btn-outline border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Link to="/shop/men" className="lunar-btn-outline border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
                 Shop Men
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -148,19 +148,19 @@ const Home: React.FC = () => {
           <CategoryCard
             title="Men"
             subtitle="New Collection"
-            href="/men"
+            href="/shop/men"
             image="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop"
           />
           <CategoryCard
             title="Women"
             subtitle="Trending Now"
-            href="/women"
+            href="/shop/women"
             image="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop"
           />
           <CategoryCard
             title="Kids"
             subtitle="Fun & Playful"
-            href="/kids"
+            href="/shop/kids"
             image="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=600&h=800&fit=crop"
             variant="kids"
           />
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-2">Featured Products</h2>
               <p className="text-muted-foreground">Hand-picked favorites from our collection</p>
             </div>
-            <Link to="/men" className="lunar-btn-outline">
+            <Link to="/shop/men" className="lunar-btn-outline">
               View All
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
