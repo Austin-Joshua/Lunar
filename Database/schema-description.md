@@ -2,6 +2,8 @@
 
 This document defines the Firestore collection structure for the migrated Lunar project.
 
+> **Legacy reference:** SQL artifacts from an earlier stack (if present) live under `Database/schema/` (`schema.sql`, `seed.sql`) for historical comparison only. The running system uses Firestore as described below.
+
 ## Collections
 
 ### 1. `users`
