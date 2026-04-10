@@ -48,7 +48,7 @@ export const Navbar: React.FC = () => {
 
             {/* CENTER: Nav Links (Desktop) - Minimalist */}
             <div className="hidden lg:flex items-center gap-10">
-              {['MEN', 'WOMEN', 'COLLECTIONS'].map((link) => (
+              {['MEN', 'WOMEN', 'ARCHIVE'].map((link) => (
                 <button
                   key={link}
                   onClick={() => {
@@ -179,7 +179,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             <div className="flex-1 px-10 flex flex-col justify-center space-y-12 text-center md:text-left">
-              {['MEN', 'WOMEN', 'COLLECTIONS'].map(link => (
+              {['MEN', 'WOMEN', 'ARCHIVE'].map(link => (
                 <button 
                   key={link}
                   onClick={() => {

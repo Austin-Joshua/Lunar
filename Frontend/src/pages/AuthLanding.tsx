@@ -6,9 +6,9 @@ const AuthLanding: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const features = [
-    { icon: Shield, title: 'Premium Quality', desc: 'Curated collection of finest clothing' },
-    { icon: Truck, title: 'Fast Shipping', desc: 'Quick and reliable delivery' },
-    { icon: RotateCcw, title: 'Easy Returns', desc: '30-day return policy' }
+    { icon: Shield, title: 'Atelier Quality', desc: 'Meticulously crafted heritage pieces' },
+    { icon: Truck, title: 'Global Priority', desc: 'Seamless international express delivery' },
+    { icon: RotateCcw, title: 'Seamless Returns', desc: 'Managed bespoke exchange policy' }
   ];
 
   return (
@@ -19,8 +19,8 @@ const AuthLanding: React.FC = () => {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold tracking-tight text-primary">LUNAR</span>
-              <span className="text-sm text-muted-foreground">Premium Store</span>
+              <span className="text-2xl font-black tracking-tighter text-primary">LUNAR</span>
+              <span className="text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase opacity-50">Archive</span>
             </div>
 
             {/* Desktop Features - Hidden on mobile */}
@@ -76,33 +76,32 @@ const AuthLanding: React.FC = () => {
         {/* Content */}
         <div className="relative z-10 w-full flex items-center justify-center">
           <div className="text-center max-w-4xl px-4">
-            <span className="inline-block text-primary-foreground text-2xl md:text-4xl lg:text-5xl uppercase tracking-widest mb-8 animate-slide-up font-bold drop-shadow-lg">
-              Welcome to LUNAR
+            <span className="inline-block text-primary-foreground text-2xl md:text-3xl lg:text-4xl uppercase tracking-[0.4em] mb-8 animate-slide-up font-bold drop-shadow-lg">
+              THE LUNAR ATELIER
             </span>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-slide-up" style={{ animationDelay: '0.05s' }}>
-              Discover Your
-              <br />
-              <span className="text-white">Signature Style</span>
+              Discover Your <br />
+              <span className="text-white">Heritage Identity</span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 max-w-2xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '0.1s' }}>
-              Premium fashion curated for the modern individual. Elegance meets quality in every piece.
+            <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 max-w-2xl mx-auto animate-slide-up leading-relaxed font-medium uppercase tracking-tight" style={{ animationDelay: '0.1s' }}>
+              Where heritage craftsmanship meets high-fidelity design. Engineered for the modern individual who seeks the exceptional.
             </p>
             
             {/* Auth Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 animate-slide-up mt-8 justify-center" style={{ animationDelay: '0.15s' }}>
               <Link 
                 to="/signin" 
-                className="group px-8 py-4 bg-primary-foreground text-primary font-semibold rounded-lg hover:bg-primary-foreground/90 transition-fast inline-flex items-center justify-center shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1"
+                className="group px-10 py-5 bg-primary-foreground text-foreground font-black text-xs tracking-widest uppercase rounded-full hover:bg-white transition-all inline-flex items-center justify-center shadow-2xl transform hover:scale-105"
               >
-                <span className="group-hover:translate-x-0.5 transition-fast">Sign In</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-fast" />
+                <span>Member Access</span>
+                <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
                 to="/signup" 
-                className="group px-8 py-4 border-2 border-primary-foreground text-primary-foreground font-semibold rounded-lg hover:bg-primary-foreground hover:text-primary transition-fast inline-flex items-center justify-center hover:shadow-lg transform hover:scale-105 hover:-translate-y-1"
+                className="group px-10 py-5 border-2 border-primary-foreground text-primary-foreground font-black text-xs tracking-widest uppercase rounded-full hover:bg-primary-foreground hover:text-foreground transition-all inline-flex items-center justify-center hover:shadow-2xl transform hover:scale-105"
               >
-                <span className="group-hover:translate-x-0.5 transition-fast">Create Account</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-fast" />
+                <span>Register Identity</span>
+                <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -145,7 +144,7 @@ const AuthLanding: React.FC = () => {
       {/* Footer */}
       <footer className="bg-background border-t py-8">
         <div className="lunar-container text-center text-muted-foreground text-sm">
-          <p>&copy; 2026 LUNAR. All rights reserved.</p>
+          <p className="text-[10px] font-black tracking-[0.5em]">&copy; 2026 LUNAR ATELIER. ARCHITECTURAL PRECISION.</p>
         </div>
       </footer>
     </div>

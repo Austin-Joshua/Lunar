@@ -21,7 +21,7 @@ export const Hero: React.FC = () => {
             <span className="text-foreground/90 font-light italic">Archive.</span>
           </h1>
           <p className="text-sm md:text-base text-muted-foreground font-medium tracking-[0.2em] uppercase max-w-xl mx-auto pt-10 animate-slide-up-fade leading-relaxed" style={{ animationDelay: '0.2s' }}>
-            Experimental Essentials. Engineered for the high-fidelity nomad. Experience the base protocol of modern style.
+            Experimental Essentials. Engineered for the modern individual. Experience the heritage of cutting-edge design.
           </p>
           
           <div className="flex justify-center pt-20 animate-slide-up-fade" style={{ animationDelay: '0.3s' }}>

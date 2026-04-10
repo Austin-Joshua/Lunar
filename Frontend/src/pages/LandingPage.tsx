@@ -22,11 +22,11 @@ const LandingPage: React.FC = () => {
                 LUNAR SPRING 2026
               </span>
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] animate-slide-up-fade" style={{ animationDelay: '0.1s' }}>
-                Discover Your <br />
-                <span className="text-foreground/90 font-light italic">Signature Style.</span>
+                Redefinition of <br />
+                <span className="text-foreground/90 font-light italic text-primary">Modern Luxury.</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground font-medium tracking-tight max-w-2xl mx-auto pt-6 animate-slide-up-fade" style={{ animationDelay: '0.2s' }}>
-                Premium materials meeting minimalist design. Experience the fusion of heritage craftsmanship and futuristic aesthetics.
+                Where heritage craftsmanship meets high-fidelity design. Engineered for the modern individual who seeks the exceptional.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-12 animate-slide-up-fade" style={{ animationDelay: '0.3s' }}>
@@ -72,11 +72,11 @@ const LandingPage: React.FC = () => {
               className="space-y-10"
             >
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-tight">
-                Designed for those who <br />
-                <span className="text-primary italic font-light">Lead.</span>
+                Crafted for those <br />
+                <span className="text-primary italic font-light">Who Lead.</span>
               </h2>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                We believe in the beauty of the essential. Our Spring collection redefines modern minimalism with pieces crafted from pure silk, sustainable wool, and organic cotton.
+                We believe in the beauty of the essential. Our Spring Archive redefines modern minimalism with pieces meticulously crafted from pure silk, sustainable wool, and technical organic cotton.
               </p>
               <div className="pt-6">
                 <Link to="/shop" className="btn-premium-gold">
@@ -97,9 +97,9 @@ const LandingPage: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {[
-                { title: 'Global Express', desc: 'Complimentary shipping worldwide on all orders above $500.', icon: Zap },
-                { title: 'Secured Atelier', desc: 'Every piece is hand-inspected and sealed in our signature charcoal packaging.', icon: ShieldCheck },
-                { title: 'Circular Return', desc: 'Complimentary 30-day collection and exchange, managed by our concierge.', icon: Package }
+                { title: 'Global Priority', desc: 'Seamless express delivery across 150+ territories with real-time digital tracking.', icon: Zap },
+                { title: 'Atelier Inspection', desc: 'Every piece is hand-verified and sealed in our signature charcoal laboratory packaging.', icon: ShieldCheck },
+                { title: 'Personal Concierge', desc: 'Complimentary 30-day collection and bespoke exchange service, managed by your dedicated agent.', icon: Package }
               ].map((feature, i) => (
                 <motion.div 
                   key={i}
@@ -125,12 +125,12 @@ const LandingPage: React.FC = () => {
         {/* FINAL CALL TO ACTION */}
         <section className="py-40 bg-foreground text-background">
           <div className="lunar-container text-center max-w-3xl">
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-10 leading-none antialiased">Join the Future <br /> of Fashion.</h2>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-10 leading-none antialiased">Join the Future <br /> of the Atelier.</h2>
             <p className="text-white/60 text-lg md:text-xl font-medium tracking-tight mb-16">
-              Exclusive early access to our limited summer drop begins tomorrow. Secure your place in the inner circle.
+              Exclusive early access to our seasonal drops and editorial insights. Secure your place in the LUNAR inner circle.
             </p>
-            <Link to="/signup" className="inline-block px-12 py-6 rounded-3xl bg-white text-black text-sm font-black tracking-widest hover:scale-105 transition-all shadow-2xl">
-              CREATE YOUR PROFILE
+            <Link to="/signup" className="inline-block px-12 py-6 rounded-3xl bg-white text-black text-sm font-black tracking-widest hover:scale-105 transition-all shadow-2xl uppercase">
+              Establish Your Identity
             </Link>
           </div>
         </section>

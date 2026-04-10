@@ -63,14 +63,14 @@ const Register: React.FC = () => {
             >
               <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.6em] text-white/40">
                  <Sparkles className="h-3 w-3 text-primary" />
-                 MEMBER ENROLLMENT
+                 ATELIER MEMBERSHIP
               </div>
               <h1 className="text-7xl font-black uppercase italic tracking-tighter leading-[0.85]">
                 The <br />
                 <span className="text-primary font-light not-italic">Archive.</span>
               </h1>
               <p className="text-lg font-medium text-white/50 leading-relaxed uppercase tracking-tight max-w-sm">
-                Join our exclusive society of modern connoisseurs. Members enjoy priority access to seasonal drops, private invitations, and bespoke styling services.
+                Join our exclusive society of modern connoisseurs. Members enjoy priority access to seasonal archives, private invitations, and bespoke styling services.
               </p>
               
               <div className="flex gap-12 pt-16">
@@ -119,7 +119,7 @@ const Register: React.FC = () => {
               </div>
               <div className="space-y-4">
                  <span className="text-[10px] font-black tracking-[0.6em] text-primary uppercase">02 / REGISTRATION</span>
-                 <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase italic text-foreground">Initialize Identity<span className="text-primary not-italic font-light">.</span></h1>
+                 <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase italic text-foreground">Join the Circle<span className="text-primary not-italic font-light">.</span></h1>
               </div>
               <p className="text-muted-foreground text-[10px] font-black tracking-[0.2em] uppercase leading-relaxed max-w-xs mx-auto">
                 Join the LUNAR inner circle to gain priority access to limited seasonal pieces and bespoke archival services.
@@ -204,7 +204,7 @@ const Register: React.FC = () => {
                 className="btn-premium-primary w-full py-6 text-[10px] font-black tracking-[0.3em] uppercase group"
               >
                 <div className="flex items-center justify-center gap-4">
-                  {isLoading ? 'INITIALIZING...' : 'AUTHORIZE REGISTRATION'}
+                  {isLoading ? 'INITIALIZING...' : 'REGISTER IDENTITY'}
                   {!isLoading && <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />}
                 </div>
               </button>
@@ -213,9 +213,9 @@ const Register: React.FC = () => {
             {/* Footer Links */}
             <div className="mt-16 text-center space-y-6">
               <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
-                ALREADY REGISTERED?{" "}
+                ALREADY A MEMBER?{" "}
                 <Link to="/signin" className="text-primary hover:text-foreground transition-colors border-b border-primary/20 pb-1">
-                  AUTHENTICATE
+                  MEMBER ACCESS
                 </Link>
               </p>
             </div>

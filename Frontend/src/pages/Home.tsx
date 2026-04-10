@@ -237,27 +237,27 @@ const Home: React.FC = () => {
         <section className="py-48 border-t border-white/5">
           <div className="lunar-container">
             <div className="text-center mb-32 space-y-4">
-              <span className="text-[10px] font-black tracking-[0.6em] text-primary uppercase">O4 / INFRASTRUCTURE</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic">Elevated <br /><span className="text-primary not-italic font-light">Logistics.</span></h2>
+              <span className="text-[10px] font-black tracking-[0.6em] text-primary uppercase">04 / INFRASTRUCTURE</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic">Bespoke <br /><span className="text-primary not-italic font-light">Fulfillment.</span></h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <FeatureCard 
                 index={0}
-                title="Premium Quality"
-                desc="Hand-crafted in Copenhagen with the finest sustainably sourced fabrics."
+                title="Atelier Quality"
+                desc="Hand-crafted in Copenhagen with the finest sustainably sourced heritage fabrics."
                 icon={Zap}
               />
               <FeatureCard 
                 index={1}
-                title="Fast Shipping"
-                desc="Complimentary express worldwide shipping on all orders over $500."
+                title="Global Priority"
+                desc="Complimentary express worldwide shipping on every bespoke order."
                 icon={ShieldCheck}
               />
               <FeatureCard 
                 index={2}
-                title="Easy Returns"
-                desc="A seamless 30-day return policy managed by our dedicated concierge team."
+                title="Seamless Returns"
+                desc="A transparent 30-day collection policy managed by our dedicated concierge."
                 icon={Package}
               />
             </div>

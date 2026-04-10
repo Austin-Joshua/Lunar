@@ -17,8 +17,8 @@ const footerLinks = {
     { name: 'FAQS', href: '/shop/settings' },
   ],
   COMPANY: [
-    { name: 'OUR STORY', href: '/about' },
-    { name: 'ATELIER', href: '/about' },
+    { name: 'HERITAGE', href: '/about' },
+    { name: 'THE STUDIO', href: '/about' },
     { name: 'SUSTAINABILITY', href: '/about' },
     { name: 'CONTACT', href: '/contact' },
   ],
@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
                   </div>
                   <div className="flex items-start gap-4 text-primary">
                      <ShieldCheck className="h-4 w-4 flex-shrink-0" />
-                     <p className="font-black">GLOBAL INSURED LOGISTICS ACTIVE</p>
+                     <p className="font-black">SECURED GLOBAL FULFILLMENT ACTIVE</p>
                   </div>
                </div>
             </div>

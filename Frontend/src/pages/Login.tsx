@@ -59,14 +59,14 @@ const Login: React.FC = () => {
             >
               <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.6em] text-white/40">
                  <Sparkles className="h-3 w-3 text-primary" />
-                 AUTHENTICATE ACCESS
+                 MEMBER ACCESS
               </div>
               <h1 className="text-7xl font-black uppercase italic tracking-tighter leading-[0.85]">
                 Welcome <br />
                 <span className="text-primary font-light not-italic">Back.</span>
               </h1>
               <p className="text-lg font-medium text-white/50 leading-relaxed uppercase tracking-tight max-w-sm">
-                Unlock your curated archive, private collection previews, and seamless bespoke experiences tailored for the modern individual.
+                Unlock your curated archive, private collection previews, and seamless bespoke experiences tailored for the exceptional individual.
               </p>
             </motion.div>
 
@@ -98,11 +98,11 @@ const Login: React.FC = () => {
                 </div>
               </div>
               <div className="space-y-4">
-                 <span className="text-[10px] font-black tracking-[0.6em] text-primary uppercase">O1 / AUTHENTICATION</span>
+                 <span className="text-[10px] font-black tracking-[0.6em] text-primary uppercase">01 / AUTHENTICATION</span>
                  <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase italic text-foreground">Archive Access<span className="text-primary not-italic font-light">.</span></h1>
               </div>
               <p className="text-muted-foreground text-[10px] font-black tracking-[0.2em] uppercase leading-relaxed max-w-xs mx-auto">
-                Initialize your credentials to access the LUNAR private archive and transaction history.
+                Enter your credentials to access the LUNAR private archive and transaction history.
               </p>
             </div>
 
@@ -170,7 +170,7 @@ const Login: React.FC = () => {
                 className="btn-premium-primary w-full py-6 text-[10px] font-black tracking-[0.3em] uppercase group"
               >
                 <div className="flex items-center justify-center gap-4">
-                  {isLoading ? 'INITIALIZING...' : 'AUTHENTICATE PROTOCOL'}
+                  {isLoading ? 'INITIALIZING...' : 'UNLOCK ACCESS'}
                   {!isLoading && <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />}
                 </div>
               </button>
@@ -179,9 +179,9 @@ const Login: React.FC = () => {
             {/* Footer Links */}
             <div className="mt-16 text-center space-y-6">
               <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
-                NO ARCHIVE IDENTITY?{" "}
+                NEW TO THE ATELIER?{" "}
                 <Link to="/signup" className="text-primary hover:text-foreground transition-colors border-b border-primary/20 pb-1">
-                  CREATE REGISTRATION
+                  JOIN THE CIRCLE
                 </Link>
               </p>
             </div>
