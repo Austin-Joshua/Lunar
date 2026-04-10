@@ -20,13 +20,16 @@ var (
 func InitFirebase() error {
 	ctx := context.Background()
 	
-	// Load credentials from file if GOOGLE_APPLICATION_CREDENTIALS is set,
-	// otherwise use default credentials or service account JSON from environment.
+	// Load credentials:
+	// 1. Check for JSON string (ideal for cloud/Render)
+	// 2. Fallback to file path (ideal for local/dev)
 	var opt option.ClientOption
-	credPath := os.Getenv("FIREBASE_SERVICE_ACCOUNT")
-	if credPath != "" {
+	if jsonCreds := os.Getenv("FIREBASE_SERVICE_ACCOUNT_JSON"); jsonCreds != "" {
+		opt = option.WithCredentialsJSON([]byte(jsonCreds))
+	} else if credPath := os.Getenv("FIREBASE_SERVICE_ACCOUNT"); credPath != "" {
 		opt = option.WithCredentialsFile(credPath)
 	}
+
 
 	app, err := firebase.NewApp(ctx, nil, opt)
 	if err != nil {
