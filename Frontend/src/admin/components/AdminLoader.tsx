@@ -17,7 +17,7 @@ export const AdminLoader: React.FC<AdminLoaderProps> = ({ size = 'md', className
     <div className={cn("flex items-center justify-center", className)}>
       <div
         className={cn(
-          "rounded-full animate-spin border-admin-sidebar border-t-admin-sidebar-active",
+          "rounded-full animate-spin border-muted-foreground/25 border-t-primary",
           sizeClasses[size]
         )}
       />

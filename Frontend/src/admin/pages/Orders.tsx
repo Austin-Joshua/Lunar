@@ -71,32 +71,32 @@ const AdminOrders: React.FC = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <div className="space-y-12 animate-fade-in p-2 md:p-6 lg:p-10 bg-[#050505] min-h-screen text-white">
+    <div className="animate-fade-in space-y-12 text-foreground">
       
       {/* HEADER PROTOCOL */}
-      <div className="flex flex-col md:flex-row justify-between items-end gap-8 pb-10 border-b border-white/5">
+      <div className="flex flex-col items-end justify-between gap-8 border-b border-border pb-10 dark:border-white/10 md:flex-row">
         <div className="space-y-4">
            <div className="flex items-center gap-3">
               <Package className="h-4 w-4 text-primary" />
               <span className="text-[10px] font-black tracking-[0.5em] text-primary uppercase leading-none">LOGISTICS CONTROL</span>
            </div>
-           <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white uppercase leading-none">Acquisition <br />Ledger<span className="text-primary not-italic">.</span></h1>
+           <h1 className="text-5xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-7xl">Acquisition <br />Ledger<span className="text-primary not-italic">.</span></h1>
         </div>
         <div className="flex flex-col sm:flex-row gap-6">
            <div className="relative group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/20 group-focus-within:text-primary transition-colors" />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input 
                  type="text" 
                  placeholder="SEARCH ARCHIVE..." 
                  value={searchQuery}
                  onChange={(e) => setSearchQuery(e.target.value)}
-                 className="pl-14 pr-8 py-4 rounded-2xl bg-white/5 border border-white/5 focus:border-primary/20 focus:outline-none text-[10px] font-black tracking-widest uppercase w-full sm:w-64"
+                 className="w-full rounded-2xl border border-border bg-muted/40 py-4 pl-14 pr-8 text-[10px] font-black uppercase tracking-widest focus:border-primary/25 focus:outline-none sm:w-64 dark:border-white/10 dark:bg-white/5"
               />
            </div>
            <select 
              value={statusFilter}
              onChange={(e) => setStatusFilter(e.target.value)}
-             className="px-8 py-4 rounded-2xl bg-white/5 border border-white/5 text-[10px] font-black tracking-widest uppercase focus:outline-none focus:border-primary/20 appearance-none cursor-pointer"
+             className="cursor-pointer appearance-none rounded-2xl border border-border bg-muted/40 px-8 py-4 text-[10px] font-black uppercase tracking-widest focus:border-primary/25 focus:outline-none dark:border-white/10 dark:bg-white/5"
            >
               <option value="">ALL STATUSES</option>
               {Object.entries(statusConfig).map(([val, cfg]) => (
@@ -107,17 +107,17 @@ const AdminOrders: React.FC = () => {
       </div>
 
       {/* ACQUISITION DATA TABLE */}
-      <div className="bg-[#0a0a0a] rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl">
+      <div className="rounded-[2.5rem] border border-border bg-card dark:border-white/10 overflow-hidden shadow-2xl">
          <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
                <thead>
-                  <tr className="border-b border-white/5 bg-white/[0.01]">
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">ID PROTOCOL</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">ACQUISITION AGENT</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">INVESTMENT</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">STATUS</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">CHRONOS</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase"></th>
+                  <tr className="border-b border-border bg-muted/20 dark:border-white/5 dark:bg-white/[0.02]">
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">ID PROTOCOL</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">ACQUISITION AGENT</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">INVESTMENT</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">STATUS</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">CHRONOS</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase"></th>
                   </tr>
                </thead>
                <tbody className="divide-y divide-white/5">
@@ -134,13 +134,13 @@ const AdminOrders: React.FC = () => {
                          <td className="px-10 py-8">
                             <div className="flex items-center gap-3">
                                <Hash className="h-4 w-4 text-primary/40" />
-                               <span className="text-[11px] font-black text-white tracking-widest">{order.id}</span>
+                               <span className="text-[11px] font-black tracking-widest text-foreground">{order.id}</span>
                             </div>
                          </td>
                          <td className="px-10 py-8">
                             <div className="space-y-1">
-                               <p className="text-[11px] font-black text-white uppercase tracking-widest">{order.customerName}</p>
-                               <p className="text-[9px] font-bold text-white/20 tracking-tighter uppercase">{order.customerEmail}</p>
+                               <p className="text-[11px] font-black uppercase tracking-widest text-foreground">{order.customerName}</p>
+                               <p className="text-[9px] font-bold text-muted-foreground tracking-tighter uppercase">{order.customerEmail}</p>
                             </div>
                          </td>
                          <td className="px-10 py-8">
@@ -153,10 +153,10 @@ const AdminOrders: React.FC = () => {
                             </div>
                          </td>
                          <td className="px-10 py-8">
-                            <span className="text-[10px] font-black text-white/20 tracking-widest">{formatDateTime(order.createdAt)}</span>
+                            <span className="text-[10px] font-black text-muted-foreground tracking-widest">{formatDateTime(order.createdAt)}</span>
                          </td>
                          <td className="px-10 py-8 text-right">
-                            <button className="p-3 rounded-xl bg-white/5 text-white/20 group-hover:text-primary transition-all group-hover:bg-primary/10">
+                            <button className="p-3 rounded-xl bg-white/5 text-muted-foreground group-hover:text-primary transition-all group-hover:bg-primary/10">
                                <Eye className="h-5 w-5" />
                             </button>
                          </td>
@@ -175,13 +175,13 @@ const AdminOrders: React.FC = () => {
              initial={{ opacity: 0 }}
              animate={{ opacity: 1 }}
              exit={{ opacity: 0 }}
-             className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#050505]/95 backdrop-blur-3xl"
+             className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 p-6 backdrop-blur-3xl"
            >
               <motion.div 
                 initial={{ scale: 0.95, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 20 }}
-                className="max-w-5xl w-full bg-[#0a0a0a] border border-white/5 rounded-[3.5rem] overflow-hidden shadow-full flex flex-col md:flex-row h-[90vh] md:h-auto max-h-[90vh]"
+                className="flex max-h-[90vh] h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-[3.5rem] border border-border bg-card shadow-full md:h-auto md:flex-row dark:border-white/10"
               >
                  {/* LEFT: Items & Summary */}
                  <div className="flex-1 p-10 md:p-16 space-y-12 overflow-y-auto no-scrollbar">
@@ -190,11 +190,11 @@ const AdminOrders: React.FC = () => {
                           <div className="flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-primary">
                              <Package className="h-4 w-4" /> ACQUISITION MANIFEST
                           </div>
-                          <h2 className="text-4xl font-black italic tracking-tighter text-white uppercase">ID: {selectedOrder.id}</h2>
+                          <h2 className="text-4xl font-black uppercase italic tracking-tighter text-foreground">ID: {selectedOrder.id}</h2>
                        </div>
                        <button 
                          onClick={() => setSelectedOrder(null)}
-                         className="p-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white/40 transition-all"
+                         className="rounded-2xl bg-muted/40 p-4 text-muted-foreground transition-all hover:bg-muted/60 dark:bg-white/5 dark:hover:bg-white/10"
                        >
                           <RefreshCw className="h-6 w-6" />
                        </button>
@@ -208,8 +208,8 @@ const AdminOrders: React.FC = () => {
                             </div>
                             <div className="flex flex-col justify-center space-y-3">
                                <p className="text-[10px] font-black text-primary tracking-widest uppercase">LUNAR PIECE</p>
-                               <h3 className="text-sm font-black text-white tracking-widest uppercase truncate max-w-[250px]">{item.productName}</h3>
-                               <div className="flex gap-6 text-[9px] font-black text-white/20 tracking-widest uppercase">
+                               <h3 className="max-w-[250px] truncate text-sm font-black uppercase tracking-widest text-foreground">{item.productName}</h3>
+                               <div className="flex gap-6 text-[9px] font-black text-muted-foreground tracking-widest uppercase">
                                   <span>VALUATION: {formatCurrency(item.price)}</span>
                                   <span>UNIT: {item.quantity}</span>
                                </div>
@@ -218,9 +218,9 @@ const AdminOrders: React.FC = () => {
                        ))}
                     </div>
 
-                    <div className="pt-12 border-t border-white/5 flex justify-between items-end">
+                    <div className="flex items-end justify-between border-t border-border pt-12 dark:border-white/10">
                        <div className="space-y-2">
-                          <p className="text-[10px] font-black tracking-widest text-white/20 uppercase">TOTAL INVESTMENT</p>
+                          <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">TOTAL INVESTMENT</p>
                           <p className="text-4xl font-black italic tracking-tighter text-primary">{formatCurrency(selectedOrder.total)}</p>
                        </div>
                        <div className="flex gap-4">
@@ -230,24 +230,24 @@ const AdminOrders: React.FC = () => {
                  </div>
 
                  {/* RIGHT: Logistics & Status */}
-                 <div className="w-full md:w-[400px] bg-white/[0.02] border-l border-white/5 p-10 md:p-16 space-y-12 flex flex-col">
+                 <div className="flex w-full flex-col space-y-12 border-l border-border bg-muted/15 p-10 md:w-[400px] md:p-16 dark:border-white/10 dark:bg-white/[0.02]">
                     <section className="space-y-10">
-                       <div className="flex items-center gap-4 border-b border-white/5 pb-4">
+                       <div className="flex items-center gap-4 border-b border-border pb-4 dark:border-white/10">
                           <MapPin className="h-4 w-4 text-primary" />
-                          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-white">TRANSIT COORDINATES</h3>
+                          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground">TRANSIT COORDINATES</h3>
                        </div>
-                       <div className="space-y-6 text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase leading-loose">
+                       <div className="space-y-6 text-[10px] font-bold uppercase leading-loose tracking-[0.2em] text-muted-foreground">
                           <div className="flex gap-4">
                              <User className="h-4 w-4 text-primary opacity-40" />
-                             <span className="text-white">{selectedOrder.customerName}</span>
+                             <span className="text-foreground">{selectedOrder.customerName}</span>
                           </div>
                           <div className="flex gap-4">
                              <Mail className="h-4 w-4 text-primary opacity-40" />
-                             <span className="text-white lowercase">{selectedOrder.customerEmail}</span>
+                             <span className="lowercase text-foreground">{selectedOrder.customerEmail}</span>
                           </div>
                           <div className="flex gap-4">
                              <MapPin className="h-4 w-4 text-primary opacity-40 shrink-0" />
-                             <span className="text-white">
+                             <span className="text-foreground">
                                 {selectedOrder.shippingAddress.street}<br />
                                 {selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.state}<br />
                                 {selectedOrder.shippingAddress.country}
@@ -257,9 +257,9 @@ const AdminOrders: React.FC = () => {
                     </section>
 
                     <section className="space-y-10 mt-auto">
-                       <div className="flex items-center gap-4 border-b border-white/5 pb-4">
+                       <div className="flex items-center gap-4 border-b border-border pb-4 dark:border-white/10">
                           <Activity className="h-4 w-4 text-primary" />
-                          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-white">PROTOCOL STATUS</h3>
+                          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground">PROTOCOL STATUS</h3>
                        </div>
                        
                        <div className="space-y-6">
@@ -267,7 +267,7 @@ const AdminOrders: React.FC = () => {
                             value={selectedOrder.status}
                             onChange={(e) => handleStatusUpdate(selectedOrder.id, e.target.value)}
                             disabled={updatingStatus === selectedOrder.id}
-                            className="w-full px-8 py-5 rounded-2xl bg-white/5 border border-white/5 text-[10px] font-black tracking-widest uppercase focus:outline-none focus:border-primary/20 appearance-none cursor-pointer disabled:opacity-50"
+                            className="w-full cursor-pointer appearance-none rounded-2xl border border-border bg-muted/40 px-8 py-5 text-[10px] font-black uppercase tracking-widest focus:border-primary/25 focus:outline-none disabled:opacity-50 dark:border-white/10 dark:bg-white/5"
                           >
                              {Object.entries(statusConfig).map(([val, cfg]) => (
                                <option key={val} value={val}>{cfg.label}</option>

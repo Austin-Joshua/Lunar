@@ -42,12 +42,12 @@ export const AdminSidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) =>
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 h-screen bg-[#050505] text-white transition-all duration-500 z-50 flex flex-col border-r border-white/5",
+        "fixed left-0 top-0 z-50 flex h-screen flex-col border-r border-border bg-background text-foreground transition-all duration-500 dark:border-white/5",
         collapsed ? "w-20" : "w-72"
       )}
     >
       {/* Logo Section */}
-      <div className="h-24 flex items-center justify-between px-6 border-b border-white/5">
+      <div className="flex h-24 items-center justify-between border-b border-border px-6 dark:border-white/5">
         {!collapsed && (
           <Link to="/admin/dashboard" className="flex flex-col">
             <span className="text-xl font-black tracking-tighter leading-none">
@@ -80,7 +80,7 @@ export const AdminSidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) =>
                     "relative flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-500 group",
                     active
                       ? "bg-primary/10 text-primary"
-                      : "text-white/40 hover:text-white hover:bg-white/5"
+                      : "text-muted-foreground hover:bg-muted/60 hover:text-foreground dark:hover:bg-white/5"
                   )}
                   title={collapsed ? item.name : undefined}
                 >
@@ -107,7 +107,7 @@ export const AdminSidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) =>
       </nav>
 
       {/* User Information */}
-      <div className="p-6 border-t border-white/5 space-y-6">
+      <div className="space-y-6 border-t border-border p-6 dark:border-white/5">
         {!collapsed && admin && (
           <div className="flex items-center gap-4 px-2">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
@@ -115,14 +115,14 @@ export const AdminSidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) =>
             </div>
             <div className="min-w-0">
               <p className="text-[10px] font-black tracking-widest truncate uppercase">{admin.name}</p>
-              <p className="text-[8px] font-bold text-white/20 tracking-widest truncate uppercase">SYSTEM OVERSEER</p>
+              <p className="text-[8px] font-bold uppercase tracking-widest text-muted-foreground truncate">SYSTEM OVERSEER</p>
             </div>
           </div>
         )}
         <button
           onClick={logout}
           className={cn(
-            "flex items-center gap-4 px-4 py-4 rounded-2xl w-full text-white/30 hover:text-destructive hover:bg-destructive/5 transition-all duration-500 group",
+            "flex w-full items-center gap-4 rounded-2xl px-4 py-4 text-muted-foreground transition-all duration-500 hover:bg-destructive/5 hover:text-destructive group",
             collapsed && "justify-center"
           )}
           title={collapsed ? "End Session" : undefined}

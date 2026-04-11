@@ -14,7 +14,7 @@ export const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ childr
     return (
       <div className="min-h-screen flex items-center justify-center bg-admin-bg">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-4 border-admin-sidebar border-t-admin-sidebar-active rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-muted-foreground/30 border-t-primary rounded-full animate-spin" />
           <p className="text-muted-foreground">Loading...</p>
         </div>
       </div>

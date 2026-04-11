@@ -26,7 +26,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, subtitl
   };
 
   return (
-    <section className="py-48 bg-background relative overflow-hidden">
+    <section className="relative overflow-hidden bg-background py-24 md:py-32">
       {/* Editorial Header Protocol */}
       <div className="lunar-container mb-24 flex flex-col md:flex-row justify-between items-end gap-12">
         <div className="space-y-6">

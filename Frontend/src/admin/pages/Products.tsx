@@ -72,26 +72,26 @@ const AdminProducts: React.FC = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <div className="space-y-12 animate-fade-in p-2 md:p-6 lg:p-10 bg-[#050505] min-h-screen text-white">
+    <div className="animate-fade-in space-y-12 text-foreground">
       
       {/* HEADER PROTOCOL */}
-      <div className="flex flex-col md:flex-row justify-between items-end gap-8 pb-10 border-b border-white/5">
+      <div className="flex flex-col items-end justify-between gap-8 border-b border-border pb-10 dark:border-white/10 md:flex-row">
         <div className="space-y-4">
            <div className="flex items-center gap-3">
               <Archive className="h-4 w-4 text-primary" />
               <span className="text-[10px] font-black tracking-[0.5em] text-primary uppercase leading-none">INVENTORY CONTROL</span>
            </div>
-           <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white uppercase leading-none">Archive <br />Assets<span className="text-primary not-italic">.</span></h1>
+           <h1 className="text-5xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-7xl">Archive <br />Assets<span className="text-primary not-italic">.</span></h1>
         </div>
         <div className="flex flex-col sm:flex-row gap-6">
            <div className="relative group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/20 group-focus-within:text-primary transition-colors" />
+              <Search className="absolute left-5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
               <input 
                  type="text" 
                  placeholder="SEARCH ARCHIVE..." 
                  value={searchQuery}
                  onChange={(e) => setSearchQuery(e.target.value)}
-                 className="pl-14 pr-8 py-4 rounded-2xl bg-white/5 border border-white/5 focus:border-primary/20 focus:outline-none text-[10px] font-black tracking-widest uppercase w-full sm:w-64 transition-all"
+                 className="w-full rounded-2xl border border-border bg-muted/40 py-4 pl-14 pr-8 text-[10px] font-black uppercase tracking-widest transition-all focus:border-primary/25 focus:outline-none sm:w-64 dark:border-white/10 dark:bg-white/5"
               />
            </div>
            <Link
@@ -105,17 +105,17 @@ const AdminProducts: React.FC = () => {
       </div>
 
       {/* ASSET LEDGER */}
-      <div className="bg-[#0a0a0a] rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl">
+      <div className="overflow-hidden rounded-[2.5rem] border border-border bg-card shadow-2xl dark:border-white/10">
          <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
                <thead>
-                  <tr className="border-b border-white/5 bg-white/[0.01]">
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">VISUAL ASSET</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">METADATA</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">CLASSIFICATION</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">VALUATION</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">STOCK LEVEL</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">ACTIONS</th>
+                  <tr className="border-b border-border bg-muted/20 dark:border-white/5 dark:bg-white/[0.02]">
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">VISUAL ASSET</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">METADATA</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">CLASSIFICATION</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">VALUATION</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">STOCK LEVEL</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">ACTIONS</th>
                   </tr>
                </thead>
                <tbody className="divide-y divide-white/5">
@@ -124,23 +124,23 @@ const AdminProducts: React.FC = () => {
                       key={product.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="group hover:bg-white/[0.02] transition-colors"
+                      className="group transition-colors hover:bg-muted/30 dark:hover:bg-white/[0.02]"
                     >
                        <td className="px-10 py-8">
-                          <div className="w-16 h-20 rounded-2xl bg-white/5 overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/20 transition-all duration-700">
+                          <div className="h-20 w-16 overflow-hidden rounded-2xl bg-muted/40 ring-1 ring-border transition-all duration-700 group-hover:ring-primary/20 dark:bg-white/5 dark:ring-white/10">
                              <img src={product.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt={product.name} />
                           </div>
                        </td>
                        <td className="px-10 py-8">
                           <div className="space-y-1">
-                             <p className="text-[11px] font-black text-white uppercase tracking-widest">{product.name}</p>
+                             <p className="text-[11px] font-black uppercase tracking-widest text-foreground">{product.name}</p>
                              <p className="text-[9px] font-bold text-primary tracking-widest uppercase">{product.brand}</p>
                           </div>
                        </td>
                        <td className="px-10 py-8">
                           <div className="flex flex-col gap-1">
-                             <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">{product.gender}</span>
-                             <span className="text-[8px] font-bold text-white/10 uppercase tracking-[0.3em]">{product.category}</span>
+                             <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{product.gender}</span>
+                             <span className="text-[8px] font-bold uppercase tracking-[0.3em] text-muted-foreground/70">{product.category}</span>
                           </div>
                        </td>
                        <td className="px-10 py-8">
@@ -158,7 +158,7 @@ const AdminProducts: React.FC = () => {
                           <div className="flex items-center gap-4">
                             <button 
                               onClick={() => navigate(`/admin/products/edit/${product.id}`)}
-                              className="p-3 rounded-xl bg-white/5 text-white/20 hover:text-white hover:bg-white/10 transition-all"
+                              className="rounded-xl bg-muted/40 p-3 text-muted-foreground transition-all hover:bg-muted/60 hover:text-foreground dark:bg-white/5 dark:hover:bg-white/10"
                             >
                                <Edit className="h-4 w-4" />
                             </button>
@@ -184,13 +184,13 @@ const AdminProducts: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-[#050505]/95 backdrop-blur-3xl z-[100] flex items-center justify-center p-6"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 p-6 backdrop-blur-3xl"
           >
             <motion.div 
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="max-w-md w-full bg-[#0a0a0a] border border-white/10 rounded-[3rem] p-12 space-y-12 shadow-full"
+              className="max-w-md w-full space-y-12 rounded-[3rem] border border-border bg-card p-12 shadow-full dark:border-white/10"
             >
               <div className="space-y-4 text-center">
                 <div className="flex justify-center">
@@ -198,21 +198,21 @@ const AdminProducts: React.FC = () => {
                       <Trash2 className="h-8 w-8" />
                    </div>
                 </div>
-                <h3 className="text-3xl font-black italic uppercase tracking-tighter text-white">Purge Asset?</h3>
-                <p className="text-white/20 text-[10px] font-bold uppercase tracking-[0.4em] leading-loose">
-                  ARE YOU ABSOLUTELY CERTAIN YOU WANT TO PERMANENTLY PURGE <span className="text-white">"{deleteModal.product?.name.toUpperCase()}"</span> FROM THE LUNAR ARCHIVE?
+                <h3 className="text-3xl font-black uppercase italic tracking-tighter text-foreground">Purge Asset?</h3>
+                <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.4em] leading-loose">
+                  ARE YOU ABSOLUTELY CERTAIN YOU WANT TO PERMANENTLY PURGE <span className="text-foreground">"{deleteModal.product?.name.toUpperCase()}"</span> FROM THE LUNAR ARCHIVE?
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <button
                   onClick={() => setDeleteModal({ open: false, product: null })}
-                  className="py-5 rounded-2xl border border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 hover:bg-white/5 transition-colors"
+                  className="rounded-2xl border border-border py-5 text-[10px] font-black uppercase tracking-widest text-muted-foreground transition-colors hover:bg-muted/40 dark:border-white/10"
                 >
                   ABORT
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="py-5 rounded-2xl bg-destructive text-white text-[10px] font-black uppercase tracking-widest hover:bg-destructive/80 transition-all shadow-xl"
+                  className="rounded-2xl bg-destructive py-5 text-[10px] font-black uppercase tracking-widest text-destructive-foreground shadow-xl transition-all hover:bg-destructive/80"
                 >
                   PURGE
                 </button>

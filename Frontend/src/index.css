@@ -7,6 +7,17 @@
 
 @layer base {
   :root {
+    /* Admin panel tokens (HSL) — used by tailwind admin.* */
+    --admin-bg: 210 20% 98%;
+    --admin-sidebar: 222 47% 11%;
+    --admin-sidebar-foreground: 0 0% 98%;
+    --admin-sidebar-hover: 222 47% 16%;
+    --admin-sidebar-active: 43 65% 55%;
+    --admin-card: 0 0% 100%;
+    --admin-success: 142 76% 36%;
+    --admin-warning: 38 92% 50%;
+    --admin-info: 199 89% 48%;
+
     /* PROFESSIONAL HIGH-CONTRAST PALETTE */
     --background: 0 0% 100%;    /* Pure White */
     --foreground: 222 47% 11%;  /* Slate 940 (Architectural Black-Blue) */
@@ -41,6 +52,16 @@
   }
 
   .dark {
+    --admin-bg: 0 0% 3%;
+    --admin-sidebar: 43 65% 55%;
+    --admin-sidebar-foreground: 222 47% 6%;
+    --admin-sidebar-hover: 43 55% 48%;
+    --admin-sidebar-active: 43 65% 60%;
+    --admin-card: 0 0% 6%;
+    --admin-success: 142 71% 45%;
+    --admin-warning: 38 92% 50%;
+    --admin-info: 199 89% 48%;
+
     --background: 224 71% 4%; /* Deep Midnight Zero */
     --foreground: 210 40% 98%;
 
@@ -71,6 +92,16 @@
 @layer base {
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   html, body {
@@ -110,6 +141,15 @@
     @apply max-w-7xl mx-auto px-6 lg:px-8;
   }
 
+  /* Shared form fields — light + dark */
+  .lunar-field-underline {
+    @apply w-full border-b border-border bg-transparent py-3 text-sm font-bold text-foreground transition-colors placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none dark:border-white/15;
+  }
+
+  .lunar-glass-panel {
+    @apply rounded-[2.5rem] border border-border/80 bg-muted/30 dark:border-white/10 dark:bg-foreground/5;
+  }
+
   /* PREMIUM BUTTON - Apple-Style */
   .btn-premium {
     @apply inline-flex items-center justify-center rounded-2xl px-8 py-4 text-sm font-semibold transition-all duration-300 active:scale-95;
@@ -129,7 +169,7 @@
 
   /* GLASSMORPHISM */
   .glass-effect {
-    @apply backdrop-blur-xl bg-background/70 border-b border-border/50;
+    @apply border-b border-border/60 bg-background/80 backdrop-blur-xl dark:border-white/10 dark:bg-background/75;
   }
 
   /* PREMIUM CARD LIFT */
@@ -170,7 +210,11 @@
   }
 
   .bg-apple-gradient {
-    background: radial-gradient(circle at top, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at top, hsl(var(--primary) / 0.06) 0%, transparent 70%);
+  }
+
+  .dark .bg-apple-gradient {
+    background: radial-gradient(circle at top, hsl(var(--primary) / 0.08) 0%, transparent 65%);
   }
 
   .mask-ledger {

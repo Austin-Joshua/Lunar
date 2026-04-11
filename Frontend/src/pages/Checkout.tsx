@@ -97,7 +97,7 @@ const Checkout: React.FC = () => {
              </div>
           </motion.div>
           <div className="text-center space-y-6 max-w-2xl">
-             <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white">Acquisition <br />Confirmed<span className="text-primary not-italic">.</span></h1>
+             <h1 className="text-5xl font-black uppercase italic tracking-tighter text-foreground md:text-7xl">Acquisition <br />Confirmed<span className="text-primary not-italic">.</span></h1>
              <p className="text-muted-foreground font-medium uppercase tracking-[0.4em] text-[10px] leading-loose">
                 Your selection has been securely archived and moved to our atelier for global transit. You will receive a bespoke notification shortly.
              </p>
@@ -121,12 +121,12 @@ const Checkout: React.FC = () => {
         <div className="lunar-container">
           <div className="mb-20 space-y-4">
              <div className="flex items-center gap-4">
-                <Link to="/shop/cart" className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center hover:bg-foreground hover:text-background transition-all">
+                <Link to="/shop/cart" className="flex h-12 w-12 items-center justify-center rounded-full border border-border transition-all hover:bg-foreground hover:text-background dark:border-white/10">
                    <ArrowLeft className="h-4 w-4" />
                 </Link>
                 <span className="luxury-subheading">SECURE ACQUISITION</span>
              </div>
-             <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white">The Final <br />Protocol<span className="text-primary not-italic">.</span></h1>
+             <h1 className="text-5xl font-black uppercase italic tracking-tighter text-foreground md:text-7xl">The Final <br />Protocol<span className="text-primary not-italic">.</span></h1>
           </div>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -135,46 +135,46 @@ const Checkout: React.FC = () => {
              <div className="lg:col-span-7 space-y-12">
                 
                 {/* 1. SHIPPING INFO */}
-                <div className="space-y-8 bg-foreground/5 p-8 md:p-12 rounded-[2.5rem] border border-white/5">
-                   <div className="flex items-center gap-4 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                <div className="lunar-glass-panel space-y-8 p-8 md:p-12">
+                   <div className="mb-4 flex items-center gap-4">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                          <MapPin className="h-5 w-5" />
                       </div>
-                      <h2 className="text-[11px] font-black uppercase tracking-[0.4em] text-white">I. TRANSIT COORDINATES</h2>
+                      <h2 className="text-[11px] font-black uppercase tracking-[0.4em] text-foreground">I. TRANSIT COORDINATES</h2>
                    </div>
                    
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
-                      <div className="md:col-span-2 space-y-3">
-                        <label className="text-[9px] font-black text-muted-foreground tracking-[0.2em] uppercase">Bespoke Atelier Address</label>
-                        <input required name="street" value={formData.street} onChange={handleInputChange} className="w-full bg-transparent border-b border-white/10 py-3 text-sm font-bold focus:outline-none focus:border-primary transition-all placeholder:text-white/5" placeholder="E.G. 12 ARCHITECTURAL PLAZA" />
+                   <div className="grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2">
+                      <div className="space-y-3 md:col-span-2">
+                        <label className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Bespoke Atelier Address</label>
+                        <input required name="street" value={formData.street} onChange={handleInputChange} className="lunar-field-underline" placeholder="E.G. 12 ARCHITECTURAL PLAZA" />
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[9px] font-black text-muted-foreground tracking-[0.2em] uppercase">Metropolis</label>
-                        <input required name="city" value={formData.city} onChange={handleInputChange} className="w-full bg-transparent border-b border-white/10 py-3 text-sm font-bold focus:outline-none focus:border-primary transition-all placeholder:text-white/5" placeholder="CITY" />
+                        <label className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Metropolis</label>
+                        <input required name="city" value={formData.city} onChange={handleInputChange} className="lunar-field-underline" placeholder="CITY" />
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[9px] font-black text-muted-foreground tracking-[0.2em] uppercase">Country Protocol</label>
-                        <input required name="country" value={formData.country} onChange={handleInputChange} className="w-full bg-transparent border-b border-white/10 py-3 text-sm font-bold focus:outline-none focus:border-primary transition-all placeholder:text-white/5" placeholder="INDIA" />
+                        <label className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Country Protocol</label>
+                        <input required name="country" value={formData.country} onChange={handleInputChange} className="lunar-field-underline" placeholder="INDIA" />
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[9px] font-black text-muted-foreground tracking-[0.2em] uppercase">Archive Zip Code</label>
-                        <input required name="zipCode" value={formData.zipCode} onChange={handleInputChange} className="w-full bg-transparent border-b border-white/10 py-3 text-sm font-bold focus:outline-none focus:border-primary transition-all placeholder:text-white/5" placeholder="PIN CODE" />
+                        <label className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Archive Zip Code</label>
+                        <input required name="zipCode" value={formData.zipCode} onChange={handleInputChange} className="lunar-field-underline" placeholder="PIN CODE" />
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[9px] font-black text-muted-foreground tracking-[0.2em] uppercase">Comm Profile (Phone)</label>
-                        <input required name="phone" value={formData.phone} onChange={handleInputChange} className="w-full bg-transparent border-b border-white/10 py-3 text-sm font-bold focus:outline-none focus:border-primary transition-all placeholder:text-white/5" placeholder="+91 XXXX XXX XXX" />
+                        <label className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Comm Profile (Phone)</label>
+                        <input required name="phone" value={formData.phone} onChange={handleInputChange} className="lunar-field-underline" placeholder="+91 XXXX XXX XXX" />
                       </div>
                    </div>
                 </div>
 
                 {/* 2. PAYMENT METHOD SELECTION */}
-                <div className="space-y-8 bg-foreground/5 p-8 md:p-12 rounded-[2.5rem] border border-white/5">
-                   <div className="flex items-center justify-between mb-4">
+                <div className="lunar-glass-panel space-y-8 p-8 md:p-12">
+                   <div className="mb-4 flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                         <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                             <ShieldCheck className="h-5 w-5" />
                          </div>
-                         <h2 className="text-[11px] font-black uppercase tracking-[0.4em] text-white">II. PAYMENT PROTOCOL</h2>
+                         <h2 className="text-[11px] font-black uppercase tracking-[0.4em] text-foreground">II. PAYMENT PROTOCOL</h2>
                       </div>
                       <div className="flex items-center gap-2 text-[8px] font-black tracking-widest text-emerald-500/60 bg-emerald-500/5 px-3 py-1 rounded-full border border-emerald-500/20">
                          <Lock className="h-3 w-3" /> SSL ENCRYPTED
@@ -182,13 +182,13 @@ const Checkout: React.FC = () => {
                    </div>
 
                    {/* METHOD TOGGLE (STRIPE STYLE) */}
-                   <div className="grid grid-cols-2 gap-4 p-2 bg-background/50 rounded-2xl border border-white/5">
+                   <div className="grid grid-cols-2 gap-4 rounded-2xl border border-border bg-background/50 p-2 dark:border-white/10">
                       <button 
                         type="button"
                         onClick={() => setPaymentMethod('card')}
                         className={cn(
-                          "flex items-center justify-center gap-3 py-4 rounded-xl text-[10px] font-black tracking-[0.2em] transition-all",
-                          paymentMethod === 'card' ? "bg-white/5 text-primary shadow-xl scale-[1.02] border border-white/5" : "text-white/30 hover:text-white/60"
+                          "flex items-center justify-center gap-3 rounded-xl py-4 text-[10px] font-black tracking-[0.2em] transition-all",
+                          paymentMethod === 'card' ? "scale-[1.02] border border-border bg-muted/60 text-primary shadow-lg dark:border-white/10 dark:bg-white/5" : "text-muted-foreground hover:text-foreground"
                         )}
                       >
                          <CreditCard className="h-4 w-4" /> CREDIT/DEBIT
@@ -197,8 +197,8 @@ const Checkout: React.FC = () => {
                         type="button"
                         onClick={() => setPaymentMethod('upi')}
                         className={cn(
-                          "flex items-center justify-center gap-3 py-4 rounded-xl text-[10px] font-black tracking-[0.2em] transition-all",
-                          paymentMethod === 'upi' ? "bg-white/5 text-primary shadow-xl scale-[1.02] border border-white/5" : "text-white/30 hover:text-white/60"
+                          "flex items-center justify-center gap-3 rounded-xl py-4 text-[10px] font-black tracking-[0.2em] transition-all",
+                          paymentMethod === 'upi' ? "scale-[1.02] border border-border bg-muted/60 text-primary shadow-lg dark:border-white/10 dark:bg-white/5" : "text-muted-foreground hover:text-foreground"
                         )}
                       >
                          <Smartphone className="h-4 w-4" /> UPI GATEWAY
@@ -216,16 +216,16 @@ const Checkout: React.FC = () => {
                         >
                            <div className="space-y-3">
                               <label className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Card Details (Simulated)</label>
-                              <div className="flex items-center gap-4 bg-background/30 border border-white/10 p-5 rounded-2xl">
-                                 <CreditCard className="h-5 w-5 text-white/20" />
-                                 <input disabled className="bg-transparent text-sm font-mono tracking-widest text-white/40 focus:outline-none w-full" placeholder="4242 4242 4242 4242" />
+                              <div className="flex items-center gap-4 rounded-2xl border border-border bg-muted/30 p-5 dark:border-white/10 dark:bg-background/30">
+                                 <CreditCard className="h-5 w-5 text-muted-foreground" />
+                                 <input disabled className="w-full bg-transparent font-mono text-sm tracking-widest text-foreground/80 focus:outline-none" placeholder="4242 4242 4242 4242" />
                                  <div className="flex gap-4">
-                                    <span className="text-[10px] font-mono text-white/20">MM/YY</span>
-                                    <span className="text-[10px] font-mono text-white/20">CVC</span>
+                                    <span className="font-mono text-[10px] text-muted-foreground">MM/YY</span>
+                                    <span className="font-mono text-[10px] text-muted-foreground">CVC</span>
                                  </div>
                               </div>
                            </div>
-                           <div className="flex items-center gap-3 text-[8px] font-bold text-white/20 tracking-widest uppercase">
+                           <div className="flex items-center gap-3 text-[8px] font-bold uppercase tracking-widest text-muted-foreground">
                               <Info className="h-3 w-3" /> Transaction will be processed via LUNAR Secure v2.6
                            </div>
                         </motion.div>
@@ -237,32 +237,32 @@ const Checkout: React.FC = () => {
                           exit={{ opacity: 0, y: -10 }}
                           className="space-y-8 flex flex-col items-center py-6"
                         >
-                           <div className="text-center space-y-2">
-                              <h3 className="text-[10px] font-black text-white tracking-[0.3em] uppercase">SCAN TO ARCHIVE</h3>
-                              <p className="text-[9px] font-bold text-white/20 uppercase">Scan with any UPI app to confirm acquisition</p>
+                           <div className="space-y-2 text-center">
+                              <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground">SCAN TO ARCHIVE</h3>
+                              <p className="text-[9px] font-bold uppercase text-muted-foreground">Scan with any UPI app to confirm acquisition</p>
                            </div>
                            
                            {/* UPI QR SIMULATION */}
-                           <div className="relative group">
-                              <div className="absolute -inset-4 bg-primary/10 rounded-[2rem] blur-2xl group-hover:bg-primary/20 transition-all duration-700" />
-                              <div className="relative w-56 h-56 bg-white rounded-[2.5rem] p-6 shadow-2xl overflow-hidden border-4 border-white">
-                                 <img 
-                                   src="/C:\Users\austi\.gemini\antigravity\brain\20f88f05-327e-4352-969e-1299d04dde5a\lunar_upi_qr_mockup_1775058758083.png" 
-                                   className="w-full h-full object-contain" 
-                                   alt="UPI QR Code" 
+                           <div className="group relative">
+                              <div className="absolute -inset-4 rounded-[2rem] bg-primary/10 blur-2xl transition-all duration-700 group-hover:bg-primary/20" />
+                              <div className="relative h-56 w-56 overflow-hidden rounded-[2.5rem] border-4 border-border bg-card p-4 shadow-2xl dark:border-white/15">
+                                 <img
+                                   src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3Dpay%40lunar%26pn%3DLUNAR%26cu%3DINR"
+                                   className="h-full w-full object-contain"
+                                   alt="UPI QR code"
                                  />
-                                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none" />
+                                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent" />
                               </div>
-                              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-foreground text-background px-4 py-2 rounded-full text-[8px] font-black tracking-widest border border-white/10 shadow-xl flex items-center gap-2">
+                              <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-border bg-foreground px-4 py-2 text-[8px] font-black uppercase tracking-widest text-background shadow-xl dark:border-white/10">
                                  <QrCode className="h-3 w-3" /> LUNAR SECURE UPI
                               </div>
                            </div>
 
                            <div className="w-full space-y-3 pt-4">
                               <label className="text-[9px] font-black text-muted-foreground uppercase tracking-widest text-center block">Or enter UPI ID</label>
-                              <div className="flex items-center gap-4 bg-background/30 border border-white/10 p-5 rounded-2xl">
-                                 <Smartphone className="h-5 w-5 text-white/20" />
-                                 <input className="bg-transparent text-sm font-bold tracking-widest text-white focus:outline-none w-full uppercase placeholder:text-white/5" placeholder="username@lunar" />
+                              <div className="flex items-center gap-4 rounded-2xl border border-border bg-muted/30 p-5 dark:border-white/10 dark:bg-background/30">
+                                 <Smartphone className="h-5 w-5 text-muted-foreground" />
+                                 <input className="w-full bg-transparent text-sm font-bold uppercase tracking-widest text-foreground placeholder:text-muted-foreground/40 focus:outline-none" placeholder="username@lunar" />
                               </div>
                            </div>
                         </motion.div>
@@ -273,44 +273,44 @@ const Checkout: React.FC = () => {
 
              {/* RIGHT: Investment Summary (Stripe Style) */}
              <div className="lg:col-span-5">
-                <div className="sticky top-32 space-y-12 bg-foreground/5 p-10 md:p-14 rounded-[3.5rem] border border-white/5">
+                <div className="lunar-glass-panel sticky top-32 space-y-12 p-10 md:p-14">
                    <div className="space-y-2">
-                      <p className="text-[10px] font-black text-primary tracking-[0.4em] uppercase">INVESTMENT SUMMARY</p>
-                      <h2 className="text-2xl font-black italic uppercase tracking-tighter text-white">The Collection</h2>
+                      <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">INVESTMENT SUMMARY</p>
+                      <h2 className="text-2xl font-black uppercase italic tracking-tighter text-foreground">The Collection</h2>
                    </div>
                    
                    <div className="space-y-8 max-h-[300px] overflow-y-auto no-scrollbar pr-2">
                       {items.map((item, i) => (
                         <div key={i} className="flex justify-between items-center gap-6 group">
                            <div className="flex items-center gap-6">
-                              <div className="w-16 h-20 bg-background/50 rounded-xl overflow-hidden border border-white/5 group-hover:border-primary/30 transition-all">
+                              <div className="h-20 w-16 overflow-hidden rounded-xl border border-border bg-muted/30 transition-all group-hover:border-primary/30 dark:border-white/10">
                                  <img src={item.product.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt={item.product.name} />
                               </div>
                               <div className="space-y-1">
-                                 <p className="text-[10px] font-black text-white tracking-widest uppercase truncate max-w-[140px]">{item.product.name}</p>
+                                 <p className="max-w-[140px] truncate text-[10px] font-black uppercase tracking-widest text-foreground">{item.product.name}</p>
                                  <p className="text-[9px] font-bold text-muted-foreground tracking-widest uppercase">UNIT x{item.quantity} · {item.size || 'OS'}</p>
                               </div>
                            </div>
-                           <span className="text-[10px] font-black text-white/60 tracking-widest">{formatPrice(item.product.price * item.quantity)}</span>
+                           <span className="text-[10px] font-black tracking-widest text-foreground/90">{formatPrice(item.product.price * item.quantity)}</span>
                         </div>
                       ))}
                    </div>
 
-                   <div className="space-y-6 pt-10 border-t border-white/10 uppercase tracking-[0.2em] text-[10px] font-bold text-muted-foreground/40">
+                   <div className="space-y-6 border-t border-border pt-10 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground dark:border-white/10">
                       <div className="flex justify-between">
                          <span>Subtotal</span>
-                         <span className="text-white/60">{formatPrice(total)}</span>
+                         <span className="text-foreground/90">{formatPrice(total)}</span>
                       </div>
                       <div className="flex justify-between">
                          <span>Global Transit (Insured)</span>
-                         <span className="text-white/60">{shipping === 0 ? 'COMPLIMENTARY' : formatPrice(shipping)}</span>
+                         <span className="text-foreground/90">{shipping === 0 ? 'COMPLIMENTARY' : formatPrice(shipping)}</span>
                       </div>
                       <div className="flex justify-between">
                          <span>Governance Tax (12%)</span>
-                         <span className="text-white/60">{formatPrice(tax)}</span>
+                         <span className="text-foreground/90">{formatPrice(tax)}</span>
                       </div>
-                      <div className="pt-8 flex justify-between items-end border-t border-white/5">
-                         <span className="text-xs font-black text-white/40 leading-none">TOTAL INVESTMENT</span>
+                      <div className="flex items-end justify-between border-t border-border pt-8 dark:border-white/10">
+                         <span className="text-xs font-black leading-none text-muted-foreground">TOTAL INVESTMENT</span>
                          <span className="text-4xl font-black italic tracking-tighter text-primary leading-none">{formatPrice(orderTotal)}</span>
                       </div>
                    </div>
@@ -348,9 +348,9 @@ const Checkout: React.FC = () => {
 
                    <div className="flex flex-col items-center gap-4 opacity-30 group">
                       <div className="flex items-center gap-4 pt-2">
-                         <div className="w-10 h-0.5 bg-white/20" />
-                         <span className="text-[8px] font-black tracking-[0.5em] text-white uppercase group-hover:text-primary transition-colors">POWERED BY LUNAR SECURE</span>
-                         <div className="w-10 h-0.5 bg-white/20" />
+                         <div className="h-0.5 w-10 bg-border dark:bg-white/20" />
+                         <span className="text-[8px] font-black uppercase tracking-[0.5em] text-muted-foreground transition-colors group-hover:text-primary">POWERED BY LUNAR SECURE</span>
+                         <div className="h-0.5 w-10 bg-border dark:bg-white/20" />
                       </div>
                    </div>
                 </div>

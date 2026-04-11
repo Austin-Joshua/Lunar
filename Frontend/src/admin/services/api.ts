@@ -8,6 +8,15 @@ import type {
   Category,
   ProductFormData 
 } from '@/admin/types';
+import { assembleDashboardStats, type ApiOrderRecord } from '@/admin/utils/dashboardStats';
+
+/** Backend wraps payloads as `{ success, data, ... }` — unwrap when present. */
+function unwrapApiPayload<T>(json: unknown): T {
+  if (json !== null && typeof json === 'object' && 'data' in json && (json as { data: unknown }).data !== undefined) {
+    return (json as { data: T }).data;
+  }
+  return json as T;
+}
 
 // Admin API Client with auth header
 const adminApiClient = async <T>(
@@ -39,19 +48,34 @@ const adminApiClient = async <T>(
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'An error occurred' }));
-    throw new Error(error.message || 'Request failed');
+    throw new Error((error as { message?: string }).message || 'Request failed');
   }
 
-  return response.json();
+  const json = await response.json();
+  return unwrapApiPayload<T>(json);
 };
 
 // Auth API
 export const adminAuthApi = {
   login: async (email: string, password: string): Promise<{ user: AdminUser; token: string }> => {
-    return adminApiClient('/auth/login', {
+    const data = await adminApiClient<{
+      accessToken: string;
+      refreshToken?: string;
+      user: { id: string; name: string; email: string; role: string; createdAt: string };
+    }>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password, role: 'admin' }),
     });
+    return {
+      token: data.accessToken,
+      user: {
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email,
+        role: data.user.role === 'superadmin' ? 'superadmin' : 'admin',
+        createdAt: data.user.createdAt,
+      },
+    };
   },
 
   logout: async (): Promise<void> => {
@@ -62,7 +86,21 @@ export const adminAuthApi = {
 // Dashboard API
 export const dashboardApi = {
   getStats: async (): Promise<DashboardStats> => {
-    return adminApiClient('/admin/stats');
+    const counts = await adminApiClient<{
+      totalUsers: number;
+      totalProducts: number;
+      totalOrders: number;
+      totalRevenue: number;
+    }>('/admin/stats');
+
+    let orders: ApiOrderRecord[] = [];
+    try {
+      orders = await adminApiClient<ApiOrderRecord[]>('/orders');
+    } catch {
+      orders = [];
+    }
+
+    return assembleDashboardStats(counts, orders);
   },
 };
 

@@ -9,7 +9,7 @@ export const AdminLayout: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-admin-bg">
+    <div className="dark min-h-screen bg-background text-foreground">
       {/* Sidebar - Desktop */}
       <div className="hidden lg:block">
         <AdminSidebar

@@ -105,7 +105,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setRememberMe(false);
   }, []);
 
-  const isAdmin = user?.role === 'admin' ?? false;
+  const isAdmin = user?.role === 'admin';
 
   return (
     <AuthContext.Provider

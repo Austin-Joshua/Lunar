@@ -42,59 +42,56 @@ const SearchPage: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="bg-[#050505] min-h-screen pt-32 pb-40 selection:bg-primary/20">
+      <div className="min-h-screen bg-background pt-32 pb-40 text-foreground selection:bg-primary/20">
         <div className="lunar-container">
-          
-          {/* ARCHITECTURAL SEARCH HEADER */}
-          <div className="max-w-5xl mx-auto mb-24 space-y-12">
+          <div className="mx-auto mb-24 max-w-5xl space-y-12">
             <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-primary">
-               <Fingerprint className="h-4 w-4" />
-               QUERY PROTOCOL
+              <Fingerprint className="h-4 w-4" />
+              QUERY PROTOCOL
             </div>
-            
-            <form onSubmit={onSearchSubmit} className="relative group">
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none opacity-20 group-focus-within:opacity-100 transition-opacity">
-                 <Command className="h-8 w-8 text-primary" />
+
+            <form onSubmit={onSearchSubmit} className="group relative">
+              <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 opacity-20 transition-opacity group-focus-within:opacity-100">
+                <Command className="h-8 w-8 text-primary" />
               </div>
               <input
                 type="text"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="ACCESS THE ARCHIVE..."
-                className="w-full bg-transparent border-b border-white/5 py-10 pl-16 pr-20 text-3xl md:text-7xl font-black italic tracking-tighter focus:outline-none focus:border-primary transition-all uppercase placeholder:text-white/5"
+                className="w-full border-b border-border bg-transparent py-10 pl-16 pr-20 text-3xl font-black uppercase italic tracking-tighter placeholder:text-muted-foreground/35 focus:border-primary focus:outline-none md:text-7xl dark:border-white/10"
               />
               <button
                 type="submit"
-                className="absolute right-0 top-1/2 -translate-y-1/2 p-4 text-white/20 hover:text-primary transition-all group-hover:scale-110 active:scale-95"
+                className="absolute right-0 top-1/2 -translate-y-1/2 p-4 text-muted-foreground transition-all hover:text-primary group-hover:scale-110 active:scale-95"
               >
-                {isLoading ? (
-                  <Loader2 className="h-8 w-8 animate-spin" />
-                ) : (
-                  <SearchIcon className="h-8 w-8" />
-                )}
+                {isLoading ? <Loader2 className="h-8 w-8 animate-spin" /> : <SearchIcon className="h-8 w-8" />}
               </button>
             </form>
-            
+
             <div className="flex items-center justify-between">
-               <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-white/20">
-                  <span className="text-primary">{products.length}</span> PIECES EXTRACTED FOR <span className="text-white">"{query || 'IDENTITY'}"</span>
-               </div>
-               <button className="flex items-center gap-4 text-[10px] font-black tracking-[0.4em] text-white/40 hover:text-primary transition-colors group">
-                  <SlidersHorizontal className="h-4 w-4 group-hover:rotate-180 transition-transform duration-700" />
-                  SORT PROTOCOL
-               </button>
+              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground">
+                <span className="text-primary">{products.length}</span> PIECES EXTRACTED FOR{' '}
+                <span className="text-foreground">&quot;{query || 'IDENTITY'}&quot;</span>
+              </div>
+              <button
+                type="button"
+                className="group flex items-center gap-4 text-[10px] font-black tracking-[0.4em] text-muted-foreground transition-colors hover:text-primary"
+              >
+                <SlidersHorizontal className="h-4 w-4 transition-transform duration-700 group-hover:rotate-180" />
+                SORT PROTOCOL
+              </button>
             </div>
           </div>
 
-          {/* DYNAMIC EXTRACTION GRID */}
           <AnimatePresence mode="wait">
             {products.length > 0 ? (
-              <motion.div 
+              <motion.div
                 key={query}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-24"
+                className="grid grid-cols-1 gap-x-12 gap-y-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
               >
                 {products.map((product, i) => (
                   <motion.div
@@ -107,28 +104,28 @@ const SearchPage: React.FC = () => {
                   </motion.div>
                 ))}
               </motion.div>
-            ) : !isLoading && query && (
-              <div className="py-60 text-center space-y-12 border border-dashed border-white/5 rounded-[4rem] bg-white/[0.01]">
-                <div className="flex justify-center">
-                   <div className="w-32 h-32 bg-white/5 rounded-full flex items-center justify-center text-white/10">
+            ) : (
+              !isLoading &&
+              query && (
+                <div className="rounded-[4rem] border border-dashed border-border/80 bg-muted/10 py-60 text-center dark:border-white/10 dark:bg-white/[0.02]">
+                  <div className="flex justify-center">
+                    <div className="flex h-32 w-32 items-center justify-center rounded-full bg-muted/40 text-muted-foreground/40 dark:bg-white/5">
                       <Sparkles className="h-12 w-12" />
-                   </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-4xl font-black uppercase italic tracking-tighter text-foreground">No Pieces Extracted</h3>
+                    <p className="mx-auto max-w-sm text-[10px] font-bold uppercase leading-loose tracking-[0.4em] text-muted-foreground">
+                      THE ARCHIVE SEARCH RETURNED NO MATCHES FOR YOUR CURRENT SELECTION.
+                    </p>
+                  </div>
+                  <div className="pt-8">
+                    <Link to="/shop" className="btn-luxury inline-flex items-center gap-2 px-16 py-6">
+                      RETURN TO COLLECTIONS <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <h3 className="text-4xl font-black italic uppercase tracking-tighter text-white">No Pieces Extracted</h3>
-                  <p className="text-white/20 text-[10px] font-bold uppercase tracking-[0.4em] max-w-sm mx-auto leading-loose">
-                    THE ARCHIVE SEARCH RETURNED NO MATCHES FOR YOUR CURRENT SELECTION.
-                  </p>
-                </div>
-                <div className="pt-8">
-                  <Link 
-                    to="/shop" 
-                    className="btn-luxury px-16 py-6"
-                  >
-                    RETURN TO COLLECTIONS
-                  </Link>
-                </div>
-              </div>
+              )
             )}
           </AnimatePresence>
         </div>

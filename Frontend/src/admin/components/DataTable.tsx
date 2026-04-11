@@ -36,7 +36,7 @@ export function DataTable<T extends Record<string, any>>({
     return (
       <div className="bg-admin-card rounded-lg border border-border overflow-hidden">
         <div className="p-8 flex justify-center">
-          <div className="w-8 h-8 border-3 border-admin-sidebar border-t-admin-sidebar-active rounded-full animate-spin" />
+          <div className="w-8 h-8 border-3 border-muted-foreground/30 border-t-primary rounded-full animate-spin" />
         </div>
       </div>
     );

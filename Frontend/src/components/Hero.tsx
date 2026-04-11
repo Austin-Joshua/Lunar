@@ -5,7 +5,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6">
+    <section id="hero" className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 pb-20 pt-32 md:min-h-screen">
       <div className="lunar-container z-10 text-center max-w-4xl">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -37,7 +37,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-20 animate-bounce">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground/40">
         <ChevronDown className="h-6 w-6" />
       </div>
     </section>

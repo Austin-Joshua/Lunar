@@ -72,7 +72,7 @@ const Categories: React.FC = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <div className="space-y-12 animate-fade-in p-2 md:p-6 lg:p-10 bg-[#050505] min-h-screen text-white">
+    <div className="animate-fade-in space-y-12 text-foreground">
       
       {/* HEADER PROTOCOL */}
       <div className="flex flex-col md:flex-row justify-between items-end gap-8 pb-10 border-b border-white/5">
@@ -81,7 +81,7 @@ const Categories: React.FC = () => {
               <Layers className="h-4 w-4 text-primary" />
               <span className="text-[10px] font-black tracking-[0.5em] text-primary uppercase leading-none">TAXONOMY CONTROL</span>
            </div>
-           <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white uppercase leading-none">Global <br />Categories<span className="text-primary not-italic">.</span></h1>
+           <h1 className="text-5xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-7xl">Global <br />Categories<span className="text-primary not-italic">.</span></h1>
         </div>
         <div className="flex flex-col sm:flex-row gap-6">
            <div className="flex gap-2 bg-white/5 p-2 rounded-2xl border border-white/5">
@@ -89,7 +89,7 @@ const Categories: React.FC = () => {
                 onClick={() => setGenderFilter('')}
                 className={cn(
                   "px-6 py-3 rounded-xl text-[9px] font-black tracking-widest uppercase transition-all duration-500",
-                  !genderFilter ? "bg-primary text-white shadow-xl" : "text-white/20 hover:text-white"
+                  !genderFilter ? "bg-primary text-primary-foreground shadow-xl" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 ALL
@@ -100,7 +100,7 @@ const Categories: React.FC = () => {
                   onClick={() => setGenderFilter(opt.value)}
                   className={cn(
                     "px-6 py-3 rounded-xl text-[9px] font-black tracking-widest uppercase transition-all duration-500",
-                    genderFilter === opt.value ? "bg-primary text-white shadow-xl" : "text-white/20 hover:text-white"
+                    genderFilter === opt.value ? "bg-primary text-primary-foreground shadow-xl" : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {opt.label}
@@ -125,10 +125,10 @@ const Categories: React.FC = () => {
             .filter((c) => c.gender === opt.value)
             .reduce((sum, c) => sum + c.productCount, 0);
           return (
-            <div key={opt.value} className="bg-[#0a0a0a] rounded-[2.5rem] border border-white/5 p-10 group hover:border-primary/20 transition-all duration-700">
-              <p className="text-[10px] font-black tracking-[0.3em] text-white/20 uppercase">{opt.label}'S ARCHIVE</p>
+            <div key={opt.value} className="rounded-[2.5rem] border border-border bg-card dark:border-white/10 p-10 group hover:border-primary/20 transition-all duration-700">
+              <p className="text-[10px] font-black tracking-[0.3em] text-muted-foreground uppercase">{opt.label}'S ARCHIVE</p>
               <div className="flex items-baseline gap-4 mt-6">
-                 <p className="text-5xl font-black italic tracking-tighter text-white">{count}</p>
+                 <p className="text-5xl font-black italic tracking-tighter text-foreground">{count}</p>
                  <span className="text-[9px] font-bold text-primary tracking-widest uppercase">{products} ASSETS</span>
               </div>
             </div>
@@ -137,16 +137,16 @@ const Categories: React.FC = () => {
       </div>
 
       {/* CATEGORY LEDGER */}
-      <div className="bg-[#0a0a0a] rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl">
+      <div className="rounded-[2.5rem] border border-border bg-card dark:border-white/10 overflow-hidden shadow-2xl">
          <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
                <thead>
                   <tr className="border-b border-white/5 bg-white/[0.01]">
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">CLASSIFICATION</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">DIRECTORY</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">GENDER</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">ASSET COUNT</th>
-                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">ACTIONS</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">CLASSIFICATION</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">DIRECTORY</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">GENDER</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">ASSET COUNT</th>
+                     <th className="px-10 py-8 text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase whitespace-nowrap">ACTIONS</th>
                   </tr>
                </thead>
                <tbody className="divide-y divide-white/5">
@@ -162,25 +162,25 @@ const Categories: React.FC = () => {
                              <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary transition-all group-hover:scale-110 group-hover:bg-primary/10">
                                 <FolderTree className="h-6 w-6" />
                              </div>
-                             <span className="text-[11px] font-black text-white uppercase tracking-widest leading-none">{category.name}</span>
+                             <span className="text-[11px] font-black uppercase leading-none tracking-widest text-foreground">{category.name}</span>
                           </div>
                        </td>
                        <td className="px-10 py-8">
-                          <span className="text-[10px] font-black text-white/20 tracking-widest uppercase">/{category.slug}</span>
+                          <span className="text-[10px] font-black text-muted-foreground tracking-widest uppercase">/{category.slug}</span>
                        </td>
                        <td className="px-10 py-8">
-                          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-white/40 text-[9px] font-black tracking-widest uppercase">
+                          <div className="inline-flex items-center gap-2 rounded-full bg-muted/40 px-4 py-2 text-[9px] font-black uppercase tracking-widest text-muted-foreground dark:bg-white/5">
                              {category.gender}
                           </div>
                        </td>
                        <td className="px-10 py-8">
                           <div className="flex items-baseline gap-2">
                              <span className="text-sm font-black italic tracking-tighter text-primary">{category.productCount}</span>
-                             <span className="text-[8px] font-bold text-white/10 uppercase tracking-widest">PIECES</span>
+                             <span className="text-[8px] font-bold uppercase tracking-widest text-muted-foreground/60">PIECES</span>
                           </div>
                        </td>
                        <td className="px-10 py-8">
-                          <button className="p-3 rounded-xl bg-white/5 text-white/20 hover:text-white hover:bg-white/10 transition-all">
+                          <button type="button" className="rounded-xl bg-muted/40 p-3 text-muted-foreground transition-all hover:bg-muted/60 hover:text-foreground dark:bg-white/5 dark:hover:bg-white/10">
                              <ChevronRight className="h-5 w-5" />
                           </button>
                        </td>
@@ -198,24 +198,24 @@ const Categories: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-[#050505]/95 backdrop-blur-3xl z-[100] flex items-center justify-center p-6"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 p-6 backdrop-blur-3xl"
           >
             <motion.div 
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="max-w-xl w-full bg-[#0a0a0a] border border-white/10 rounded-[3rem] p-12 space-y-12 shadow-full"
+              className="max-w-xl w-full space-y-12 rounded-[3rem] border border-border bg-card p-12 shadow-full dark:border-white/10"
             >
               <div className="flex justify-between items-start">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-primary">
                     <Plus className="h-4 w-4" /> NEW TAXONOMY
                   </div>
-                  <h3 className="text-3xl font-black italic uppercase tracking-tighter text-white">Add Category</h3>
+                  <h3 className="text-3xl font-black uppercase italic tracking-tighter text-foreground">Add Category</h3>
                 </div>
                 <button 
                   onClick={() => setAddModalOpen(false)}
-                  className="p-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white/40 transition-all"
+                  className="rounded-2xl bg-muted/40 p-4 text-muted-foreground transition-all hover:bg-muted/60 dark:bg-white/5 dark:hover:bg-white/10"
                 >
                   <X className="h-6 w-6" />
                 </button>
@@ -223,19 +223,19 @@ const Categories: React.FC = () => {
 
               <form onSubmit={handleSubmit} className="space-y-10">
                 <div className="space-y-4">
-                  <label className="text-[10px] font-black tracking-[0.4em] text-white/20 uppercase">CATEGORY IDENTITY</label>
+                  <label className="text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase">CATEGORY IDENTITY</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                     placeholder="ENTER NOMENCLATURE..."
-                    className="w-full bg-white/5 border border-white/5 py-6 px-10 rounded-2xl text-[11px] font-black tracking-widest uppercase focus:outline-none focus:border-primary/40 transition-all placeholder:text-white/5"
+                    className="w-full rounded-2xl border border-border bg-muted/40 py-6 px-10 text-[11px] font-black uppercase tracking-widest transition-all placeholder:text-muted-foreground/40 focus:border-primary/40 focus:outline-none dark:border-white/10 dark:bg-white/5"
                   />
                   {errors.name && <p className="text-[9px] font-bold text-destructive tracking-widest uppercase">{errors.name}</p>}
                 </div>
 
                 <div className="space-y-4">
-                  <label className="text-[10px] font-black tracking-[0.4em] text-white/20 uppercase">GENDER CLASSIFICATION</label>
+                  <label className="text-[10px] font-black tracking-[0.4em] text-muted-foreground uppercase">GENDER CLASSIFICATION</label>
                   <div className="grid grid-cols-3 gap-6">
                     {GENDER_OPTIONS.map((opt) => (
                       <button
@@ -244,7 +244,7 @@ const Categories: React.FC = () => {
                         onClick={() => setFormData((prev) => ({ ...prev, gender: opt.value }))}
                         className={cn(
                           "py-5 rounded-2xl text-[9px] font-black tracking-widest uppercase border transition-all duration-500",
-                          formData.gender === opt.value ? "bg-primary border-primary text-white shadow-xl" : "bg-white/5 border-white/10 text-white/20 hover:bg-white/10"
+                          formData.gender === opt.value ? "border-primary bg-primary text-primary-foreground shadow-xl" : "border-border bg-muted/40 text-muted-foreground hover:bg-muted/60 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
                         )}
                       >
                         {opt.label}

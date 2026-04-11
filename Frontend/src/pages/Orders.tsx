@@ -46,10 +46,10 @@ const Orders: React.FC = () => {
              <Package className="h-10 w-10 text-muted-foreground opacity-20" />
           </div>
           <div className="text-center space-y-4">
-             <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white">No Order History</h1>
+             <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-foreground">No Order History</h1>
              <p className="text-muted-foreground font-medium uppercase tracking-widest text-xs">Your acquisitions will appear here once confirmed.</p>
           </div>
-          <Link to="/" className="btn-luxury px-12 py-5">
+          <Link to="/shop" className="btn-luxury px-12 py-5">
              START COLLECTION
           </Link>
         </div>
@@ -63,10 +63,10 @@ const Orders: React.FC = () => {
         <div className="lunar-container">
           
           {/* ORDERS HEADER */}
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20 border-b border-white/5 pb-10">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20 border-b border-border pb-10">
             <div className="space-y-4">
               <span className="luxury-subheading">ACQUISITION HISTORY</span>
-              <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none text-white">
+              <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none text-foreground">
                 The <br />Archive<span className="text-primary not-italic">.</span>
               </h1>
             </div>
@@ -102,11 +102,11 @@ const Orders: React.FC = () => {
                           <div className="space-y-6 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
                              <div className="flex items-center gap-4">
                                 <Hash className="h-4 w-4 text-primary/40" />
-                                <span className="text-white">{order.id}</span>
+                                <span className="text-foreground">{order.id}</span>
                              </div>
                              <div className="flex items-center gap-4">
                                 <Calendar className="h-4 w-4 text-primary/40" />
-                                <span className="text-white">
+                                <span className="text-foreground">
                                    {new Date(order.createdAt).toLocaleDateString('en-US', {
                                       month: 'long', day: 'numeric', year: 'numeric'
                                    })}
@@ -114,11 +114,11 @@ const Orders: React.FC = () => {
                              </div>
                              <div className="flex items-center gap-4">
                                 <ShieldCheck className="h-4 w-4 text-primary/40" />
-                                <span className="text-white">INSURED DELIVERY</span>
+                                <span className="text-foreground">INSURED DELIVERY</span>
                              </div>
                           </div>
 
-                          <div className="pt-8 border-t border-white/5 mt-auto">
+                          <div className="pt-8 border-t border-border mt-auto">
                              <div className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-40 mb-2">INVESTMENT</div>
                              <div className="text-3xl font-black italic tracking-tighter text-primary">{formatPrice(order.total)}</div>
                           </div>
@@ -138,25 +138,25 @@ const Orders: React.FC = () => {
                                   </div>
                                   <div className="flex flex-col justify-center space-y-3">
                                      <span className="text-[9px] font-bold text-primary uppercase tracking-[0.3em]">{item.product.brand || 'LUNAR'}</span>
-                                     <h3 className="text-sm font-black uppercase tracking-widest text-white leading-tight">{item.product.name}</h3>
+                                     <h3 className="text-sm font-black uppercase tracking-widest text-foreground leading-tight">{item.product.name}</h3>
                                      <div className="flex gap-4 text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
                                         {item.size && <span>SIZE: {item.size}</span>}
                                         <span>UNIT: {item.quantity}</span>
                                      </div>
-                                     <span className="text-xs font-black italic tracking-tighter text-white/60">{formatPrice(item.product.price)}</span>
+                                     <span className="text-xs font-black italic tracking-tighter text-muted-foreground">{formatPrice(item.product.price)}</span>
                                   </div>
                                </div>
                              ))}
                           </div>
                           
                           <div className="pt-10 flex justify-end">
-                             <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-white/20 hover:text-primary transition-all group-hover:gap-6">
+                             <button type="button" className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/70 hover:text-primary transition-all group-hover:gap-6">
                                 TRACK SHIPMENT <ArrowRight className="h-4 w-4" />
                              </button>
                           </div>
                        </div>
                     </div>
-                    <div className="mt-20 h-px w-full bg-white/5" />
+                    <div className="mt-20 h-px w-full bg-border" />
                   </motion.div>
                 );
               })}

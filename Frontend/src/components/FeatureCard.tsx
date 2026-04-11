@@ -16,13 +16,13 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ title, desc, icon: Ico
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="premium-card group bg-card border-white/5"
+      className="premium-card group border border-border/80 bg-card dark:border-white/10"
     >
-      <div className="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mb-10 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 transition-all duration-700 shadow-2xl">
+      <div className="mb-10 flex h-20 w-20 items-center justify-center rounded-3xl bg-primary/10 text-primary shadow-2xl transition-all duration-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
         <Icon className="h-8 w-8 stroke-[1.5px]" />
       </div>
-      <h3 className="text-2xl font-black tracking-tight mb-5 text-white italic group-hover:text-primary transition-colors uppercase">{title}</h3>
-      <p className="text-white/40 leading-relaxed font-medium tracking-wide uppercase text-[10px]">
+      <h3 className="mb-5 text-2xl font-black uppercase italic tracking-tight text-foreground transition-colors group-hover:text-primary">{title}</h3>
+      <p className="text-[10px] font-medium uppercase leading-relaxed tracking-wide text-muted-foreground">
         {desc}
       </p>
     </motion.div>

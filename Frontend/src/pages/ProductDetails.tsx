@@ -59,8 +59,9 @@ const ProductDetails: React.FC = () => {
 
   if (isLoading) return <PageLoader />;
   if (!product) return (
-    <div className="h-screen flex flex-col items-center justify-center space-y-8">
-      <h2 className="text-4xl font-black italic uppercase tracking-tighter">PIECE NOT FOUND</h2>
+    <div className="flex h-screen flex-col items-center justify-center space-y-8 bg-background px-6">
+      <h2 className="text-center text-4xl font-black italic uppercase tracking-tighter text-foreground">PIECE NOT FOUND</h2>
+      <p className="max-w-sm text-center text-sm text-muted-foreground">This piece may have been archived or removed.</p>
       <Link to="/shop" className="btn-luxury">RETURN TO COLLECTIONS</Link>
     </div>
   );

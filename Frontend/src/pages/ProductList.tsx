@@ -46,21 +46,21 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
 
   return (
     <PageTransition>
-      <div className="bg-[#050505] min-h-screen pt-32 pb-40 selection:bg-primary/20">
+      <div className="min-h-screen bg-background pt-32 pb-40 text-foreground selection:bg-primary/20">
         <div className="lunar-container">
           
           {/* EDITORIAL HEADER */}
-          <div className="flex flex-col md:flex-row justify-between items-end gap-12 border-b border-white/5 pb-16 mb-20">
+          <div className="mb-20 flex flex-col items-end justify-between gap-12 border-b border-border/80 pb-16 dark:border-white/10 md:flex-row">
              <div className="space-y-6">
                 <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-primary">
                    <Fingerprint className="h-4 w-4" />
                    THE {gender.toUpperCase()} ARCHIVE
                 </div>
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black italic uppercase tracking-tighter leading-[0.85] text-white">
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black italic uppercase tracking-tighter leading-[0.85] text-foreground">
                   {title} <br />
                   <span className="text-primary font-light not-italic">Archive.</span>
                 </h1>
-                <p className="text-lg text-white/30 font-medium uppercase tracking-tight max-w-xl leading-relaxed">
+                <p className="text-lg font-medium uppercase tracking-tight max-w-xl leading-relaxed text-muted-foreground">
                    A curated collection of architectural pieces defining the modern {gender} silhouette. Engineered for endurance and refined expression.
                 </p>
              </div>
@@ -68,15 +68,16 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
              {/* FILTERS & LAYOUT CONTROLS */}
              <div className="flex flex-wrap items-center gap-10">
                 <div className="hidden lg:flex items-center gap-6">
-                   <span className="text-[9px] font-black tracking-[0.4em] text-white/20 uppercase">LAYOUT VIEW</span>
+                   <span className="text-[9px] font-black tracking-[0.4em] uppercase text-muted-foreground/70">LAYOUT VIEW</span>
                    <div className="flex items-center gap-4">
                       {[2, 3, 4].map(cols => (
                         <button 
                           key={cols}
+                          type="button"
                           onClick={() => setGridCols(cols as any)}
                           className={cn(
-                            "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500 border border-white/5",
-                            gridCols === cols ? "bg-primary/10 text-primary border-primary/20" : "bg-white/5 text-white/40 hover:bg-white/10"
+                            "flex h-10 w-10 items-center justify-center rounded-xl border border-border transition-all duration-500",
+                            gridCols === cols ? "bg-primary/10 text-primary border-primary/20" : "bg-muted/50 text-muted-foreground hover:bg-muted"
                           )}
                         >
                           <span className="text-[10px] font-black">{cols}</span>
@@ -85,9 +86,9 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
                    </div>
                 </div>
 
-                <div className="h-10 w-px bg-white/5 hidden md:block" />
+                <div className="hidden h-10 w-px bg-border md:block" />
 
-                <button className="btn-luxury px-8 py-4 flex items-center gap-4 group">
+                <button type="button" className="btn-luxury flex items-center gap-4 px-8 py-4 group">
                    <SlidersHorizontal className="h-4 w-4 group-hover:rotate-180 transition-transform duration-700" />
                    REFINE SELECTION
                 </button>
@@ -119,34 +120,34 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
                 ))}
               </motion.div>
             ) : (
-              <div className="py-60 text-center space-y-10 border border-white/5 rounded-[3rem] bg-white/[0.01]">
+              <div className="space-y-10 rounded-[3rem] border border-border bg-muted/20 py-60 text-center dark:bg-white/[0.02]">
                  <div className="flex justify-center">
-                    <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center text-white/10">
+                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-muted text-muted-foreground/30">
                        <Sparkles className="h-10 w-10 rotate-12" />
                     </div>
                  </div>
                  <div className="space-y-4">
-                    <h3 className="text-3xl font-black italic uppercase tracking-tighter text-white">Selection Unavailable</h3>
-                    <p className="text-white/30 text-[10px] font-bold uppercase tracking-[0.4em] max-w-sm mx-auto leading-loose">
+                    <h3 className="text-3xl font-black italic uppercase tracking-tighter text-foreground">Selection Unavailable</h3>
+                    <p className="mx-auto max-w-sm text-[10px] font-bold uppercase leading-loose tracking-[0.4em] text-muted-foreground">
                        WE ARE CURRENTLY CURATING THIS ARCHIVE. PLEASE CHECK BACK SHORTLY OR EXPLORE OTHER COLLECTIONS.
                     </p>
                  </div>
-                 <Link to="/" className="btn-luxury inline-block px-12 mt-8">CONTINUE EXPLORING</Link>
+                 <Link to="/shop" className="btn-luxury mt-8 inline-block px-12">CONTINUE EXPLORING</Link>
               </div>
             )}
           </AnimatePresence>
 
           {/* EDITORIAL PROMO SECTION */}
-          <section className="mt-60 py-40 border-t border-white/5">
-             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <section className="mt-60 border-t border-border py-40">
+             <div className="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
                 <div className="space-y-12">
                    <span className="luxury-subheading">THE LUNAR DIFFERENCE</span>
-                   <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white leading-none">Sustainable <br />Bespoke<span className="text-primary not-italic">.</span></h2>
-                   <p className="text-xl text-white/30 font-medium uppercase tracking-tight leading-loose max-w-lg">
+                   <h2 className="text-5xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-7xl">Sustainable <br />Bespoke<span className="text-primary not-italic">.</span></h2>
+                   <p className="max-w-lg text-xl font-medium uppercase leading-loose tracking-tight text-muted-foreground">
                       Every piece in our archive is verified for architectural integrity and sustainable provenance. We believe in high-fidelity fashion that transcends seasonal cycles.
                    </p>
                    <div className="pt-8">
-                      <button className="flex items-center gap-6 group text-[10px] font-black uppercase tracking-[0.6em] text-primary">
+                      <button type="button" className="group flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.6em] text-primary">
                          READ OUR MANIFESTO <ArrowRight className="h-5 w-5 group-hover:translate-x-4 transition-all duration-700" />
                       </button>
                    </div>

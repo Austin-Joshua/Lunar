@@ -32,7 +32,7 @@ const KidsHome: React.FC = () => {
     <PageTransition>
       <div className="bg-background min-h-screen pb-40">
         {/* HERO - Playful yet Architectural */}
-        <section className="relative h-[80vh] flex items-center overflow-hidden bg-[#0a0a0a]">
+        <section className="relative flex h-[80vh] items-center overflow-hidden bg-neutral-950">
           <div className="absolute inset-0">
              <img
               src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=1920&q=80"

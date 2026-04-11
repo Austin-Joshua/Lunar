@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingBag, User, Menu, X, Search, Moon, Sun, ChevronRight } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
@@ -16,6 +16,23 @@ export const Navbar: React.FC = () => {
   const { itemCount } = useCart();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const sectionForLabel: Record<string, string> = {
+    MEN: 'men',
+    WOMEN: 'women',
+    ARCHIVE: 'collections',
+  };
+
+  const goToSection = (label: string) => {
+    const id = sectionForLabel[label];
+    if (!id) return;
+    if (isHomePage) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      navigate(`${homeBasePath}#${id}`);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +42,11 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isLanding = location.pathname === '/';
+  const isShopHome =
+    location.pathname === '/shop' || location.pathname === '/shop/';
+  const isPublicHome = location.pathname === '/';
+  const isHomePage = isPublicHome || isShopHome;
+  const homeBasePath = location.pathname.startsWith('/shop') ? '/shop' : '/';
 
   return (
     <>
@@ -39,7 +60,11 @@ export const Navbar: React.FC = () => {
             {/* LEFT: Branding/Logo - Scroll to Top */}
             <div className="flex-1 flex items-center">
               <button 
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                type="button"
+                onClick={() => {
+                  if (isHomePage) window.scrollTo({ top: 0, behavior: 'smooth' });
+                  else navigate(homeBasePath);
+                }}
                 className="text-2xl font-black italic tracking-tighter hover:text-primary transition-colors leading-none uppercase"
               >
                 LUNAR<span className="text-primary not-italic">.</span>
@@ -51,13 +76,8 @@ export const Navbar: React.FC = () => {
               {['MEN', 'WOMEN', 'ARCHIVE'].map((link) => (
                 <button
                   key={link}
-                  onClick={() => {
-                    if (location.pathname === '/') {
-                      document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                      window.location.href = `/#${link.toLowerCase()}`;
-                    }
-                  }}
+                  type="button"
+                  onClick={() => goToSection(link)}
                   className="text-[10px] font-black tracking-[0.4em] hover:text-primary transition-all duration-300 uppercase"
                 >
                   {link}
@@ -182,13 +202,10 @@ export const Navbar: React.FC = () => {
               {['MEN', 'WOMEN', 'ARCHIVE'].map(link => (
                 <button 
                   key={link}
+                  type="button"
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    if (location.pathname === '/') {
-                      document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                      window.location.href = `/#${link.toLowerCase()}`;
-                    }
+                    goToSection(link);
                   }}
                   className="text-6xl font-black tracking-tighter hover:text-primary leading-none uppercase italic"
                 >

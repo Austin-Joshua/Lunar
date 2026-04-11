@@ -41,7 +41,7 @@ const Cart: React.FC = () => {
         <div className="lunar-container">
           
           {/* CART HEADER */}
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20 border-b border-white/5 pb-10">
+          <div className="mb-20 flex flex-col items-end justify-between gap-8 border-b border-border pb-10 dark:border-white/10 md:flex-row">
             <div className="space-y-4">
               <span className="luxury-subheading">SELECTION REVIEW</span>
               <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none">
@@ -91,7 +91,7 @@ const Cart: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 className="sticky top-32 space-y-10"
                >
-                  <div className="bg-secondary/20 p-10 rounded-[2.5rem] border border-white/5 space-y-10">
+                  <div className="space-y-10 rounded-[2.5rem] border border-border bg-secondary/20 p-10 dark:border-white/10">
                      <h2 className="text-xl font-black italic uppercase tracking-tighter">Investment Summary</h2>
                      
                      <div className="space-y-6 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
@@ -108,7 +108,7 @@ const Cart: React.FC = () => {
                            <span className="text-foreground">{formatPrice(tax)}</span>
                         </div>
                         
-                        <div className="pt-6 border-t border-white/10 mt-6">
+                        <div className="mt-6 border-t border-border pt-6 dark:border-white/10">
                            <div className="flex justify-between items-end">
                               <span className="text-xs font-black">Total Investment</span>
                               <span className="text-2xl font-black text-primary tracking-tighter">{formatPrice(orderTotal)}</span>
@@ -137,7 +137,7 @@ const Cart: React.FC = () => {
                         <input 
                           type="text" 
                           placeholder="ENTER CODE" 
-                          className="w-full bg-transparent border-b border-white/10 py-4 text-xs font-black tracking-widest focus:outline-none focus:border-primary transition-all uppercase placeholder:text-white/10"
+                          className="lunar-field-underline py-4 text-xs font-black uppercase tracking-widest"
                         />
                         <button className="absolute right-0 top-1/2 -translate-y-1/2 text-primary font-black text-[9px] tracking-widest hover:opacity-70 transition-opacity">APPLY</button>
                      </div>
