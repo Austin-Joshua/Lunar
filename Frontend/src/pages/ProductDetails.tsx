@@ -70,11 +70,11 @@ const ProductDetails: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="bg-background pt-24 pb-40">
+      <div className="bg-background pb-24 pt-20 sm:pb-32 sm:pt-24 md:pb-40">
         <div className="lunar-container">
           
           {/* Breadcrumb / Navigation */}
-          <div className="flex items-center gap-4 mb-12 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">
+          <div className="mb-8 flex flex-wrap items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground sm:mb-12 sm:gap-4">
              <Link to="/" className="hover:text-primary transition-colors">LUNAR</Link>
              <ChevronRight className="h-3 w-3" />
              <Link to={`/shop/${product.gender}`} className="hover:text-primary transition-colors">{product.gender}</Link>

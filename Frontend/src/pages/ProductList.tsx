@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Filter, SlidersHorizontal, ArrowRight, LayoutGrid, Grid, ChevronDown, Sparkles, Fingerprint } from 'lucide-react';
+import { SlidersHorizontal, ArrowRight, Sparkles, Fingerprint } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
 import { PageLoader } from '@/components/Loader';
 import { cn } from '@/lib/utils';
@@ -46,11 +46,11 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background pt-32 pb-40 text-foreground selection:bg-primary/20">
+      <div className="min-h-[100dvh] bg-background pb-24 pt-28 text-foreground selection:bg-primary/20 sm:pb-32 sm:pt-32 md:pb-40">
         <div className="lunar-container">
           
           {/* EDITORIAL HEADER */}
-          <div className="mb-20 flex flex-col items-end justify-between gap-12 border-b border-border/80 pb-16 dark:border-white/10 md:flex-row">
+          <div className="mb-12 flex flex-col items-end justify-between gap-8 border-b border-border/80 pb-10 dark:border-white/10 sm:mb-16 sm:gap-12 sm:pb-14 md:flex-row md:pb-16">
              <div className="space-y-6">
                 <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-primary">
                    <Fingerprint className="h-4 w-4" />
@@ -138,9 +138,9 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
           </AnimatePresence>
 
           {/* EDITORIAL PROMO SECTION */}
-          <section className="mt-60 border-t border-border py-40">
-             <div className="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
-                <div className="space-y-12">
+          <section className="mt-20 border-t border-border py-16 sm:mt-28 sm:py-24 md:mt-40 md:py-32">
+             <div className="grid grid-cols-1 items-center gap-12 sm:gap-16 lg:grid-cols-2 lg:gap-24">
+                <div className="space-y-8 sm:space-y-12">
                    <span className="luxury-subheading">THE LUNAR DIFFERENCE</span>
                    <h2 className="text-5xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-7xl">Sustainable <br />Bespoke<span className="text-primary not-italic">.</span></h2>
                    <p className="max-w-lg text-xl font-medium uppercase leading-loose tracking-tight text-muted-foreground">
@@ -152,9 +152,9 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
                       </button>
                    </div>
                 </div>
-                <div className="relative aspect-square md:aspect-video lg:aspect-square overflow-hidden rounded-[4rem] group shadow-deep">
-                   <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=1000&q=80" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Sustainability" />
-                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-16">
+                <div className="group relative aspect-square overflow-hidden rounded-3xl shadow-deep sm:rounded-[2.5rem] md:aspect-video lg:aspect-square lg:rounded-[4rem]">
+                   <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=1000&q=80" className="h-full w-full object-cover grayscale transition-all duration-1000 group-hover:scale-105 group-hover:grayscale-0" alt="Sustainability" />
+                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-8 sm:p-12 lg:p-16">
                       <span className="text-[10px] font-bold tracking-[0.5em] text-white/60 mb-2 block uppercase">COLLECTION v2.6</span>
                       <h4 className="text-2xl font-black italic text-white uppercase tracking-tighter leading-none">Organic Cotton & <br />Refined Wool</h4>
                    </div>

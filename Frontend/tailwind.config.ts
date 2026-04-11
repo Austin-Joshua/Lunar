@@ -13,6 +13,13 @@ export default {
       },
     },
     extend: {
+      minHeight: {
+        screen: "100dvh",
+      },
+      spacing: {
+        "nav-top": "calc(env(safe-area-inset-top, 0px) + 4rem)",
+        "bottom-nav": "calc(5rem + env(safe-area-inset-bottom, 0px))",
+      },
       fontFamily: {
         sans: ['Outfit', 'system-ui', 'sans-serif'],
       },

@@ -5,7 +5,10 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="hero" className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 pb-20 pt-32 md:min-h-screen">
+    <section
+      id="hero"
+      className="relative flex min-h-[88dvh] flex-col items-center justify-center px-4 pb-16 pt-[calc(env(safe-area-inset-top,0px)+6.5rem)] sm:min-h-[90dvh] sm:px-6 sm:pb-20 sm:pt-32 md:min-h-screen md:pt-36"
+    >
       <div className="lunar-container z-10 text-center max-w-4xl">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

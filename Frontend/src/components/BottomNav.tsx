@@ -6,36 +6,51 @@ import { cn } from '@/lib/utils';
 import { useCart } from '@/context/CartContext';
 
 const navItems = [
-  { icon: Home, label: 'HOME', href: '/shop' },
-  { icon: ShoppingBag, label: 'ARCHIVE', href: '/shop/men' },
-  { icon: Search, label: 'QUERY', href: '/shop/search' },
-  { icon: User, label: 'PROTOCOL', href: '/shop/settings' },
+  { icon: Home, label: 'Home', href: '/shop' },
+  { icon: ShoppingBag, label: 'Shop', href: '/shop/men' },
+  { icon: Search, label: 'Search', href: '/shop/search' },
+  { icon: User, label: 'Account', href: '/shop/settings' },
 ];
+
+function navItemActive(pathname: string, href: string): boolean {
+  if (href === '/shop') return pathname === '/shop' || pathname === '/shop/';
+  if (href === '/shop/search') return pathname.startsWith('/shop/search');
+  if (href === '/shop/settings') return pathname.startsWith('/shop/settings');
+  if (href === '/shop/men') {
+    return (
+      pathname.startsWith('/shop/men') ||
+      pathname.startsWith('/shop/women') ||
+      pathname.startsWith('/shop/kids') ||
+      pathname.startsWith('/shop/product')
+    );
+  }
+  return pathname === href;
+}
 
 export const BottomNav: React.FC = () => {
   const location = useLocation();
   const { itemCount } = useCart();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/90 pb-safe shadow-2xl backdrop-blur-3xl dark:border-white/10 dark:bg-background/85 lg:hidden">
-      <div className="flex h-20 items-center justify-around px-6">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 px-safe pb-safe pt-1 shadow-[0_-8px_32px_-12px_rgba(0,0,0,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/90 dark:shadow-[0_-8px_32px_-12px_rgba(0,0,0,0.45)] lg:hidden">
+      <div className="mx-auto flex h-[4.75rem] max-w-lg items-center justify-between gap-1 px-2 sm:px-4">
         {navItems.map((item) => {
-          const isActive = location.pathname === item.href;
+          const isActive = navItemActive(location.pathname, item.href);
           return (
             <Link
               key={item.label}
               to={item.href}
-              className="group relative flex h-full w-full flex-col items-center justify-center"
+              className="group relative flex min-h-[44px] min-w-[44px] flex-1 flex-col items-center justify-center rounded-2xl py-1"
             >
               <motion.div
-                whileTap={{ scale: 0.85 }}
+                whileTap={{ scale: 0.92 }}
                 className={cn(
-                  'relative rounded-2xl p-3 transition-all duration-500',
+                  'relative rounded-2xl p-2.5 transition-all duration-300 sm:p-3',
                   isActive ? 'bg-primary/10 text-primary' : 'text-muted-foreground'
                 )}
               >
-                <item.icon className={cn('h-6 w-6', isActive ? 'stroke-[2.5px]' : 'stroke-[1.5px]')} />
-                {item.label === 'ARCHIVE' && itemCount > 0 && (
+                <item.icon className={cn('h-5 w-5 sm:h-6 sm:w-6', isActive ? 'stroke-[2.5px]' : 'stroke-[1.5px]')} />
+                {item.label === 'Shop' && itemCount > 0 && (
                   <span className="absolute -right-1 -top-1 rounded-full bg-primary px-1.5 py-0.5 text-[8px] font-black text-primary-foreground ring-2 ring-background">
                     {itemCount}
                   </span>
@@ -44,8 +59,8 @@ export const BottomNav: React.FC = () => {
 
               <span
                 className={cn(
-                  'mt-1 text-[8px] font-black uppercase tracking-[0.3em] transition-all duration-500',
-                  isActive ? 'text-primary opacity-100' : 'text-muted-foreground opacity-0 group-hover:opacity-60'
+                  'mt-0.5 max-w-[4.5rem] truncate text-center text-[9px] font-semibold uppercase tracking-wide transition-all duration-300',
+                  isActive ? 'text-primary opacity-100' : 'text-muted-foreground opacity-70'
                 )}
               >
                 {item.label}

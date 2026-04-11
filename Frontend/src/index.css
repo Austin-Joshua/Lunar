@@ -122,12 +122,16 @@
     scrollbar-width: none; /* Firefox */
   }
 
-  /* SAFE AREA UTILITIES */
+  /* SAFE AREA UTILITIES (iOS / notched devices) */
   .pb-safe {
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .pt-safe {
-    padding-top: env(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .px-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -138,7 +142,12 @@
 
 @layer components {
   .lunar-container {
-    @apply max-w-7xl mx-auto px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Consistent page rhythm — storefront + auth */
+  .lunar-page {
+    @apply min-h-[100dvh] w-full pt-[calc(env(safe-area-inset-top,0px)+0.5rem)];
   }
 
   /* Shared form fields — light + dark */

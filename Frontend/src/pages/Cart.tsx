@@ -15,16 +15,16 @@ const Cart: React.FC = () => {
   if (items.length === 0) {
     return (
       <PageTransition>
-        <div className="min-h-[80vh] flex flex-col items-center justify-center space-y-10 lunar-container">
-          <div className="w-24 h-24 bg-secondary/50 rounded-full flex items-center justify-center">
+        <div className="lunar-container flex min-h-[100dvh] flex-col items-center justify-center space-y-8 px-safe pb-12 pt-safe text-center sm:space-y-10 sm:pb-16">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary/50">
              <ShoppingBag className="h-10 w-10 text-muted-foreground opacity-20" />
           </div>
-          <div className="text-center space-y-4">
-             <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter">Your Archive is Empty</h1>
-             <p className="text-muted-foreground font-medium uppercase tracking-widest text-xs">Discover our latest editorial collections to begin your journey.</p>
+          <div className="max-w-md space-y-3 sm:space-y-4">
+             <h1 className="text-3xl font-black uppercase italic tracking-tighter text-foreground sm:text-4xl md:text-6xl">Your archive is empty</h1>
+             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Browse collections and add pieces to continue.</p>
           </div>
-          <Link to="/" className="btn-luxury px-12 py-5">
-             START EXPLORING
+          <Link to="/shop" className="btn-luxury min-h-11 px-10 py-4 sm:px-12 sm:py-5">
+             Explore the shop
           </Link>
         </div>
       </PageTransition>
@@ -37,33 +37,34 @@ const Cart: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="bg-background min-h-screen pt-32 pb-40 selection:bg-primary/20">
+      <div className="min-h-[100dvh] bg-background pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] pt-[calc(env(safe-area-inset-top,0px)+5.5rem)] selection:bg-primary/20 sm:pt-28 md:pb-32 md:pt-32 lg:pb-40">
         <div className="lunar-container">
           
           {/* CART HEADER */}
-          <div className="mb-20 flex flex-col items-end justify-between gap-8 border-b border-border pb-10 dark:border-white/10 md:flex-row">
-            <div className="space-y-4">
+          <div className="mb-10 flex flex-col items-stretch justify-between gap-6 border-b border-border pb-8 dark:border-white/10 sm:mb-14 sm:items-end sm:gap-8 md:mb-16 md:flex-row md:pb-10">
+            <div className="space-y-3 sm:space-y-4">
               <span className="luxury-subheading">SELECTION REVIEW</span>
-              <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none">
+              <h1 className="text-4xl font-black uppercase italic leading-none tracking-tighter text-foreground sm:text-5xl md:text-7xl">
                 Shopping <br />Archive<span className="text-primary not-italic">.</span>
               </h1>
             </div>
-            <div className="flex items-center gap-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 sm:justify-end sm:gap-8">
                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">{itemCount} PIECES COLLECTED</span>
                <button 
+                type="button"
                 onClick={clearCart}
-                className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-destructive hover:opacity-70 transition-opacity"
+                className="flex min-h-11 items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-destructive transition-opacity hover:opacity-70"
                >
                  <Trash2 className="h-4 w-4" /> PURGE ARCHIVE
                </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
             
             {/* LEFT: CART ITEMS */}
-            <div className="lg:col-span-8 space-y-12">
-               <div className="space-y-8">
+            <div className="space-y-8 lg:col-span-8 sm:space-y-10 lg:space-y-12">
+               <div className="space-y-6 sm:space-y-8">
                   <AnimatePresence mode="popLayout">
                     {items.map((item, idx) => (
                       <motion.div
@@ -79,7 +80,7 @@ const Cart: React.FC = () => {
                   </AnimatePresence>
                </div>
 
-               <Link to="/" className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground hover:text-primary transition-colors mt-12">
+               <Link to="/shop" className="mt-8 inline-flex min-h-11 items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground transition-colors hover:text-primary sm:mt-12">
                   <ArrowLeft className="h-4 w-4" /> RETURN TO COLLECTIONS
                </Link>
             </div>
@@ -89,9 +90,9 @@ const Cart: React.FC = () => {
                <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="sticky top-32 space-y-10"
+                className="sticky top-24 space-y-8 sm:top-28 md:top-32 md:space-y-10 lg:top-32"
                >
-                  <div className="space-y-10 rounded-[2.5rem] border border-border bg-secondary/20 p-10 dark:border-white/10">
+                  <div className="space-y-8 rounded-3xl border border-border bg-secondary/20 p-6 dark:border-white/10 sm:space-y-10 sm:rounded-[2.5rem] sm:p-8 md:p-10">
                      <h2 className="text-xl font-black italic uppercase tracking-tighter">Investment Summary</h2>
                      
                      <div className="space-y-6 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
@@ -117,8 +118,9 @@ const Cart: React.FC = () => {
                      </div>
 
                      <button 
+                        type="button"
                         onClick={() => navigate('/shop/checkout')}
-                        className="btn-luxury w-full py-8 flex items-center justify-center gap-4 text-sm shadow-2xl"
+                        className="btn-luxury flex min-h-[3.25rem] w-full items-center justify-center gap-3 py-6 text-sm shadow-2xl sm:min-h-[3.5rem] sm:py-8"
                      >
                         PROCEED TO CHECKOUT <ArrowRight className="h-5 w-5" />
                      </button>
@@ -131,7 +133,7 @@ const Cart: React.FC = () => {
                   </div>
 
                   {/* PROMO FIELD */}
-                  <div className="px-10 space-y-4">
+                  <div className="space-y-4 px-0 sm:px-6 md:px-10">
                      <span className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground">DISCOUNT ARCHIVE CODE</span>
                      <div className="relative">
                         <input 

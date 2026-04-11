@@ -17,20 +17,20 @@ const footerLinks = {
     { name: 'FAQS', href: '/shop/settings' },
   ],
   COMPANY: [
-    { name: 'HERITAGE', href: '/about' },
-    { name: 'THE STUDIO', href: '/about' },
-    { name: 'SUSTAINABILITY', href: '/about' },
-    { name: 'CONTACT', href: '/contact' },
+    { name: 'HERITAGE', href: '/#collections' },
+    { name: 'THE STUDIO', href: '/shop' },
+    { name: 'SUSTAINABILITY', href: '/#collections' },
+    { name: 'CONTACT', href: 'mailto:concierge@lunar.com' },
   ],
 };
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-secondary/10 text-foreground pt-32 pb-16 selection:bg-primary/20 overflow-hidden border-t border-border/50">
+    <footer className="border-t border-border/50 bg-secondary/10 pb-[max(2rem,env(safe-area-inset-bottom,0px))] pt-16 text-foreground selection:bg-primary/20 sm:pt-24 lg:pt-28">
       <div className="lunar-container">
         
         {/* UPPER FOOTER: BRAND & NEWSLETTER */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 pb-24 border-b border-white/5">
+        <div className="grid grid-cols-1 gap-12 border-b border-border/40 pb-12 dark:border-white/5 lg:grid-cols-12 lg:gap-16 lg:pb-20">
           <div className="lg:col-span-6 space-y-10">
             <Link to="/" className="inline-block group">
               <span className="text-4xl font-black tracking-tighter leading-none group-hover:scale-105 transition-transform duration-500 block">
@@ -72,16 +72,22 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* MIDDLE FOOTER: LINKS */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16 py-24">
+        <div className="grid grid-cols-2 gap-10 py-12 md:grid-cols-3 md:gap-12 md:py-16 lg:grid-cols-5 lg:gap-14 lg:py-20">
             {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title} className="space-y-8">
+              <div key={title} className="space-y-6 sm:space-y-8">
                  <h4 className="text-[10px] font-black tracking-[0.4em] text-foreground uppercase">{title}</h4>
-                 <ul className="space-y-4">
+                 <ul className="space-y-3 sm:space-y-4">
                     {links.map(link => (
                       <li key={link.name}>
-                         <Link to={link.href} className="text-[10px] font-bold tracking-widest text-muted-foreground hover:text-primary transition-colors uppercase">
-                            {link.name}
-                         </Link>
+                         {link.href.startsWith('mailto:') ? (
+                           <a href={link.href} className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary">
+                             {link.name}
+                           </a>
+                         ) : (
+                           <Link to={link.href} className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary">
+                             {link.name}
+                           </Link>
+                         )}
                       </li>
                     ))}
                  </ul>

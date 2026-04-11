@@ -39,8 +39,9 @@ const Home: React.FC = () => {
     isNew: true,
   }));
 
-  const sectionClass = 'scroll-mt-28 md:scroll-mt-32 border-border/60 border-t dark:border-white/10';
-  const scrollOnly = 'scroll-mt-28 md:scroll-mt-32';
+  const sectionClass =
+    'scroll-mt-24 border-t border-border/60 dark:border-white/10 sm:scroll-mt-28 md:scroll-mt-32';
+  const scrollOnly = 'scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32';
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground selection:bg-primary/20 bg-apple-gradient">
@@ -50,7 +51,7 @@ const Home: React.FC = () => {
         <ProductCarousel title="THE ARCHIVE" subtitle="SIGNATURE BEST SELLERS" products={newArrivals.slice(0, 3)} />
       </div>
 
-      <section id="men" className={`py-24 md:py-32 ${sectionClass}`}>
+      <section id="men" className={`py-14 md:py-24 lg:py-28 ${sectionClass}`}>
         <div className="lunar-container">
           <div className="mb-12 flex flex-col items-end justify-between gap-8 md:mb-16 md:flex-row">
             <div className="space-y-4">
@@ -96,7 +97,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section id="women" className={`bg-muted/20 py-24 md:py-32 dark:bg-white/[0.02] ${sectionClass}`}>
+      <section id="women" className={`bg-muted/20 py-14 md:py-24 lg:py-28 dark:bg-white/[0.02] ${sectionClass}`}>
         <div className="lunar-container">
           <div className="order-1 mb-12 flex flex-col items-end justify-between gap-8 md:mb-16 md:flex-row">
             <div className="space-y-4 text-right md:text-left">
@@ -142,7 +143,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section id="collections" className={`py-20 md:py-36 ${sectionClass}`}>
+      <section id="collections" className={`py-14 md:py-28 lg:py-32 ${sectionClass}`}>
         <div className="lunar-container">
           <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-12">
             <div className="space-y-16 lg:col-span-12">
@@ -229,7 +230,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-border/50 py-24 md:py-40">
+      <section className="relative overflow-hidden border-y border-border/50 py-16 md:py-28 lg:py-36">
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.06)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.09)_0%,transparent_70%)]" />
 
         <div className="lunar-container relative z-10">
@@ -280,7 +281,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className={`border-border/60 border-t py-24 md:py-40 dark:border-white/10`}>
+      <section className={`border-border/60 border-t py-16 md:py-28 lg:py-36 dark:border-white/10`}>
         <div className="lunar-container">
           <div className="mb-20 space-y-4 text-center md:mb-32">
             <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">04 / INFRASTRUCTURE</span>
@@ -298,7 +299,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-border/60 border-y bg-muted/15 py-24 dark:border-white/10 dark:bg-white/[0.02] md:py-40">
+      <section className="border-border/60 border-y bg-muted/15 py-16 dark:border-white/10 dark:bg-white/[0.02] md:py-28 lg:py-36">
         <div className="lunar-container flex max-w-2xl flex-col items-center text-center">
           <div className="mb-10 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-primary/10">
             <Sparkles className="h-10 w-10 text-primary" />

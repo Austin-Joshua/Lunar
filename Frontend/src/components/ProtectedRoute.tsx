@@ -17,7 +17,7 @@ interface ProtectedRouteProps {
  * ProtectedRoute Component
  * 
  * Features:
- * - Redirects unauthenticated users to /login
+ * - Redirects unauthenticated users to /signin
  * - Optionally restricts to admin users only
  * - Preserves intended location for redirect after login
  * - Shows loading state while auth status is being determined
@@ -41,9 +41,8 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminO
     return <PageLoader />;
   }
 
-  // Redirect to landing if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/" state={{ from: location }} replace />;
+    return <Navigate to="/signin" state={{ from: location }} replace />;
   }
 
   // Redirect to shop home if admin-only route and user is not admin

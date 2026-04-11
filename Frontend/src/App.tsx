@@ -19,7 +19,7 @@ import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { CurrencyProvider } from "@/context/CurrencyContext";
 import { AdminAuthProvider } from "@/admin/context/AdminAuthContext";
-import { requestFirebaseToken, onMessageListener } from "@/lib/firebase";
+import { requestFirebaseToken } from "@/lib/firebase";
 
 // Customer Layout Components
 import { Navbar } from "@/components/Navbar";
@@ -36,7 +36,6 @@ import { AdminProtectedRoute } from "@/admin/components/AdminProtectedRoute";
 const Home = lazy(() => import("@/pages/Home"));
 const Login = lazy(() => import("@/pages/Login"));
 const Register = lazy(() => import("@/pages/Register"));
-const DashboardHome = lazy(() => import("@/pages/Home")); // Use Home as the public landing
 const SearchPage = lazy(() => import("@/pages/Search"));
 const Cart = lazy(() => import("@/pages/Cart"));
 const Orders = lazy(() => import("@/pages/Orders"));
@@ -90,9 +89,9 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         {/* ========== PUBLIC ROUTES ========== */}
         <Route element={
-          <div className="flex flex-col min-h-screen">
+          <div className="flex min-h-[100dvh] flex-col">
             <Navbar />
-            <main className="flex-1">
+            <main className="flex-1 pb-8 sm:pb-12">
               <PageTransition><Home /></PageTransition>
             </main>
             <Footer />
@@ -128,9 +127,9 @@ const AnimatedRoutes = () => {
         {/* ========== PROTECTED SHOP DASHBOARD ========== */}
         <Route path="/shop/*" element={
           <ProtectedRoute>
-            <div className="flex flex-col min-h-screen">
+            <div className="flex min-h-[100dvh] flex-col">
               <Navbar />
-              <main className="flex-1 pb-16 md:pb-0">
+              <main className="flex-1 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] md:pb-8 lg:pb-10">
                 <AnimatePresence mode="wait">
                   <Routes location={location} key={location.pathname}>
                     <Route path="/" element={<PageTransition><Home /></PageTransition>} />
@@ -189,20 +188,17 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   React.useEffect(() => {
-    // Request permission on mount
     const setupFirebase = async () => {
-      const token = await requestFirebaseToken();
-      if (token) {
-        // Send token to backend or store in user context
-        console.log('FCM Token successfully retrieved');
+      try {
+        const token = await requestFirebaseToken();
+        if (token && import.meta.env.DEV) {
+          console.log('FCM token ready');
+        }
+      } catch {
+        /* optional: no VAPID / blocked notifications */
       }
     };
-    
     setupFirebase();
-    
-    onMessageListener().then((payload: any) => {
-      console.log('Foreground notification received:', payload);
-    });
   }, []);
 
   return (

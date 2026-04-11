@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, Menu, X, Search, Moon, Sun, ChevronRight } from 'lucide-react';
+import { ShoppingBag, User, Menu, X, Search, ChevronRight } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
-import { useTheme } from '@/context/ThemeContext';
 import { ThemeToggle } from './ThemeToggle';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,7 +13,6 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const { isAuthenticated, logout } = useAuth();
   const { itemCount } = useCart();
-  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -51,8 +49,8 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-500",
-        scrolled ? "glass-effect py-4" : "bg-transparent py-6"
+        "fixed top-0 z-50 w-full pt-safe transition-all duration-500",
+        scrolled ? "glass-effect py-3 sm:py-4" : "bg-transparent py-4 sm:py-6"
       )}>
         <nav className="lunar-container">
           <div className="flex items-center justify-between">
@@ -151,10 +149,11 @@ export const Navbar: React.FC = () => {
               <form 
                 onSubmit={(e) => {
                   e.preventDefault();
-                  const query = (e.target as any).search.value;
+                  const fd = new FormData(e.currentTarget);
+                  const query = (fd.get('search') as string)?.trim();
                   if (query) {
                     setSearchOpen(false);
-                    window.location.href = `/shop/search?q=${encodeURIComponent(query)}`;
+                    navigate(`/shop/search?q=${encodeURIComponent(query)}`);
                   }
                 }}
                 className="relative"

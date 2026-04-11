@@ -28,40 +28,41 @@ const Settings: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background pt-32 pb-40 text-foreground selection:bg-primary/20">
+      <div className="min-h-[100dvh] bg-background pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] pt-[calc(env(safe-area-inset-top,0px)+5.5rem)] text-foreground selection:bg-primary/20 sm:pt-28 md:pb-32 md:pt-32 lg:pb-40">
         <div className="lunar-container">
           
           {/* EDITORIAL HEADER */}
-          <div className="mb-20 flex flex-col items-end justify-between gap-12 border-b border-border/80 pb-16 dark:border-white/10 md:flex-row">
-             <div className="space-y-6">
-                <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-primary">
-                   <Fingerprint className="h-4 w-4" />
+          <div className="mb-10 flex flex-col justify-between gap-8 border-b border-border/80 pb-10 dark:border-white/10 sm:mb-14 sm:gap-10 md:mb-16 md:flex-row md:items-end md:pb-16">
+             <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.5em] text-primary sm:gap-4">
+                   <Fingerprint className="h-4 w-4 shrink-0" />
                    COMMAND PREFERENCES
                 </div>
-                <h1 className="text-6xl font-black uppercase italic leading-[0.85] tracking-tighter text-foreground md:text-8xl">
+                <h1 className="text-4xl font-black uppercase italic leading-[0.9] tracking-tighter text-foreground sm:text-5xl md:text-7xl lg:text-8xl">
                   User <br />
                   <span className="text-primary font-light not-italic">Settings.</span>
                 </h1>
              </div>
-             <div className="flex items-center gap-6 text-[9px] font-bold tracking-[0.3em] text-muted-foreground uppercase">
-                <div className="flex items-center gap-2 font-black text-primary"><div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> ENCRYPTED SESSION ACTIVE</div>
+             <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+                <div className="flex items-center gap-2 font-black text-primary"><div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> ENCRYPTED SESSION ACTIVE</div>
              </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
             
             {/* SIDEBAR NAVIGATION */}
-            <div className="lg:col-span-4 space-y-10">
-               <div className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-8 space-y-4">
+            <div className="space-y-8 lg:col-span-4 lg:space-y-10">
+               <div className="space-y-2 rounded-3xl border border-border bg-muted/20 p-4 dark:border-white/10 dark:bg-white/[0.02] sm:space-y-3 sm:rounded-[2.5rem] sm:p-6 md:p-8">
                   {menuItems.map((item) => (
                     <button
                       key={item.id}
+                      type="button"
                       onClick={() => setActiveTab(item.id as any)}
                       className={cn(
-                        "w-full flex items-center justify-between px-6 py-5 rounded-2xl transition-all duration-500 group",
+                        "group flex min-h-[48px] w-full items-center justify-between rounded-2xl px-4 py-4 transition-all duration-500 sm:px-6 sm:py-5",
                         activeTab === item.id 
-                          ? "bg-primary/10 text-primary border border-primary/20 shadow-2xl" 
-                          : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                          ? "border border-primary/20 bg-primary/10 text-primary shadow-lg" 
+                          : "text-muted-foreground hover:bg-muted/80 hover:text-foreground dark:hover:bg-white/5"
                       )}
                     >
                       <div className="flex items-center gap-4">
@@ -74,8 +75,9 @@ const Settings: React.FC = () => {
                </div>
 
                <button 
+                  type="button"
                   onClick={() => setShowLogoutConfirm(true)}
-                  className="w-full flex items-center gap-4 px-10 py-6 rounded-2xl text-destructive/60 hover:text-destructive hover:bg-destructive/5 transition-all duration-500 font-black text-[10px] tracking-[0.4em] uppercase group"
+                  className="group flex min-h-[48px] w-full items-center gap-3 rounded-2xl px-6 py-4 text-[10px] font-black uppercase tracking-[0.4em] text-destructive/60 transition-all duration-500 hover:bg-destructive/5 hover:text-destructive sm:gap-4 sm:px-10 sm:py-6"
                >
                   <LogOut className="h-5 w-5 group-hover:-translate-x-2 transition-transform duration-500" /> 
                   TERMINATE SESSION
@@ -94,30 +96,30 @@ const Settings: React.FC = () => {
                   className="space-y-12"
                 >
                   {activeTab === 'profile' && (
-                    <div className="space-y-16">
-                       <section className="space-y-10">
-                          <div className="flex items-center gap-4 border-b border-white/5 pb-4">
+                    <div className="space-y-12 sm:space-y-16">
+                       <section className="space-y-8 sm:space-y-10">
+                          <div className="flex items-center gap-4 border-b border-border pb-4 dark:border-white/5">
                              <User className="h-4 w-4 text-primary" />
                              <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-foreground">CORE IDENTITY</h2>
                           </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
                              <div className="space-y-3">
-                                <label className="text-[9px] font-bold text-muted-foreground tracking-widest uppercase">FULL NAME</label>
-                                <div className="checkout-input bg-white/5 border-white/10 text-muted-foreground cursor-not-allowed flex items-center justify-between">
+                                <label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">FULL NAME</label>
+                                <div className="flex cursor-not-allowed items-center justify-between rounded-2xl border border-border bg-muted/40 px-4 py-3 text-muted-foreground dark:border-white/10 dark:bg-white/5">
                                    {user?.name || 'IDENTITY UNSET'}
                                    <ShieldCheck className="h-4 w-4 opacity-20" />
                                 </div>
                              </div>
                              <div className="space-y-3">
                                 <label className="text-[9px] font-bold text-muted-foreground tracking-widest uppercase">COMMUNICATION BRIDGE</label>
-                                <div className="checkout-input bg-white/5 border-white/10 text-muted-foreground cursor-not-allowed flex items-center justify-between">
+                                <div className="flex cursor-not-allowed items-center justify-between rounded-2xl border border-border bg-muted/40 px-4 py-3 text-muted-foreground dark:border-white/10 dark:bg-white/5">
                                    {user?.email || 'EMAIL UNSET'}
                                    <ShieldCheck className="h-4 w-4 opacity-20" />
                                 </div>
                              </div>
                              <div className="space-y-3">
                                 <label className="text-[9px] font-bold text-muted-foreground tracking-widest uppercase">LEVEL OF ACCESS</label>
-                                <div className="checkout-input bg-white/5 border-white/10 text-primary/60 cursor-not-allowed font-black flex items-center justify-between">
+                                <div className="flex cursor-not-allowed items-center justify-between rounded-2xl border border-border bg-muted/40 px-4 py-3 font-black text-primary/60 dark:border-white/10 dark:bg-white/5">
                                    {user?.role === 'admin' ? 'SYSTEM OVERSEER' : 'GUEST ARCHIVIST'}
                                    <Activity className="h-4 w-4 opacity-40 animate-pulse" />
                                 </div>
@@ -125,14 +127,15 @@ const Settings: React.FC = () => {
                           </div>
                        </section>
 
-                       <section className="space-y-10">
-                          <div className="flex items-center gap-4 border-b border-white/5 pb-4">
+                       <section className="space-y-8 sm:space-y-10">
+                          <div className="flex items-center gap-4 border-b border-border pb-4 dark:border-white/5">
                              <Activity className="h-4 w-4 text-primary" />
                              <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-foreground">INTERFACE THEME</h2>
                           </div>
                           <button 
+                            type="button"
                             onClick={toggleTheme}
-                            className="w-full flex items-center justify-between p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-primary/20 transition-all duration-700 group"
+                            className="group flex w-full min-h-[56px] items-center justify-between rounded-3xl border border-border bg-muted/20 p-6 transition-all duration-700 hover:border-primary/20 dark:border-white/5 dark:bg-white/[0.02] sm:rounded-[2.5rem] sm:p-8 md:p-10"
                           >
                              <div className="flex items-center gap-8">
                                 <div className="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-700">
@@ -155,9 +158,9 @@ const Settings: React.FC = () => {
                   )}
 
                   {activeTab !== 'profile' && (
-                    <div className="py-40 text-center space-y-10 border border-white/5 rounded-[3rem] bg-white/[0.01]">
+                    <div className="space-y-8 rounded-3xl border border-border bg-muted/20 py-16 text-center dark:border-white/5 dark:bg-white/[0.02] sm:space-y-10 sm:rounded-[3rem] sm:py-24 md:py-32">
                        <div className="flex justify-center">
-                          <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center text-muted-foreground/50">
+                          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-muted text-muted-foreground/50 dark:bg-white/5">
                              <ShieldCheck className="h-10 w-10" />
                           </div>
                        </div>
@@ -183,13 +186,13 @@ const Settings: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 p-6 backdrop-blur-3xl"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 p-4 px-safe pb-safe pt-safe backdrop-blur-3xl sm:p-6"
           >
             <motion.div 
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="max-w-md w-full space-y-12 rounded-[3rem] border border-border bg-card p-12 shadow-full dark:border-white/10"
+              className="w-full max-w-md space-y-8 rounded-3xl border border-border bg-card p-8 shadow-full dark:border-white/10 sm:space-y-12 sm:rounded-[3rem] sm:p-12"
             >
               <div className="space-y-4 text-center">
                 <div className="flex justify-center">
@@ -204,14 +207,16 @@ const Settings: React.FC = () => {
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <button
+                  type="button"
                   onClick={() => setShowLogoutConfirm(false)}
-                  className="py-5 rounded-2xl border border-white/5 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:bg-white/5 transition-colors"
+                  className="min-h-11 rounded-2xl border border-border py-4 text-[10px] font-black uppercase tracking-widest text-muted-foreground transition-colors hover:bg-muted dark:border-white/5"
                 >
                   ABORT
                 </button>
                 <button
+                  type="button"
                   onClick={handleLogout}
-                  className="rounded-2xl bg-destructive py-5 text-[10px] font-black uppercase tracking-widest text-destructive-foreground shadow-xl transition-all hover:bg-destructive/80"
+                  className="min-h-11 rounded-2xl bg-destructive py-4 text-[10px] font-black uppercase tracking-widest text-destructive-foreground shadow-xl transition-all hover:bg-destructive/80"
                 >
                   CONFIRM
                 </button>

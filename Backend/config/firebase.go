@@ -2,8 +2,10 @@ package config
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	firebase "firebase.google.com/go/v4"
 	"cloud.google.com/go/firestore"
@@ -20,14 +22,19 @@ var (
 func InitFirebase() error {
 	ctx := context.Background()
 	
-	// Load credentials:
-	// 1. Check for JSON string (ideal for cloud/Render)
-	// 2. Fallback to file path (ideal for local/dev)
+	// Credentials: FIREBASE_SERVICE_ACCOUNT_JSON, or FIREBASE_SERVICE_ACCOUNT as JSON (starts with '{') or file path.
 	var opt option.ClientOption
-	if jsonCreds := os.Getenv("FIREBASE_SERVICE_ACCOUNT_JSON"); jsonCreds != "" {
+	jsonCreds := os.Getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
+	credOrPath := os.Getenv("FIREBASE_SERVICE_ACCOUNT")
+	switch {
+	case jsonCreds != "":
 		opt = option.WithCredentialsJSON([]byte(jsonCreds))
-	} else if credPath := os.Getenv("FIREBASE_SERVICE_ACCOUNT"); credPath != "" {
-		opt = option.WithCredentialsFile(credPath)
+	case strings.TrimSpace(credOrPath) != "" && strings.HasPrefix(strings.TrimSpace(credOrPath), "{"):
+		opt = option.WithCredentialsJSON([]byte(credOrPath))
+	case credOrPath != "":
+		opt = option.WithCredentialsFile(credOrPath)
+	default:
+		return fmt.Errorf("set FIREBASE_SERVICE_ACCOUNT (path or inline JSON) or FIREBASE_SERVICE_ACCOUNT_JSON")
 	}
 
 

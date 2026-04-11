@@ -85,7 +85,7 @@ const Checkout: React.FC = () => {
   if (isSuccess) {
     return (
       <PageTransition>
-        <div className="min-h-[90vh] flex flex-col items-center justify-center space-y-12 lunar-container">
+        <div className="lunar-container flex min-h-[100dvh] flex-col items-center justify-center space-y-10 px-safe pb-[max(2rem,env(safe-area-inset-bottom,0px))] pt-safe text-center sm:space-y-12">
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -102,9 +102,9 @@ const Checkout: React.FC = () => {
                 Your selection has been securely archived and moved to our atelier for global transit. You will receive a bespoke notification shortly.
              </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-6">
-             <Link to="/shop/orders" className="btn-luxury px-12 py-5">VIEW ARCHIVE</Link>
-             <Link to="/" className="text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-4 hover:text-primary transition-all p-5">CONTINUE EXPLORING <ArrowLeft className="h-4 w-4" /></Link>
+          <div className="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center sm:gap-6">
+             <Link to="/shop/orders" className="btn-luxury min-h-11 flex items-center justify-center px-10 py-4 sm:px-12 sm:py-5">VIEW ARCHIVE</Link>
+             <Link to="/shop" className="flex min-h-11 items-center justify-center gap-2 p-4 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-primary">CONTINUE SHOPPING <ArrowLeft className="h-4 w-4" /></Link>
           </div>
         </div>
       </PageTransition>
@@ -113,29 +113,29 @@ const Checkout: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="bg-background min-h-screen pt-32 pb-40 relative">
-        <div className="absolute top-10 right-10 z-50">
+      <div className="relative min-h-[100dvh] bg-background pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] pt-[calc(env(safe-area-inset-top,0px)+5.5rem)] sm:pt-28 md:pb-32 md:pt-32 lg:pb-40">
+        <div className="absolute right-4 top-[calc(env(safe-area-inset-top,0px)+1rem)] z-50 sm:right-6 sm:top-10 md:right-10">
            <ThemeToggle />
         </div>
 
         <div className="lunar-container">
-          <div className="mb-20 space-y-4">
+          <div className="mb-12 space-y-4 sm:mb-16 md:mb-20">
              <div className="flex items-center gap-4">
-                <Link to="/shop/cart" className="flex h-12 w-12 items-center justify-center rounded-full border border-border transition-all hover:bg-foreground hover:text-background dark:border-white/10">
+                <Link to="/shop/cart" className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border transition-all hover:bg-foreground hover:text-background dark:border-white/10 sm:h-12 sm:w-12">
                    <ArrowLeft className="h-4 w-4" />
                 </Link>
                 <span className="luxury-subheading">SECURE ACQUISITION</span>
              </div>
-             <h1 className="text-5xl font-black uppercase italic tracking-tighter text-foreground md:text-7xl">The Final <br />Protocol<span className="text-primary not-italic">.</span></h1>
+             <h1 className="text-4xl font-black uppercase italic tracking-tighter text-foreground sm:text-5xl md:text-7xl">The Final <br />Protocol<span className="text-primary not-italic">.</span></h1>
           </div>
 
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
              
              {/* LEFT: Shipping & Payment (Stripe Style) */}
-             <div className="lg:col-span-7 space-y-12">
+             <div className="space-y-10 sm:space-y-12 lg:col-span-7">
                 
                 {/* 1. SHIPPING INFO */}
-                <div className="lunar-glass-panel space-y-8 p-8 md:p-12">
+                <div className="lunar-glass-panel space-y-6 p-5 sm:space-y-8 sm:p-8 md:p-12">
                    <div className="mb-4 flex items-center gap-4">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                          <MapPin className="h-5 w-5" />
@@ -168,8 +168,8 @@ const Checkout: React.FC = () => {
                 </div>
 
                 {/* 2. PAYMENT METHOD SELECTION */}
-                <div className="lunar-glass-panel space-y-8 p-8 md:p-12">
-                   <div className="mb-4 flex items-center justify-between">
+                <div className="lunar-glass-panel space-y-6 p-5 sm:space-y-8 sm:p-8 md:p-12">
+                   <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex items-center gap-4">
                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                             <ShieldCheck className="h-5 w-5" />
@@ -273,7 +273,7 @@ const Checkout: React.FC = () => {
 
              {/* RIGHT: Investment Summary (Stripe Style) */}
              <div className="lg:col-span-5">
-                <div className="lunar-glass-panel sticky top-32 space-y-12 p-10 md:p-14">
+                <div className="lunar-glass-panel sticky top-24 space-y-8 p-6 sm:top-28 sm:space-y-10 sm:p-8 md:top-32 md:space-y-12 md:p-10 lg:p-14">
                    <div className="space-y-2">
                       <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">INVESTMENT SUMMARY</p>
                       <h2 className="text-2xl font-black uppercase italic tracking-tighter text-foreground">The Collection</h2>
@@ -318,7 +318,7 @@ const Checkout: React.FC = () => {
                    <button 
                       disabled={isSubmitting}
                       type="submit"
-                      className="btn-luxury w-full py-8 flex items-center justify-center gap-4 text-xs group disabled:opacity-50 relative overflow-hidden"
+                      className="btn-luxury group relative flex min-h-[3.25rem] w-full items-center justify-center gap-3 overflow-hidden py-6 text-xs disabled:opacity-50 sm:min-h-[3.5rem] sm:py-8"
                    >
                       <AnimatePresence mode="wait">
                          {isSubmitting ? (

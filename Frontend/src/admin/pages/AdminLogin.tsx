@@ -79,9 +79,9 @@ const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="dark min-h-screen bg-background text-foreground selection:bg-primary/20">
-      <div className="flex min-h-screen flex-col lg:flex-row">
-        <aside className="relative flex flex-col justify-between border-b border-border bg-muted/30 px-8 py-10 dark:border-white/5 dark:bg-neutral-950/40 lg:w-[min(28rem,40vw)] lg:border-b-0 lg:border-r lg:py-14">
+    <div className="dark min-h-[100dvh] bg-background pt-safe text-foreground selection:bg-primary/20">
+      <div className="flex min-h-[100dvh] flex-col lg:flex-row">
+        <aside className="relative flex flex-col justify-between border-b border-border bg-muted/30 px-5 py-8 sm:px-8 sm:py-10 dark:border-white/5 dark:bg-neutral-950/40 lg:w-[min(28rem,40vw)] lg:border-b-0 lg:border-r lg:py-14">
           <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.06] dark:opacity-[0.05]">
             <div className="absolute -left-20 top-24 select-none text-[18rem] font-black italic leading-none tracking-tighter text-foreground">
               L
@@ -114,7 +114,7 @@ const AdminLogin: React.FC = () => {
         </aside>
 
         {/* Form column */}
-        <div className="flex flex-1 items-center justify-center px-6 py-12 lg:px-16">
+        <div className="flex flex-1 items-center justify-center px-4 py-10 sm:px-6 sm:py-12 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
