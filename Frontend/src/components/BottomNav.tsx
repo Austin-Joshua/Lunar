@@ -6,22 +6,22 @@ import { cn } from '@/lib/utils';
 import { useCart } from '@/context/CartContext';
 
 const navItems = [
-  { icon: Home, label: 'Home', href: '/shop' },
-  { icon: ShoppingBag, label: 'Shop', href: '/shop/men' },
-  { icon: Search, label: 'Search', href: '/shop/search' },
-  { icon: User, label: 'Account', href: '/shop/settings' },
+  { icon: Home, label: 'Home', href: '/' },
+  { icon: ShoppingBag, label: 'Shop', href: '/men' },
+  { icon: Search, label: 'Search', href: '/search' },
+  { icon: User, label: 'Account', href: '/settings' },
 ];
 
 function navItemActive(pathname: string, href: string): boolean {
-  if (href === '/shop') return pathname === '/shop' || pathname === '/shop/';
-  if (href === '/shop/search') return pathname.startsWith('/shop/search');
-  if (href === '/shop/settings') return pathname.startsWith('/shop/settings');
-  if (href === '/shop/men') {
+  if (href === '/') return pathname === '/' || pathname === '';
+  if (href === '/search') return pathname.startsWith('/search');
+  if (href === '/settings') return pathname.startsWith('/settings');
+  if (href === '/men') {
     return (
-      pathname.startsWith('/shop/men') ||
-      pathname.startsWith('/shop/women') ||
-      pathname.startsWith('/shop/kids') ||
-      pathname.startsWith('/shop/product')
+      pathname.startsWith('/men') ||
+      pathname.startsWith('/women') ||
+      pathname.startsWith('/kids') ||
+      pathname.startsWith('/product')
     );
   }
   return pathname === href;
@@ -32,7 +32,7 @@ export const BottomNav: React.FC = () => {
   const { itemCount } = useCart();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 px-safe pb-safe pt-1 shadow-[0_-8px_32px_-12px_rgba(0,0,0,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/90 dark:shadow-[0_-8px_32px_-12px_rgba(0,0,0,0.45)] lg:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-black/[0.08] bg-[rgba(245,245,247,0.96)] px-safe pb-[max(0.25rem,env(safe-area-inset-bottom))] pt-1 backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:bg-[rgba(0,0,0,0.88)] lg:hidden">
       <div className="mx-auto flex h-[4.75rem] max-w-lg items-center justify-between gap-1 px-2 sm:px-4">
         {navItems.map((item) => {
           const isActive = navItemActive(location.pathname, item.href);
@@ -45,13 +45,13 @@ export const BottomNav: React.FC = () => {
               <motion.div
                 whileTap={{ scale: 0.92 }}
                 className={cn(
-                  'relative rounded-2xl p-2.5 transition-all duration-300 sm:p-3',
-                  isActive ? 'bg-primary/10 text-primary' : 'text-muted-foreground'
+                  'relative rounded-2xl p-2.5 transition-colors sm:p-3',
+                  isActive ? 'text-primary' : 'text-[rgba(0,0,0,0.48)] dark:text-white/50',
                 )}
               >
-                <item.icon className={cn('h-5 w-5 sm:h-6 sm:w-6', isActive ? 'stroke-[2.5px]' : 'stroke-[1.5px]')} />
+                <item.icon className={cn('h-5 w-5 sm:h-6 sm:w-6', isActive ? 'stroke-[2px]' : 'stroke-[1.5px]')} />
                 {item.label === 'Shop' && itemCount > 0 && (
-                  <span className="absolute -right-1 -top-1 rounded-full bg-primary px-1.5 py-0.5 text-[8px] font-black text-primary-foreground ring-2 ring-background">
+                  <span className="absolute -right-1 -top-1 min-w-[1rem] rounded-full bg-primary px-1 py-0.5 text-center text-[8px] font-semibold text-primary-foreground">
                     {itemCount}
                   </span>
                 )}
@@ -59,8 +59,8 @@ export const BottomNav: React.FC = () => {
 
               <span
                 className={cn(
-                  'mt-0.5 max-w-[4.5rem] truncate text-center text-[9px] font-semibold uppercase tracking-wide transition-all duration-300',
-                  isActive ? 'text-primary opacity-100' : 'text-muted-foreground opacity-70'
+                  'mt-0.5 max-w-[4.5rem] truncate text-center text-[10px] font-normal tracking-tight',
+                  isActive ? 'text-primary' : 'text-[rgba(0,0,0,0.48)] dark:text-white/50',
                 )}
               >
                 {item.label}
@@ -69,7 +69,7 @@ export const BottomNav: React.FC = () => {
               {isActive && (
                 <motion.div
                   layoutId="bottom-nav-active-indicator"
-                  className="absolute -bottom-1 h-1 w-1 rounded-full bg-primary"
+                  className="absolute -bottom-0.5 h-1 w-7 rounded-full bg-primary"
                   transition={{ type: 'spring', stiffness: 400, damping: 40 }}
                 />
               )}

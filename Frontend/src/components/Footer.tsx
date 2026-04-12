@@ -5,20 +5,20 @@ import { motion } from 'framer-motion';
 
 const footerLinks = {
   COLLECTIONS: [
-    { name: 'MEN', href: '/shop/men' },
-    { name: 'WOMEN', href: '/shop/women' },
-    { name: 'KIDS', href: '/shop/kids' },
-    { name: 'NEW ARRIVALS', href: '/shop' },
+    { name: 'MEN', href: '/men' },
+    { name: 'WOMEN', href: '/women' },
+    { name: 'KIDS', href: '/kids' },
+    { name: 'NEW ARRIVALS', href: '/' },
   ],
   ASSISTANCE: [
-    { name: 'TRACK ORDER', href: '/shop/orders' },
-    { name: 'RETURNS', href: '/shop/settings' },
-    { name: 'SHIPPING', href: '/shop/settings' },
-    { name: 'FAQS', href: '/shop/settings' },
+    { name: 'TRACK ORDER', href: '/orders' },
+    { name: 'RETURNS', href: '/settings' },
+    { name: 'SHIPPING', href: '/settings' },
+    { name: 'FAQS', href: '/settings' },
   ],
   COMPANY: [
     { name: 'HERITAGE', href: '/#collections' },
-    { name: 'THE STUDIO', href: '/shop' },
+    { name: 'THE STUDIO', href: '/' },
     { name: 'SUSTAINABILITY', href: '/#collections' },
     { name: 'CONTACT', href: 'mailto:concierge@lunar.com' },
   ],
@@ -33,8 +33,9 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 gap-12 border-b border-border/40 pb-12 dark:border-white/5 lg:grid-cols-12 lg:gap-16 lg:pb-20">
           <div className="lg:col-span-6 space-y-10">
             <Link to="/" className="inline-block group">
-              <span className="text-4xl font-black tracking-tighter leading-none group-hover:scale-105 transition-transform duration-500 block">
-                LUNAR<span className="text-primary italic">.</span>
+              <span className="block text-4xl font-black tracking-tighter leading-none transition-transform duration-500 group-hover:scale-[1.02]">
+                <span className="font-bold">LUNAR</span>
+                <span className="text-primary italic">.</span>
               </span>
               <span className="text-[10px] font-black tracking-[0.6em] text-primary mt-2 block">ARCHIVE</span>
             </Link>

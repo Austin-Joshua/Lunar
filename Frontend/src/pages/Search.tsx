@@ -120,7 +120,7 @@ const SearchPage: React.FC = () => {
                     </p>
                   </div>
                   <div className="pt-8">
-                    <Link to="/shop" className="btn-luxury inline-flex items-center gap-2 px-16 py-6">
+                    <Link to="/" className="btn-luxury inline-flex items-center gap-2 px-16 py-6">
                       RETURN TO COLLECTIONS <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>

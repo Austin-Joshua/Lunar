@@ -1,4 +1,6 @@
 node_modules/
+CREDENTIALS.md
+**/CREDENTIALS.md
 .env
 **/.env
 **/.env.*

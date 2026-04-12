@@ -3,8 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Zap, ShieldCheck, Package, ArrowRight, Sparkles, Globe } from 'lucide-react';
 import { Hero } from '@/components/Hero';
+import { SeasonAnnouncement } from '@/components/SeasonAnnouncement';
 import { FeatureCard } from '@/components/FeatureCard';
 import { ProductCarousel } from '@/components/ProductCarousel';
+import { stockImages } from '@/config/brand';
 
 const Home: React.FC = () => {
   const location = useLocation();
@@ -47,11 +49,13 @@ const Home: React.FC = () => {
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground selection:bg-primary/20 bg-apple-gradient">
       <Hero />
 
+      <SeasonAnnouncement />
+
       <div id="best-sellers" className={scrollOnly}>
         <ProductCarousel title="THE ARCHIVE" subtitle="SIGNATURE BEST SELLERS" products={newArrivals.slice(0, 3)} />
       </div>
 
-      <section id="men" className={`py-14 md:py-24 lg:py-28 ${sectionClass}`}>
+      <section id="men" className={`py-10 md:py-16 lg:py-20 ${sectionClass}`}>
         <div className="lunar-container">
           <div className="mb-12 flex flex-col items-end justify-between gap-8 md:mb-16 md:flex-row">
             <div className="space-y-4">
@@ -62,7 +66,7 @@ const Home: React.FC = () => {
               </h2>
             </div>
             <Link
-              to="/shop/men"
+              to="/men"
               className="border-b border-primary/30 pb-2 text-[10px] font-black tracking-widest text-primary transition-all hover:tracking-[0.3em]"
             >
               VIEW ALL MEN&apos;S PIECES
@@ -76,9 +80,9 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: i * 0.1 }}
-                className="group cursor-pointer"
+                className="group"
               >
-                <div className="block">
+                <Link to="/men" className="block cursor-pointer active:scale-[0.99]">
                   <div className="mb-6 aspect-[3/4] overflow-hidden rounded-3xl bg-secondary/30 ring-1 ring-border/60 dark:bg-secondary/20 dark:ring-white/10">
                     <img
                       src={product.image}
@@ -90,14 +94,14 @@ const Home: React.FC = () => {
                     <h3 className="text-[11px] font-black uppercase tracking-widest text-foreground">{product.name}</h3>
                     <p className="text-[10px] font-bold italic tracking-tight text-primary">{product.brand}</p>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="women" className={`bg-muted/20 py-14 md:py-24 lg:py-28 dark:bg-white/[0.02] ${sectionClass}`}>
+      <section id="women" className={`bg-muted/20 py-10 md:py-16 lg:py-20 dark:bg-white/[0.02] ${sectionClass}`}>
         <div className="lunar-container">
           <div className="order-1 mb-12 flex flex-col items-end justify-between gap-8 md:mb-16 md:flex-row">
             <div className="space-y-4 text-right md:text-left">
@@ -108,7 +112,7 @@ const Home: React.FC = () => {
               </h2>
             </div>
             <Link
-              to="/shop/women"
+              to="/women"
               className="border-b border-primary/30 pb-2 text-[10px] font-black tracking-widest text-primary transition-all hover:tracking-[0.3em]"
             >
               VIEW ALL WOMEN&apos;S PIECES
@@ -122,9 +126,9 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: i * 0.1 }}
-                className="group cursor-pointer"
+                className="group"
               >
-                <div className="block">
+                <Link to="/women" className="block cursor-pointer active:scale-[0.99]">
                   <div className="mb-6 aspect-[3/4] overflow-hidden rounded-3xl bg-secondary/30 ring-1 ring-border/60 dark:bg-secondary/20 dark:ring-white/10">
                     <img
                       src={product.image}
@@ -136,19 +140,55 @@ const Home: React.FC = () => {
                     <h3 className="text-[11px] font-black uppercase tracking-widest text-foreground">{product.name}</h3>
                     <p className="text-[10px] font-bold italic tracking-tight text-primary">{product.brand}</p>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="collections" className={`py-14 md:py-28 lg:py-32 ${sectionClass}`}>
+      <section
+        id="kids"
+        className={`scroll-mt-24 border-t border-border/60 py-10 dark:border-white/10 sm:scroll-mt-28 md:py-16 lg:py-20 ${sectionClass}`}
+      >
+        <div className="lunar-container">
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] md:order-2">
+              <img
+                src={stockImages.kidsEditorial}
+                alt="Kids clothing"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            </div>
+            <div className="space-y-6 md:order-1">
+              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">03 / KIDS</span>
+              <h2 className="text-4xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-6xl lg:text-7xl">
+                Soft seams.
+                <br />
+                Serious play.
+              </h2>
+              <p className="max-w-md text-sm font-medium uppercase leading-relaxed tracking-widest text-muted-foreground">
+                Organic cotton tees, weather-ready shells, and sneakers sized for growth spurts—designed for motion, finished like the rest of Lunar.
+              </p>
+              <Link
+                to="/kids"
+                className="inline-flex min-h-[44px] items-center justify-center rounded-full border-2 border-primary bg-primary px-8 py-3 text-xs font-bold uppercase tracking-widest text-primary-foreground transition hover:opacity-90 active:scale-[0.98]"
+              >
+                Shop kids
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="collections" className={`py-10 md:py-20 lg:py-24 ${sectionClass}`}>
         <div className="lunar-container">
           <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-12">
             <div className="space-y-16 lg:col-span-12">
               <div className="space-y-6 text-center">
-                <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary">03 / SPECIAL EDITIONS</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary">04 / SPECIAL EDITIONS</span>
                 <h2 className="text-5xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-8xl lg:text-9xl">
                   Archive Collections<span className="font-light not-italic text-primary">.</span>
                 </h2>
@@ -182,7 +222,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative border-border/60 border-t bg-secondary/20 py-20 dark:border-white/10 md:py-36">
+      <section className="relative border-border/60 border-t bg-secondary/20 py-14 dark:border-white/10 md:py-24 lg:py-28">
         <div className="lunar-container grid grid-cols-1 items-center gap-16 lg:grid-cols-12 lg:gap-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -221,7 +261,7 @@ const Home: React.FC = () => {
               Every seam is a story of precision. We believe in the beauty of the essential, crafting pieces that transcend seasons with high-fidelity fabrics and heritage techniques.
             </p>
             <div className="pt-4">
-              <Link to="/about" className="btn-luxury inline-flex items-center gap-4 px-10 py-5">
+              <Link to="/#collections" className="btn-luxury inline-flex items-center gap-4 px-10 py-5">
                 THE ATELIER EXPERIENCE
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -230,14 +270,14 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-border/50 py-16 md:py-28 lg:py-36">
+      <section className="relative overflow-hidden border-y border-border/50 py-12 md:py-20 lg:py-24">
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.06)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.09)_0%,transparent_70%)]" />
 
         <div className="lunar-container relative z-10">
           <div className="mb-20 space-y-6 text-center md:mb-32">
-            <span className="text-[10px] font-bold uppercase tracking-[0.6em] text-primary">BESPOKE SERVICES</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.6em] text-primary">05 / BESPOKE SERVICES</span>
             <h2 className="text-5xl font-black uppercase italic leading-none tracking-tighter text-foreground md:text-7xl">
-              Lunar <br />
+              <span className="font-bold not-italic">LUNAR</span> <br />
               <span className="font-light not-italic text-primary">Concierge.</span>
             </h2>
           </div>
@@ -281,10 +321,10 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className={`border-border/60 border-t py-16 md:py-28 lg:py-36 dark:border-white/10`}>
+      <section className={`border-border/60 border-t py-12 md:py-20 lg:py-24 dark:border-white/10`}>
         <div className="lunar-container">
           <div className="mb-20 space-y-4 text-center md:mb-32">
-            <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">04 / INFRASTRUCTURE</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">06 / INFRASTRUCTURE</span>
             <h2 className="text-5xl font-black uppercase italic tracking-tighter text-foreground md:text-7xl">
               Bespoke <br />
               <span className="font-light not-italic text-primary">Fulfillment.</span>
@@ -299,7 +339,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-border/60 border-y bg-muted/15 py-16 dark:border-white/10 dark:bg-white/[0.02] md:py-28 lg:py-36">
+      <section className="border-border/60 border-y bg-muted/15 py-12 dark:border-white/10 dark:bg-white/[0.02] md:py-20 lg:py-24">
         <div className="lunar-container flex max-w-2xl flex-col items-center text-center">
           <div className="mb-10 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-primary/10">
             <Sparkles className="h-10 w-10 text-primary" />

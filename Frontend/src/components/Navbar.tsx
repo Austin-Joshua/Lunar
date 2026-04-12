@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, Menu, X, Search, ChevronRight } from 'lucide-react';
+import { ShoppingBag, User, Menu, X, Search } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { ThemeToggle } from './ThemeToggle';
-import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const { isAuthenticated, logout } = useAuth();
   const { itemCount } = useCart();
   const location = useLocation();
@@ -19,205 +17,193 @@ export const Navbar: React.FC = () => {
   const sectionForLabel: Record<string, string> = {
     MEN: 'men',
     WOMEN: 'women',
+    KIDS: 'kids',
     ARCHIVE: 'collections',
   };
 
   const goToSection = (label: string) => {
     const id = sectionForLabel[label];
     if (!id) return;
-    if (isHomePage) {
+    if (location.pathname === '/') {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      navigate(`${homeBasePath}#${id}`);
+      navigate(`/#${id}`);
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const isShopHome =
-    location.pathname === '/shop' || location.pathname === '/shop/';
-  const isPublicHome = location.pathname === '/';
-  const isHomePage = isPublicHome || isShopHome;
-  const homeBasePath = location.pathname.startsWith('/shop') ? '/shop' : '/';
+  const isHomePage = location.pathname === '/';
 
   return (
     <>
-      <header className={cn(
-        "fixed top-0 z-50 w-full pt-safe transition-all duration-500",
-        scrolled ? "glass-effect py-3 sm:py-4" : "bg-transparent py-4 sm:py-6"
-      )}>
+      <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[rgba(0,0,0,0.8)] pt-safe backdrop-blur-xl backdrop-saturate-180 dark:border-white/10">
         <nav className="lunar-container">
-          <div className="flex items-center justify-between">
-            
-            {/* LEFT: Branding/Logo - Scroll to Top */}
-            <div className="flex-1 flex items-center">
-              <button 
+          <div className="flex h-12 items-center justify-between sm:h-[3.25rem]">
+            <div className="flex flex-1 items-center">
+              <button
                 type="button"
                 onClick={() => {
                   if (isHomePage) window.scrollTo({ top: 0, behavior: 'smooth' });
-                  else navigate(homeBasePath);
+                  else navigate('/');
                 }}
-                className="text-2xl font-black italic tracking-tighter hover:text-primary transition-colors leading-none uppercase"
+                className="text-[17px] font-bold leading-none tracking-tight text-white transition-opacity hover:opacity-90"
               >
-                LUNAR<span className="text-primary not-italic">.</span>
+                LUNAR
               </button>
             </div>
 
-            {/* CENTER: Nav Links (Desktop) - Minimalist */}
-            <div className="hidden lg:flex items-center gap-10">
-              {['MEN', 'WOMEN', 'ARCHIVE'].map((link) => (
+            <div className="hidden items-center gap-5 lg:flex xl:gap-8">
+              {['MEN', 'WOMEN', 'KIDS', 'ARCHIVE'].map((link) => (
                 <button
                   key={link}
                   type="button"
                   onClick={() => goToSection(link)}
-                  className="text-[10px] font-black tracking-[0.4em] hover:text-primary transition-all duration-300 uppercase"
+                  className="text-xs font-normal text-white/80 transition-colors hover:text-white"
                 >
                   {link}
                 </button>
               ))}
             </div>
 
-            {/* RIGHT: Actions */}
-            <div className="flex items-center gap-5 md:gap-7">
-              {/* Search */}
-              <button 
+            <div className="flex flex-1 items-center justify-end gap-1 sm:gap-2">
+              <button
+                type="button"
                 onClick={() => setSearchOpen(true)}
-                className="hover:scale-110 hover:text-primary transition-all p-2 rounded-full hover:bg-foreground/5"
+                className="rounded-full p-2.5 text-white/90 transition-colors hover:bg-white/10"
                 aria-label="Search"
               >
-                <Search className="h-5 w-5 stroke-[2px]" />
+                <Search className="h-[17px] w-[17px]" strokeWidth={1.75} />
               </button>
 
-              {/* Theme Toggle */}
-              <ThemeToggle className="hidden sm:flex" />
+              <ThemeToggle className="hidden h-10 w-10 bg-white/10 hover:bg-white/15 sm:flex [&_svg]:!text-white" />
 
-              {/* Account */}
-              <Link 
-                to={isAuthenticated ? "/shop/settings" : "/signin"} 
-                className="hidden sm:flex hover:scale-110 transition-all p-2 rounded-full hover:bg-foreground/5"
+              <Link
+                to={isAuthenticated ? '/settings' : '/signin'}
+                className="hidden rounded-full p-2.5 text-white/90 transition-colors hover:bg-white/10 sm:flex"
               >
-                <User className="h-5 w-5 stroke-[2px]" />
+                <User className="h-[17px] w-[17px]" strokeWidth={1.75} />
               </Link>
 
-              {/* Cart */}
-              <Link to="/shop/cart" className="relative group hover:scale-110 transition-all p-2 rounded-full hover:bg-foreground/5">
-                <ShoppingBag className="h-5 w-5 stroke-[2px]" />
+              <Link to="/cart" className="relative rounded-full p-2.5 text-white/90 transition-colors hover:bg-white/10">
+                <ShoppingBag className="h-[17px] w-[17px]" strokeWidth={1.75} />
                 {itemCount > 0 && (
-                  <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[8px] font-bold px-1.5 py-0.5 rounded-full ring-2 ring-background">
+                  <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold text-primary-foreground">
                     {itemCount}
                   </span>
                 )}
               </Link>
 
-              {/* Mobile Menu */}
-              <button 
-                className="lg:hidden p-2 rounded-full hover:bg-foreground/5 transition-all"
+              <button
+                type="button"
+                className="rounded-full p-2.5 text-white/90 lg:hidden"
                 onClick={() => setMobileMenuOpen(true)}
               >
-                <Menu className="h-6 w-6" />
+                <Menu className="h-5 w-5" strokeWidth={1.75} />
               </button>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* FULL-SCREEN SEARCH OVERLAY */}
       <AnimatePresence>
         {searchOpen && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl flex flex-col items-center justify-center p-6"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#f5f5f7]/95 p-6 backdrop-blur-md dark:bg-black/90"
           >
-            <button 
+            <button
+              type="button"
               onClick={() => setSearchOpen(false)}
-              className="absolute top-10 right-10 p-5 rounded-full bg-secondary hover:bg-foreground hover:text-background transition-all active:scale-95"
+              className="absolute right-6 top-6 rounded-full p-3 text-[#1d1d1f] transition-colors hover:bg-black/5 dark:text-white dark:hover:bg-white/10"
             >
               <X className="h-6 w-6" />
             </button>
 
-            <div className="w-full max-w-2xl px-4">
-              <span className="block text-center text-xs font-bold tracking-[0.4em] mb-10 text-muted-foreground/60 uppercase">SEARCH COLLECTION</span>
-              <form 
+            <div className="w-full max-w-xl px-4">
+              <p className="mb-8 text-center text-xs font-normal tracking-tight text-[rgba(0,0,0,0.48)] dark:text-white/50">
+                Search collection
+              </p>
+              <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   const fd = new FormData(e.currentTarget);
                   const query = (fd.get('search') as string)?.trim();
                   if (query) {
                     setSearchOpen(false);
-                    navigate(`/shop/search?q=${encodeURIComponent(query)}`);
+                    navigate(`/search?q=${encodeURIComponent(query)}`);
                   }
                 }}
-                className="relative"
               >
-                <input 
+                <input
                   autoFocus
                   name="search"
-                  type="text" 
-                  placeholder="What are you looking for?" 
-                  className="w-full bg-transparent border-b-2 border-foreground/10 py-10 text-4xl md:text-6xl font-black text-center focus:outline-none focus:border-primary transition-all placeholder:text-muted-foreground/15"
+                  type="text"
+                  placeholder="Search"
+                  className="w-full border-0 border-b border-black/10 bg-transparent py-4 text-center text-2xl font-semibold tracking-tight text-[#1d1d1f] placeholder:text-[rgba(0,0,0,0.28)] focus:border-primary focus:outline-none dark:border-white/15 dark:text-white dark:placeholder:text-white/30 sm:text-4xl"
                 />
               </form>
-              <div className="mt-16 flex flex-wrap justify-center gap-6">
-                {['NEW SEASON', 'ACCESSORIES', 'LIMITED EDIT'].map(hint => (
-                  <button key={hint} className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground hover:text-primary transition-all">
-                    {hint}
-                  </button>
-                ))}
-              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* MOBILE DRAWER */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[100] bg-background lg:hidden flex flex-col"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[100] flex flex-col bg-[#f5f5f7] lg:hidden dark:bg-[#000000]"
           >
-            <div className="p-8 flex justify-end">
-              <button 
+            <div className="flex justify-end p-6">
+              <button
+                type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-5 rounded-full bg-secondary transition-all active:scale-90"
+                className="rounded-full p-3 text-[#1d1d1f] dark:text-white"
               >
                 <X className="h-6 w-6" />
               </button>
             </div>
 
-            <div className="flex-1 px-10 flex flex-col justify-center space-y-12 text-center md:text-left">
-              {['MEN', 'WOMEN', 'ARCHIVE'].map(link => (
-                <button 
+            <div className="flex flex-1 flex-col justify-center space-y-8 px-10">
+              {['MEN', 'WOMEN', 'KIDS', 'ARCHIVE'].map((link) => (
+                <button
                   key={link}
                   type="button"
                   onClick={() => {
                     setMobileMenuOpen(false);
                     goToSection(link);
                   }}
-                  className="text-6xl font-black tracking-tighter hover:text-primary leading-none uppercase italic"
+                  className="text-left text-4xl font-semibold tracking-tight text-[#1d1d1f] dark:text-white"
                 >
                   {link}
                 </button>
               ))}
             </div>
 
-            <div className="p-10 space-y-4">
+            <div className="space-y-3 p-8">
               {isAuthenticated ? (
-                <button onClick={() => { logout(); setMobileMenuOpen(false); }} className="btn-premium-primary w-full shadow-lg">SIGN OUT</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full rounded-full bg-primary py-3.5 text-[17px] font-semibold text-primary-foreground"
+                >
+                  Sign out
+                </button>
               ) : (
-                <Link to="/signin" onClick={() => setMobileMenuOpen(false)} className="btn-premium-primary w-full text-center shadow-lg">SIGN IN</Link>
+                <Link
+                  to="/signin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full rounded-full bg-primary py-3.5 text-center text-[17px] font-semibold text-primary-foreground"
+                >
+                  Sign in
+                </Link>
               )}
             </div>
           </motion.div>

@@ -8,7 +8,7 @@ import type { Product } from '@/types';
 import { PageTransition } from '@/components/PageTransition';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { db } from '@/services/firebase';
+import { db } from '@/lib/firebase';
 
 interface ProductListProps {
   gender: 'men' | 'women' | 'kids';
@@ -132,7 +132,7 @@ const ProductList: React.FC<ProductListProps> = ({ gender, subcategory }) => {
                        WE ARE CURRENTLY CURATING THIS ARCHIVE. PLEASE CHECK BACK SHORTLY OR EXPLORE OTHER COLLECTIONS.
                     </p>
                  </div>
-                 <Link to="/shop" className="btn-luxury mt-8 inline-block px-12">CONTINUE EXPLORING</Link>
+                 <Link to="/" className="btn-luxury mt-8 inline-block px-12">CONTINUE EXPLORING</Link>
               </div>
             )}
           </AnimatePresence>

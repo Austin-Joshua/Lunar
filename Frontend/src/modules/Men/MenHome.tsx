@@ -84,7 +84,7 @@ const MenHome: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-12 flex flex-col justify-end">
                        <span className="text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-2">NEW SEASON</span>
                        <h3 className="text-4xl font-black italic text-white uppercase tracking-tighter">Atelier Tailoring</h3>
-                       <Link to="/shop/men/shirts" className="mt-6 flex items-center gap-2 text-white text-[10px] font-bold tracking-widest group-hover:gap-4 transition-all uppercase">
+                       <Link to="/men/shirts" className="mt-6 flex items-center gap-2 text-white text-[10px] font-bold tracking-widest group-hover:gap-4 transition-all uppercase">
                           VIEW COLLECTION <MoveRight className="h-4 w-4" />
                        </Link>
                     </div>

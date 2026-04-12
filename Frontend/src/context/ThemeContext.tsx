@@ -17,8 +17,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return savedTheme;
     }
 
-    // Default to 'dark' as per brand architect request
-    return 'dark';
+    return 'light';
   });
 
   useEffect(() => {

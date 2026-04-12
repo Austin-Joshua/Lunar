@@ -23,7 +23,7 @@ const Cart: React.FC = () => {
              <h1 className="text-3xl font-black uppercase italic tracking-tighter text-foreground sm:text-4xl md:text-6xl">Your archive is empty</h1>
              <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Browse collections and add pieces to continue.</p>
           </div>
-          <Link to="/shop" className="btn-luxury min-h-11 px-10 py-4 sm:px-12 sm:py-5">
+          <Link to="/" className="btn-luxury min-h-11 px-10 py-4 sm:px-12 sm:py-5">
              Explore the shop
           </Link>
         </div>
@@ -80,7 +80,7 @@ const Cart: React.FC = () => {
                   </AnimatePresence>
                </div>
 
-               <Link to="/shop" className="mt-8 inline-flex min-h-11 items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground transition-colors hover:text-primary sm:mt-12">
+               <Link to="/" className="mt-8 inline-flex min-h-11 items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground transition-colors hover:text-primary sm:mt-12">
                   <ArrowLeft className="h-4 w-4" /> RETURN TO COLLECTIONS
                </Link>
             </div>
@@ -119,7 +119,7 @@ const Cart: React.FC = () => {
 
                      <button 
                         type="button"
-                        onClick={() => navigate('/shop/checkout')}
+                        onClick={() => navigate('/checkout')}
                         className="btn-luxury flex min-h-[3.25rem] w-full items-center justify-center gap-3 py-6 text-sm shadow-2xl sm:min-h-[3.5rem] sm:py-8"
                      >
                         PROCEED TO CHECKOUT <ArrowRight className="h-5 w-5" />

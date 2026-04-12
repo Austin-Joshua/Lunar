@@ -5,7 +5,8 @@ import { AdminTopbar } from './AdminTopbar';
 import { cn } from '@/lib/utils';
 
 export const AdminLayout: React.FC = () => {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  /** Default: icon rail only — sidebar is not fully expanded on load. */
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -37,12 +38,12 @@ export const AdminLayout: React.FC = () => {
       {/* Main Content */}
       <div
         className={cn(
-          "transition-all duration-300",
-          sidebarCollapsed ? "lg:ml-16" : "lg:ml-64"
+          'min-w-0 transition-[margin] duration-300 ease-out',
+          sidebarCollapsed ? 'lg:ml-14' : 'lg:ml-52',
         )}
       >
         <AdminTopbar onMenuClick={() => setMobileMenuOpen(true)} />
-        <main className="p-4 lg:p-6">
+        <main className="max-w-[1600px] p-4 lg:p-5 xl:p-6 2xl:p-8">
           <Outlet />
         </main>
       </div>

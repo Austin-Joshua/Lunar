@@ -84,7 +84,7 @@ const KidsHome: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-12 flex flex-col justify-end">
                        <span className="text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-2">PLAY READY</span>
                        <h3 className="text-4xl font-black italic text-white uppercase tracking-tighter">Comfort & Color</h3>
-                       <Link to="/shop/kids/girls" className="mt-6 flex items-center gap-2 text-white text-[10px] font-bold tracking-widest group-hover:gap-4 transition-all uppercase">
+                       <Link to="/kids/girls" className="mt-6 flex items-center gap-2 text-white text-[10px] font-bold tracking-widest group-hover:gap-4 transition-all uppercase">
                           EXPLORE GIRLS <MoveRight className="h-4 w-4" />
                        </Link>
                     </div>
@@ -105,7 +105,7 @@ const KidsHome: React.FC = () => {
                        </div>
                        <div>
                           <h3 className="text-2xl font-black italic text-white uppercase tracking-tighter leading-none">Vibrant <br />Steps</h3>
-                          <Link to="/shop/kids/boys" className="mt-4 flex items-center gap-2 text-white text-[9px] font-bold tracking-widest uppercase">
+                          <Link to="/kids/boys" className="mt-4 flex items-center gap-2 text-white text-[9px] font-bold tracking-widest uppercase">
                              SHOP BOYS <ArrowRight className="h-3 w-3" />
                           </Link>
                        </div>

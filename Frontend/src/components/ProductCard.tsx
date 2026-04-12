@@ -40,7 +40,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
              ACQUIRE PIECE
            </button>
            <Link 
-             to={`/shop/product/${product.id}`}
+             to={`/product/${product.id}`}
              className="w-full py-5 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white/10 transition-all duration-500 text-center rounded-2xl"
            >
              EXAMINE DETAILS
@@ -65,7 +65,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary block leading-none mb-2">
               {product.brand || 'LUNAR EDIT'}
             </span>
-            <Link to={`/shop/product/${product.id}`}>
+            <Link to={`/product/${product.id}`}>
               <h3 className="text-xl font-black italic uppercase tracking-tighter text-foreground hover:text-primary transition-colors leading-none truncate max-w-[200px]">
                 {product.name}
               </h3>

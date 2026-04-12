@@ -12,7 +12,7 @@ import type { Product } from '@/types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PageTransition } from '@/components/PageTransition';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '@/services/firebase';
+import { db } from '@/lib/firebase';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -62,7 +62,7 @@ const ProductDetails: React.FC = () => {
     <div className="flex h-screen flex-col items-center justify-center space-y-8 bg-background px-6">
       <h2 className="text-center text-4xl font-black italic uppercase tracking-tighter text-foreground">PIECE NOT FOUND</h2>
       <p className="max-w-sm text-center text-sm text-muted-foreground">This piece may have been archived or removed.</p>
-      <Link to="/shop" className="btn-luxury">RETURN TO COLLECTIONS</Link>
+      <Link to="/" className="btn-luxury">RETURN TO COLLECTIONS</Link>
     </div>
   );
 
@@ -77,7 +77,7 @@ const ProductDetails: React.FC = () => {
           <div className="mb-8 flex flex-wrap items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground sm:mb-12 sm:gap-4">
              <Link to="/" className="hover:text-primary transition-colors">LUNAR</Link>
              <ChevronRight className="h-3 w-3" />
-             <Link to={`/shop/${product.gender}`} className="hover:text-primary transition-colors">{product.gender}</Link>
+             <Link to={`/${product.gender}`} className="hover:text-primary transition-colors">{product.gender}</Link>
              <ChevronRight className="h-3 w-3" />
              <span className="text-foreground">{product.name}</span>
           </div>

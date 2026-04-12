@@ -1,4 +1,5 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, type FirebaseApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
@@ -10,23 +11,25 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID ?? "YOUR_APP_ID",
 };
 
-const app = initializeApp(firebaseConfig);
-const messaging = typeof window !== 'undefined' ? getMessaging(app) : null;
+const app: FirebaseApp = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+
+const messaging = typeof window !== "undefined" ? getMessaging(app) : null;
 
 export const requestFirebaseToken = async () => {
   if (!messaging) return null;
-  
+
   try {
     const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
+    if (permission === "granted") {
       const token = await getToken(messaging, {
         vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY ?? "YOUR_VAPID_KEY",
       });
-      console.log('FCM Token:', token);
+      if (import.meta.env.DEV) console.log("FCM Token:", token);
       return token;
     }
   } catch (error) {
-    console.error('Error requesting Firebase token:', error);
+    console.error("Error requesting Firebase token:", error);
   }
   return null;
 };
@@ -35,7 +38,7 @@ export const onMessageListener = () =>
   new Promise((resolve) => {
     if (!messaging) return;
     onMessage(messaging, (payload) => {
-      console.log('Received foreground message:', payload);
+      if (import.meta.env.DEV) console.log("Foreground message:", payload);
       resolve(payload);
     });
   });

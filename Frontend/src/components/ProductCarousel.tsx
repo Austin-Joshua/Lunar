@@ -58,7 +58,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, subtitl
       <div className="relative">
         <div 
           ref={containerRef}
-          className="flex gap-12 overflow-x-auto px-[calc((100vw-min(1280px,90vw))/2)] pb-40 no-scrollbar snap-x snap-mandatory mask-ledger"
+          className="flex gap-12 overflow-x-auto px-4 pb-40 no-scrollbar snap-x snap-mandatory sm:px-5 md:px-6 lg:px-7 xl:px-8"
         >
           {products.map((product, i) => (
             <motion.div 

@@ -47,7 +47,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminO
 
   // Redirect to shop home if admin-only route and user is not admin
   if (adminOnly && !isAdmin) {
-    return <Navigate to="/shop" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

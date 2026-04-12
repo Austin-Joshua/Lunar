@@ -74,7 +74,7 @@ const Checkout: React.FC = () => {
       clearCart();
       
       // Auto redirect to orders after 6 seconds
-      setTimeout(() => navigate('/shop/orders'), 6000);
+      setTimeout(() => navigate('/orders'), 6000);
     } catch (error) {
       console.error("Acquisition failed:", error);
     } finally {
@@ -103,8 +103,8 @@ const Checkout: React.FC = () => {
              </p>
           </div>
           <div className="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center sm:gap-6">
-             <Link to="/shop/orders" className="btn-luxury min-h-11 flex items-center justify-center px-10 py-4 sm:px-12 sm:py-5">VIEW ARCHIVE</Link>
-             <Link to="/shop" className="flex min-h-11 items-center justify-center gap-2 p-4 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-primary">CONTINUE SHOPPING <ArrowLeft className="h-4 w-4" /></Link>
+             <Link to="/orders" className="btn-luxury min-h-11 flex items-center justify-center px-10 py-4 sm:px-12 sm:py-5">VIEW ARCHIVE</Link>
+             <Link to="/" className="flex min-h-11 items-center justify-center gap-2 p-4 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-primary">CONTINUE SHOPPING <ArrowLeft className="h-4 w-4" /></Link>
           </div>
         </div>
       </PageTransition>
@@ -121,7 +121,7 @@ const Checkout: React.FC = () => {
         <div className="lunar-container">
           <div className="mb-12 space-y-4 sm:mb-16 md:mb-20">
              <div className="flex items-center gap-4">
-                <Link to="/shop/cart" className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border transition-all hover:bg-foreground hover:text-background dark:border-white/10 sm:h-12 sm:w-12">
+                <Link to="/cart" className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border transition-all hover:bg-foreground hover:text-background dark:border-white/10 sm:h-12 sm:w-12">
                    <ArrowLeft className="h-4 w-4" />
                 </Link>
                 <span className="luxury-subheading">SECURE ACQUISITION</span>

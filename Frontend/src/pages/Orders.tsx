@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const statusConfig = {
   pending: { icon: Clock, label: 'PENDING ARCHIVE', color: 'text-yellow-500/80', bg: 'bg-yellow-500/5' },
-  processing: { icon: Package, label: 'IN ATELIER', color: 'text-blue-500/80', bg: 'bg-blue-500/5' },
+  processing: { icon: Package, label: 'IN ATELIER', color: 'text-amber-600/90 dark:text-amber-400/90', bg: 'bg-amber-500/10' },
   shipped: { icon: Truck, label: 'IN TRANSIT', color: 'text-primary', bg: 'bg-primary/5' },
   delivered: { icon: CheckCircle, label: 'ARCHIVED', color: 'text-emerald-500/80', bg: 'bg-emerald-500/5' },
   cancelled: { icon: Clock, label: 'RECLAIMED', color: 'text-destructive/80', bg: 'bg-destructive/5' },
@@ -49,7 +49,7 @@ const Orders: React.FC = () => {
              <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-foreground">No Order History</h1>
              <p className="text-muted-foreground font-medium uppercase tracking-widest text-xs">Your acquisitions will appear here once confirmed.</p>
           </div>
-          <Link to="/shop" className="btn-luxury px-12 py-5">
+          <Link to="/" className="btn-luxury px-12 py-5">
              START COLLECTION
           </Link>
         </div>

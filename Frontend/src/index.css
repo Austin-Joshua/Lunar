@@ -1,91 +1,121 @@
-/* LUXURY FASHION FONT IMPORTS */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@200;300;400;500;600;700&display=swap');
-
+/* Lunar — gold accent, system fonts (see Frontend/DESIGN.md for reference) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Admin panel tokens (HSL) — used by tailwind admin.* */
-    --admin-bg: 210 20% 98%;
+    --lunar-navy: 222 47% 11%;
+    --lunar-silver: 210 20% 96%;
+    --lunar-pearl: 40 20% 97%;
+    --lunar-gold: 43 65% 55%;
+    --lunar-charcoal: 220 15% 20%;
+
+    --kids-coral: 12 90% 68%;
+    --kids-mint: 160 45% 52%;
+    --kids-sky: 200 85% 62%;
+    --kids-lavender: 270 45% 72%;
+    --kids-peach: 25 90% 78%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+    --admin-bg: 240 5% 97%;
     --admin-sidebar: 222 47% 11%;
     --admin-sidebar-foreground: 0 0% 98%;
     --admin-sidebar-hover: 222 47% 16%;
-    --admin-sidebar-active: 43 65% 55%;
+    --admin-sidebar-active: 43 65% 52%;
     --admin-card: 0 0% 100%;
     --admin-success: 142 76% 36%;
     --admin-warning: 38 92% 50%;
     --admin-info: 199 89% 48%;
 
-    /* PROFESSIONAL HIGH-CONTRAST PALETTE */
-    --background: 0 0% 100%;    /* Pure White */
-    --foreground: 222 47% 11%;  /* Slate 940 (Architectural Black-Blue) */
+    --background: 240 5% 97%;
+    --foreground: 240 4% 11%;
 
-    --card: 222 47% 11%;        /* Midnight Blue Card BG (Architectural Constant) */
-    --card-foreground: 0 0% 100%; /* High Visibility White */
+    --card: 0 0% 100%;
+    --card-foreground: 240 4% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 240 4% 11%;
 
-    /* Premium Satin Gold Accent */
-    --primary: 43 65% 55%; 
-    --primary-foreground: 222 47% 11%;
+    --primary: 43 56% 48%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 240 5% 94%;
+    --secondary-foreground: 240 4% 11%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 240 5% 94%;
+    --muted-foreground: 240 4% 46%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 240 5% 94%;
+    --accent-foreground: 240 4% 11%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 222 47% 11%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 43 56% 48%;
 
-    --radius: 2rem; 
+    --radius: 0.5rem;
   }
 
   .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
     --admin-bg: 0 0% 3%;
-    --admin-sidebar: 43 65% 55%;
-    --admin-sidebar-foreground: 222 47% 6%;
-    --admin-sidebar-hover: 43 55% 48%;
-    --admin-sidebar-active: 43 65% 60%;
+    --admin-sidebar: 43 50% 48%;
+    --admin-sidebar-foreground: 0 0% 6%;
+    --admin-sidebar-hover: 43 45% 42%;
+    --admin-sidebar-active: 43 55% 55%;
     --admin-card: 0 0% 6%;
     --admin-success: 142 71% 45%;
     --admin-warning: 38 92% 50%;
     --admin-info: 199 89% 48%;
 
-    --background: 224 71% 4%; /* Deep Midnight Zero */
-    --foreground: 210 40% 98%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
 
-    --card: 224 71% 4%;        /* Deep Midnight Contrast for Dark Mode */
-    --card-foreground: 210 40% 98%;
+    --card: 240 3% 16%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 3% 12%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 43 65% 65%; 
-    --primary-foreground: 224 71% 4%;
+    --primary: 43 58% 58%;
+    --primary-foreground: 0 0% 6%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 4% 18%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 4% 18%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 240 4% 18%;
+    --accent-foreground: 0 0% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 240 4% 20%;
+    --input: 240 4% 20%;
+    --ring: 43 58% 58%;
   }
 }
 
@@ -104,25 +134,29 @@
     }
   }
 
-  html, body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/30 no-scrollbar;
-    font-family: 'Inter', sans-serif;
+  html,
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
     overflow-x: hidden;
     width: 100%;
     position: relative;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* HIDE SCROLLBARS BUT MAINTAIN FUNCTIONALITY */
+  #root {
+    @apply min-h-[100dvh];
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
-  /* SAFE AREA UTILITIES (iOS / notched devices) */
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
@@ -134,88 +168,89 @@
     padding-right: env(safe-area-inset-right, 0px);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tight font-extrabold;
-    font-family: 'Inter', sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight text-balance;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
 @layer components {
+  /* Use max-width + w-full — avoid min(...,100vw) which is wider than the layout when a vertical scrollbar is present. */
   .lunar-container {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[980px] px-4 sm:px-5 md:px-6 lg:px-7 xl:px-8;
   }
 
-  /* Consistent page rhythm — storefront + auth */
+  @media (min-width: 1280px) {
+    .lunar-container {
+      @apply max-w-[1060px];
+    }
+  }
+
+  /* Tablet: centered column, subtle chrome. */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .app-main {
+      @apply mx-auto max-w-3xl shadow-[0_0_0_1px_rgba(0,0,0,0.06)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08)];
+    }
+  }
+
+  /* Desktop storefront: use width efficiently without ultra-wide stretch. */
+  @media (min-width: 1024px) {
+    .app-main {
+      @apply mx-auto w-full max-w-[1200px];
+    }
+  }
+
   .lunar-page {
-    @apply min-h-[100dvh] w-full pt-[calc(env(safe-area-inset-top,0px)+0.5rem)];
+    @apply min-h-[100dvh] w-full pt-[calc(env(safe-area-inset-top,0px)+3rem)];
   }
 
-  /* Shared form fields — light + dark */
   .lunar-field-underline {
-    @apply w-full border-b border-border bg-transparent py-3 text-sm font-bold text-foreground transition-colors placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none dark:border-white/15;
+    @apply w-full border-b border-border bg-transparent py-3 text-[17px] font-normal text-foreground transition-colors placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none;
   }
 
   .lunar-glass-panel {
-    @apply rounded-[2.5rem] border border-border/80 bg-muted/30 dark:border-white/10 dark:bg-foreground/5;
+    @apply rounded-2xl border border-border/60 bg-[#f5f5f7]/90 dark:border-white/10 dark:bg-white/5;
   }
 
-  /* PREMIUM BUTTON - Apple-Style */
-  .btn-premium {
-    @apply inline-flex items-center justify-center rounded-2xl px-8 py-4 text-sm font-semibold transition-all duration-300 active:scale-95;
+  .apple-section-light {
+    @apply bg-[#f5f5f7] text-[#1d1d1f];
   }
 
-  .btn-premium-primary {
-    @apply btn-premium bg-foreground text-background hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_20px_40px_-10px_rgba(255,255,255,0.1)];
+  .apple-section-dark {
+    @apply bg-black text-white;
   }
 
-  .btn-premium-gold {
-    @apply btn-premium bg-primary text-primary-foreground hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(212,175,55,0.4)];
+  .btn-apple-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-[17px] font-semibold text-primary-foreground transition-opacity hover:opacity-90 active:opacity-80 active:scale-[0.98];
   }
 
-  .btn-premium-outline {
-    @apply btn-premium border-2 border-foreground/10 bg-transparent hover:bg-foreground/5 hover:scale-105;
+  .btn-apple-pill {
+    @apply inline-flex items-center justify-center rounded-full border-2 border-primary bg-transparent px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/10 active:scale-[0.98];
   }
 
-  /* GLASSMORPHISM */
   .glass-effect {
-    @apply border-b border-border/60 bg-background/80 backdrop-blur-xl dark:border-white/10 dark:bg-background/75;
+    @apply border-b border-white/10 bg-[rgba(0,0,0,0.8)] backdrop-blur-xl backdrop-saturate-180;
   }
 
-  /* PREMIUM CARD LIFT */
+  .btn-luxury {
+    @apply inline-flex items-center justify-center rounded-full bg-[#1d1d1f] px-8 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90 dark:bg-white dark:text-black;
+  }
+
+  .lunar-card {
+    @apply rounded-2xl border border-border/40 bg-card shadow-deep;
+  }
+
+  .kids-card {
+    @apply rounded-2xl border border-kids-sky/30 bg-gradient-to-br from-kids-mint/10 to-kids-sky/10;
+  }
+
   .premium-card {
-    @apply rounded-3xl bg-secondary/50 border border-border/30 p-8 transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)];
-  }
-}
-
-@layer utilities {
-  .animate-reveal {
-    animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  
-  .animate-slide-up-fade {
-    animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  @keyframes reveal {
-    from { 
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to { 
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes slideUpFade {
-    from { 
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to { 
-      opacity: 1;
-      transform: translateY(0);
-    }
+    @apply rounded-xl border border-border/30 bg-secondary/50 p-8 transition-shadow duration-300 hover:shadow-deep;
   }
 
   .bg-apple-gradient {
@@ -225,9 +260,10 @@
   .dark .bg-apple-gradient {
     background: radial-gradient(circle at top, hsl(var(--primary) / 0.08) 0%, transparent 65%);
   }
+}
 
-  .mask-ledger {
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+@layer utilities {
+  .text-apple-caption {
+    @apply text-sm leading-snug tracking-tight text-[rgba(0,0,0,0.48)] dark:text-white/50;
   }
 }

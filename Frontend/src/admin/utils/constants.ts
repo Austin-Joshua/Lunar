@@ -16,7 +16,7 @@ export const ORDER_STATUS = {
 
 export const ORDER_STATUS_LABELS: Record<string, { label: string; color: string }> = {
   pending: { label: 'Pending', color: 'bg-yellow-100 text-yellow-800' },
-  processing: { label: 'Processing', color: 'bg-blue-100 text-blue-800' },
+  processing: { label: 'Processing', color: 'bg-amber-100 text-amber-900 dark:bg-amber-900/30 dark:text-amber-100' },
   shipped: { label: 'Shipped', color: 'bg-purple-100 text-purple-800' },
   delivered: { label: 'Delivered', color: 'bg-green-100 text-green-800' },
   cancelled: { label: 'Cancelled', color: 'bg-red-100 text-red-800' },

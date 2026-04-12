@@ -13,12 +13,13 @@ export const AdminTopbar: React.FC<TopbarProps> = ({ onMenuClick, title }) => {
   const { admin } = useAdminAuth();
 
   return (
-    <header className="sticky top-0 z-40 flex h-24 items-center justify-between border-b border-border bg-background/90 px-8 backdrop-blur-3xl selection:bg-primary/20 dark:border-white/5 dark:bg-background/85">
+    <header className="sticky top-0 z-40 flex h-16 items-center justify-between gap-4 border-b border-border bg-background/90 px-4 backdrop-blur-xl selection:bg-primary/20 sm:px-5 lg:h-[4.5rem] lg:px-6 xl:px-8 dark:border-white/5 dark:bg-background/85">
       {/* Left section: Context & Navigation */}
-      <div className="flex items-center gap-8">
+      <div className="flex min-w-0 items-center gap-3 sm:gap-5 lg:gap-6">
         <button
+          type="button"
           onClick={onMenuClick}
-          className="rounded-xl bg-muted/50 p-3 text-primary transition-all hover:bg-primary/10 active:scale-95 dark:bg-white/5"
+          className="shrink-0 rounded-xl bg-muted/50 p-2.5 text-primary transition-all hover:bg-primary/10 active:scale-95 lg:hidden dark:bg-white/5"
         >
           <Menu className="h-5 w-5" />
         </button>
@@ -35,7 +36,7 @@ export const AdminTopbar: React.FC<TopbarProps> = ({ onMenuClick, title }) => {
       </div>
 
       {/* Center: Command Center Search */}
-      <div className="hidden md:flex flex-1 max-w-xl mx-12">
+      <div className="mx-4 hidden min-w-0 max-w-xl flex-1 md:flex lg:mx-8 xl:mx-10">
         <div className="relative w-full group">
           <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none">
              <Command className="h-4 w-4 text-primary/40 group-focus-within:text-primary transition-colors" />
@@ -43,7 +44,7 @@ export const AdminTopbar: React.FC<TopbarProps> = ({ onMenuClick, title }) => {
           <input
             type="text"
             placeholder="ACCESS PROTOCOLS, PRODUCTS, OR ANALYTICS..."
-            className="w-full rounded-2xl border border-border bg-muted/40 py-4 pl-14 pr-20 text-[10px] font-bold uppercase tracking-widest transition-all placeholder:text-muted-foreground/40 focus:border-primary/25 focus:outline-none focus:ring-4 focus:ring-primary/10 dark:border-white/10 dark:bg-white/5 dark:placeholder:text-white/15"
+            className="w-full rounded-xl border border-border bg-muted/40 py-3 pl-12 pr-16 text-[10px] font-bold uppercase tracking-widest transition-all placeholder:text-muted-foreground/40 focus:border-primary/25 focus:outline-none focus:ring-2 focus:ring-primary/10 dark:border-white/10 dark:bg-white/5 dark:placeholder:text-white/15"
           />
           <div className="absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 opacity-20 group-focus-within:opacity-100 transition-opacity">
              <span className="rounded bg-muted/80 px-2 py-1 text-[9px] font-black dark:bg-white/10">⌘</span>
@@ -53,9 +54,9 @@ export const AdminTopbar: React.FC<TopbarProps> = ({ onMenuClick, title }) => {
       </div>
 
       {/* Right side: Alerts & Identity */}
-      <div className="flex items-center gap-8">
+      <div className="flex shrink-0 items-center gap-3 sm:gap-4 lg:gap-6">
         {/* Theme Protocol Switcher */}
-        <ThemeToggle className="h-12 w-12 border border-border bg-muted/50 dark:border-white/10 dark:bg-white/5" />
+        <ThemeToggle className="h-10 w-10 border border-border bg-muted/50 sm:h-11 sm:w-11 dark:border-white/10 dark:bg-white/5" />
         
         {/* Alerts Archive */}
         <button type="button" className="group relative rounded-xl bg-muted/50 p-3 transition-all hover:bg-primary/10 active:scale-95 dark:bg-white/5">
@@ -65,7 +66,7 @@ export const AdminTopbar: React.FC<TopbarProps> = ({ onMenuClick, title }) => {
         </button>
 
         {/* System Overseer Identity */}
-        <div className="flex items-center gap-5 border-l border-border pl-8 dark:border-white/10">
+        <div className="flex items-center gap-3 border-l border-border pl-3 sm:gap-4 sm:pl-5 lg:pl-6 dark:border-white/10">
           <div className="text-right hidden sm:block">
             <p className="max-w-[120px] truncate text-[10px] font-black uppercase tracking-widest text-foreground">{admin?.name || 'ADMIN'}</p>
             <p className="text-[8px] font-bold text-primary tracking-[0.3em] uppercase mt-0.5">{admin?.role || 'LEVEL-1 ACCESS'}</p>
