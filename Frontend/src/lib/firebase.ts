@@ -1,18 +1,33 @@
 import { initializeApp, type FirebaseApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ?? "YOUR_API_KEY",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ?? "YOUR_AUTH_DOMAIN",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ?? "YOUR_PROJECT_ID",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ?? "YOUR_STORAGE_BUCKET",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID ?? "YOUR_MESSAGING_SENDER_ID",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID ?? "YOUR_APP_ID",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ?? "AIzaSyDa_8rLSHZl-B2vyz0lyUVDE9amJAgz5X8",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ?? "lunar-db-10d04.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ?? "lunar-db-10d04",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ?? "lunar-db-10d04.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID ?? "154420566703",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID ?? "1:154420566703:web:c74c5b0471eaf15120925a",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID ?? "G-7RNHBSHJGZ",
 };
 
 const app: FirebaseApp = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+if (typeof window !== "undefined") {
+  import("firebase/analytics")
+    .then(({ getAnalytics, isSupported }) =>
+      isSupported().then((ok) => {
+        if (ok) getAnalytics(app);
+      }),
+    )
+    .catch(() => {
+      /* analytics optional */
+    });
+}
 
 const messaging = typeof window !== "undefined" ? getMessaging(app) : null;
 

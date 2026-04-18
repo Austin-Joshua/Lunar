@@ -32,6 +32,7 @@ const Register: React.FC = () => {
     try {
       setIsSubmitting(true);
       const { user: userData, token } = await authApi.register(name, email, password);
+      if (!token) throw new Error("No access token from server.");
       login(userData, token, true);
       navigate("/");
     } catch (err: unknown) {

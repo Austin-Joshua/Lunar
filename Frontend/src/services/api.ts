@@ -6,6 +6,22 @@
 import { apiClient } from './apiClient';
 import type { AuthResponse, Product, Order, User } from '@/types';
 
+type BackendTokenResponse = {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: string;
+  user: User;
+};
+
+function mapTokenResponse(data: BackendTokenResponse): AuthResponse {
+  return {
+    user: data.user,
+    token: data.accessToken,
+    accessToken: data.accessToken,
+    refreshToken: data.refreshToken,
+  };
+}
+
 // Note: apiClient automatically handles:
 // - Token injection from localStorage
 // - CORS headers
@@ -19,7 +35,8 @@ export const authApi = {
    * Returns: token and user data
    */
   login: async (email: string, password: string): Promise<AuthResponse> => {
-    return apiClient.post<AuthResponse>('/auth/login', { email, password });
+    const data = await apiClient.post<BackendTokenResponse>('/auth/login', { email, password });
+    return mapTokenResponse(data);
   },
 
   /**
@@ -27,7 +44,16 @@ export const authApi = {
    * Returns: token and new user data
    */
   register: async (name: string, email: string, password: string): Promise<AuthResponse> => {
-    return apiClient.post<AuthResponse>('/auth/register', { name, email, password });
+    const data = await apiClient.post<BackendTokenResponse>('/auth/register', { name, email, password });
+    return mapTokenResponse(data);
+  },
+
+  /**
+   * Sign in with Google (Firebase ID token verified by backend)
+   */
+  loginWithGoogle: async (idToken: string): Promise<AuthResponse> => {
+    const data = await apiClient.post<BackendTokenResponse>('/auth/google', { idToken });
+    return mapTokenResponse(data);
   },
 
   /**

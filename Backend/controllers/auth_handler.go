@@ -73,6 +73,33 @@ func (h *AuthHandler) Login(c *gin.Context) {
 	})
 }
 
+func (h *AuthHandler) GoogleLogin(c *gin.Context) {
+	var input services.GoogleLoginInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success": false,
+			"message": "idToken is required.",
+		})
+		return
+	}
+
+	result, err := h.authService.LoginWithGoogle(c.Request.Context(), input.IDToken)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"success": false,
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success":   true,
+		"message":   "Login successful.",
+		"data":      result,
+		"timestamp": time.Now().Format(time.RFC3339),
+	})
+}
+
 func (h *AuthHandler) GetProfile(c *gin.Context) {
 	userID, _ := c.Get("user_id")
 	id := userID.(string)

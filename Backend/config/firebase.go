@@ -9,12 +9,14 @@ import (
 
 	firebase "firebase.google.com/go/v4"
 	"cloud.google.com/go/firestore"
+	"firebase.google.com/go/v4/auth"
 	"firebase.google.com/go/v4/messaging"
 	"google.golang.org/api/option"
 )
 
 var (
 	FirebaseApp     *firebase.App
+	AuthClient      *auth.Client
 	FirestoreClient *firestore.Client
 	MessagingClient *messaging.Client
 )
@@ -42,6 +44,12 @@ func InitFirebase() error {
 	if err != nil {
 		return err
 	}
+
+	authClient, err := app.Auth(ctx)
+	if err != nil {
+		return err
+	}
+	AuthClient = authClient
 
 	client, err := app.Firestore(ctx)
 	if err != nil {

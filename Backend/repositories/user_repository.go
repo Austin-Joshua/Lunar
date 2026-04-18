@@ -17,6 +17,33 @@ func NewUserRepository() *UserRepository {
 	return &UserRepository{}
 }
 
+func (r *UserRepository) CreateOAuth(name, email, hashedPassword, provider, oauthID string, profileImage *string) (*models.User, error) {
+	ctx := context.Background()
+	user := models.User{
+		Name:          name,
+		Email:         email,
+		Password:      hashedPassword,
+		Role:          "user",
+		OAuthProvider: strPtr(provider),
+		OAuthID:       strPtr(oauthID),
+		ProfileImage:  profileImage,
+		CreatedAt:     time.Now(),
+		UpdatedAt:     time.Now(),
+	}
+
+	docRef, _, err := config.FirestoreClient.Collection("users").Add(ctx, user)
+	if err != nil {
+		return nil, err
+	}
+	user.ID = docRef.ID
+
+	return &user, nil
+}
+
+func strPtr(s string) *string {
+	return &s
+}
+
 func (r *UserRepository) Create(name, email, password string) (*models.User, error) {
 	ctx := context.Background()
 	user := models.User{

@@ -30,6 +30,7 @@ func SetupRoutes(app *gin.Engine) {
 		{
 			auth.POST("/register", authHandler.Register)
 			auth.POST("/login", authHandler.Login)
+			auth.POST("/google", authHandler.GoogleLogin)
 			auth.POST("/refresh-token", authHandler.RefreshToken)
 			auth.POST("/logout", authHandler.Logout)
 

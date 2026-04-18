@@ -1,10 +1,15 @@
 package services
 
 import (
+	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"os"
+	"strings"
 	"time"
 
+	"lunar-backend/config"
 	"lunar-backend/models"
 	"lunar-backend/repositories"
 
@@ -35,6 +40,10 @@ type LoginInput struct {
 	Password string `json:"password" binding:"required"`
 }
 
+type GoogleLoginInput struct {
+	IDToken string `json:"idToken" binding:"required"`
+}
+
 type TokenResponse struct {
 	AccessToken  string               `json:"accessToken"`
 	RefreshToken string               `json:"refreshToken"`
@@ -43,7 +52,8 @@ type TokenResponse struct {
 }
 
 func (s *AuthService) Register(input RegisterInput) (*TokenResponse, error) {
-	existingUser, err := s.userRepo.FindByEmail(input.Email)
+	email := strings.ToLower(strings.TrimSpace(input.Email))
+	existingUser, err := s.userRepo.FindByEmail(email)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +66,7 @@ func (s *AuthService) Register(input RegisterInput) (*TokenResponse, error) {
 		return nil, err
 	}
 
-	user, err := s.userRepo.Create(input.Name, input.Email, string(hashedPassword))
+	user, err := s.userRepo.Create(input.Name, email, string(hashedPassword))
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +75,7 @@ func (s *AuthService) Register(input RegisterInput) (*TokenResponse, error) {
 }
 
 func (s *AuthService) Login(input LoginInput) (*TokenResponse, error) {
-	user, err := s.userRepo.FindByEmail(input.Email)
+	user, err := s.userRepo.FindByEmail(strings.ToLower(strings.TrimSpace(input.Email)))
 	if err != nil {
 		return nil, err
 	}
@@ -78,6 +88,70 @@ func (s *AuthService) Login(input LoginInput) (*TokenResponse, error) {
 	}
 
 	return s.generateTokens(user)
+}
+
+func (s *AuthService) LoginWithGoogle(ctx context.Context, idToken string) (*TokenResponse, error) {
+	if config.AuthClient == nil {
+		return nil, errors.New("firebase auth is not configured")
+	}
+
+	token, err := config.AuthClient.VerifyIDToken(ctx, idToken)
+	if err != nil {
+		return nil, errors.New("invalid or expired Google sign-in")
+	}
+
+	emailRaw, _ := token.Claims["email"].(string)
+	email := strings.ToLower(strings.TrimSpace(emailRaw))
+	if email == "" {
+		return nil, errors.New("Google account has no email")
+	}
+
+	name, _ := token.Claims["name"].(string)
+	name = strings.TrimSpace(name)
+	if name == "" {
+		if at := strings.Index(email, "@"); at > 0 {
+			name = email[:at]
+		} else {
+			name = "User"
+		}
+	}
+
+	var profileImage *string
+	if pic, ok := token.Claims["picture"].(string); ok && strings.TrimSpace(pic) != "" {
+		pic = strings.TrimSpace(pic)
+		profileImage = &pic
+	}
+
+	user, err := s.userRepo.FindByEmail(email)
+	if err != nil {
+		return nil, err
+	}
+	if user != nil {
+		if err := s.userRepo.UpdateOAuthData(user.ID, "google", token.UID, profileImage); err != nil {
+			return nil, err
+		}
+		updated, err := s.userRepo.FindByID(user.ID)
+		if err != nil {
+			return nil, err
+		}
+		return s.generateTokens(updated)
+	}
+
+	randomBytes := make([]byte, 32)
+	if _, err := rand.Read(randomBytes); err != nil {
+		return nil, err
+	}
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(hex.EncodeToString(randomBytes)), bcrypt.DefaultCost)
+	if err != nil {
+		return nil, err
+	}
+
+	newUser, err := s.userRepo.CreateOAuth(name, email, string(hashedPassword), "google", token.UID, profileImage)
+	if err != nil {
+		return nil, err
+	}
+
+	return s.generateTokens(newUser)
 }
 
 func (s *AuthService) RefreshToken(refreshToken string) (string, error) {

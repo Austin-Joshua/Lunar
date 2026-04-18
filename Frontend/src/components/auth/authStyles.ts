@@ -22,3 +22,10 @@ export const authPrimaryButtonClass = cn(
 export const authSecondaryLinkClass = cn(
   "text-[13px] font-medium text-primary underline-offset-4 hover:underline",
 );
+
+/** Outlined control for OAuth providers (e.g. Google). */
+export const authOAuthButtonClass = cn(
+  "flex min-h-[48px] w-full items-center justify-center gap-3 rounded-[10px] border border-black/[0.12] bg-white px-4 text-[17px] font-semibold text-[#1d1d1f] transition",
+  "hover:bg-black/[0.03] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50",
+  "dark:border-white/15 dark:bg-white/[0.06] dark:text-white dark:hover:bg-white/[0.09]",
+);
